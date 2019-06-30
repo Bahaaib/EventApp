@@ -12,13 +12,13 @@
         android:id="@+id/action_explore"
         android:enabled="true"
         android:icon="@drawable/ic_explore"
-        android:title="Explore"
+        android:title="Favorites"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_interested"
         android:enabled="true"
         android:icon="@drawable/ic_star"
-        android:title="Interested"
+        android:title="Nearby"
         app:showAsAction="ifRoom" />
 
 </menu>
