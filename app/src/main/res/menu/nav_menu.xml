@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_nearby"
         android:enabled="true"
-android:icon="@drawable/ic_nearby"
+        android:icon="@drawable/ic_nearby"
         android:title="Nearby"
         app:showAsAction="ifRoom" />
     <item
