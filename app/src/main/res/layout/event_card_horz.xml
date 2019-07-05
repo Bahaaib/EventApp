@@ -3,7 +3,8 @@
     android:layout_width="350dp"
     android:layout_height="180dp"
     card_view:cardCornerRadius="5dp"
-    card_view:cardElevation="2dp">
+    card_view:cardElevation="6dp"
+    android:layout_marginEnd="8dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -31,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="170dp"
-            android:layout_marginTop="50dp"
+            android:layout_centerVertical="true"
             android:maxLength="110"
             android:paddingEnd="3dp"
             android:text="Codemotion Amsterdam Lorem ipsum dolor sit amet, consectetur adipisicing elit" />
@@ -59,10 +60,11 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="5dp"
             android:contentDescription="Available Tickets"
-            android:drawableStart="@drawable/ic_available"
+            android:drawableStart="@drawable/ic_ticket"
             android:gravity="center"
             android:text="8"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:drawablePadding="5dp"/>
 
 
     </RelativeLayout>
