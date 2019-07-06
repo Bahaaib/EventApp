@@ -39,7 +39,23 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="130dp"
             android:orientation="horizontal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="330dp"
+            android:text="Future Events"
+            android:textColor="@color/colorInactive"
+            android:textSize="16sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/future_events_rv"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="365dp"
+            android:orientation="horizontal"/>
+
     </RelativeLayout>
-
-
 </ScrollView>

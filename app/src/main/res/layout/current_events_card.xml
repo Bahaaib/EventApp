@@ -24,7 +24,8 @@
             android:drawableStart="@drawable/ic_timer"
             android:drawablePadding="5dp"
             android:gravity="center"
-            android:text="Fri, 04 Apr" />
+            android:text="Fri, 04 Apr"
+            android:textStyle="bold"/>
 
 
         <TextView

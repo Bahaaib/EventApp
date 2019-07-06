@@ -15,7 +15,8 @@ import android.view.ViewGroup;
 import com.bahaa.eventapp.MockedData;
 import com.bahaa.eventapp.R;
 import com.bahaa.eventapp.adapters.CurrentEventsAdapter;
-import com.bahaa.eventapp.models.CurrentEventsModel;
+import com.bahaa.eventapp.adapters.FutureEventsAdapter;
+import com.bahaa.eventapp.models.EventModel;
 
 import java.util.ArrayList;
 
@@ -30,11 +31,16 @@ public class ExploreFragment extends Fragment {
     public SearchView searchView;
     @BindView(R.id.current_events_rv)
     public RecyclerView currentEventsRV;
+    @BindView(R.id.future_events_rv)
+    public RecyclerView futureEventsRV;
 
     private Unbinder unbinder;
-    private ArrayList<CurrentEventsModel> currentEventsList;
+    private ArrayList<EventModel> currentEventsList;
     private CurrentEventsAdapter currentEventsAdapter;
     private LinearLayoutManager linearLayoutManager;
+
+    private ArrayList<EventModel> futureEventsList;
+    private FutureEventsAdapter futureEventsAdapter;
 
 
     public ExploreFragment() {
@@ -54,7 +60,7 @@ public class ExploreFragment extends Fragment {
 
         //fill mocked data
         for (int i = 0; i < 3; i++) {
-            CurrentEventsModel model = new CurrentEventsModel();
+            EventModel model = new EventModel();
             model.setImage(MockedData.images[i]);
             model.setDate(MockedData.dates[i]);
             model.setTitle(MockedData.titles[i]);
@@ -64,8 +70,19 @@ public class ExploreFragment extends Fragment {
             currentEventsList.add(model);
         }
 
-
         currentEventsAdapter.notifyDataSetChanged();
+
+        setupFutureEventsRV();
+
+        for (int j = 0; j < 3; j++) {
+            EventModel model = new EventModel();
+            model.setImage(MockedData.images[j]);
+            model.setDate(MockedData.dates[j]);
+            model.setTitle(MockedData.titles[j]);
+
+            futureEventsList.add(model);
+        }
+        futureEventsAdapter.notifyDataSetChanged();
 
 
         return v;
@@ -77,6 +94,14 @@ public class ExploreFragment extends Fragment {
         currentEventsRV.setAdapter(currentEventsAdapter);
         linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         currentEventsRV.setLayoutManager(linearLayoutManager);
+    }
+
+    private void setupFutureEventsRV() {
+        futureEventsList = new ArrayList<>();
+        futureEventsAdapter = new FutureEventsAdapter(getActivity(), futureEventsList);
+        futureEventsRV.setAdapter(futureEventsAdapter);
+        linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        futureEventsRV.setLayoutManager(linearLayoutManager);
     }
 
     @Override
