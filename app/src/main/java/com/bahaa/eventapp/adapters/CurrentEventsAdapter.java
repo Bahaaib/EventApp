@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bahaa.eventapp.R;
-import com.bahaa.eventapp.models.HorizontalEventModel;
+import com.bahaa.eventapp.models.CurrentEventsModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -20,17 +20,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class HorizontalEventAdapter extends RecyclerView.Adapter {
+public class CurrentEventsAdapter extends RecyclerView.Adapter {
 
     private Context context;
-    private ArrayList<HorizontalEventModel> adapterModel;
+    private ArrayList<CurrentEventsModel> adapterModel;
     private Unbinder unbinder;
 
     {
         adapterModel = new ArrayList<>();
     }
 
-    public HorizontalEventAdapter(Context context, ArrayList<HorizontalEventModel> adapterModel) {
+    public CurrentEventsAdapter(Context context, ArrayList<CurrentEventsModel> adapterModel) {
         this.context = context;
         this.adapterModel = adapterModel;
 
@@ -42,14 +42,14 @@ public class HorizontalEventAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.event_card_horz, parent, false);
-        return new HorizontalEventAdapter.HorizontalEventViewHolder(view);
+        View view = LayoutInflater.from(context).inflate(R.layout.current_events_card, parent, false);
+        return new CurrentEventsViewHolder(view);
     }
 
     //Here We tell the RecyclerView what to show at each CardView..
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((HorizontalEventAdapter.HorizontalEventViewHolder) holder).BindView(position);
+        ((CurrentEventsViewHolder) holder).BindView(position);
 
     }
 
@@ -60,21 +60,21 @@ public class HorizontalEventAdapter extends RecyclerView.Adapter {
 
     //Here we bind all the children views of each cardView with their corresponding
     // actions to show & interact with them
-    public class HorizontalEventViewHolder extends RecyclerView.ViewHolder {
+    public class CurrentEventsViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.event_horz_img)
+        @BindView(R.id.current_events_img)
         public ImageView image;
-        @BindView(R.id.event_horz_date)
+        @BindView(R.id.current_events_date)
         public TextView date;
-        @BindView(R.id.event_horz_title)
+        @BindView(R.id.current_events_title)
         public TextView title;
-        @BindView(R.id.event_horz_capacity)
+        @BindView(R.id.current_events_capacity)
         public TextView capacity;
-        @BindView(R.id.event_horz_avialable)
+        @BindView(R.id.current_events_avialable)
         public TextView ticketsAvailable;
 
 
-        public HorizontalEventViewHolder(View itemView) {
+        public CurrentEventsViewHolder(View itemView) {
             super(itemView);
             unbinder = ButterKnife.bind(this, itemView);
         }

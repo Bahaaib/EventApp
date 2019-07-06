@@ -1,6 +1,6 @@
 package com.bahaa.eventapp.models;
 
-public class HorizontalEventModel {
+public class CurrentEventsModel {
 
     private int image;
     private String date;
@@ -8,7 +8,7 @@ public class HorizontalEventModel {
     private int capacity;
     private int ticketsAvailable;
 
-    public HorizontalEventModel() {
+    public CurrentEventsModel() {
     }
 
     public int getImage() {

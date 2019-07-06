@@ -33,7 +33,7 @@
             android:textSize="16sp" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/events_rv_horiz"
+            android:id="@+id/current_events_rv"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginStart="8dp"

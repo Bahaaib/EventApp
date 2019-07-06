@@ -4,7 +4,6 @@ package com.bahaa.eventapp.fragments;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,12 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import com.bahaa.eventapp.MockedData;
 import com.bahaa.eventapp.R;
-import com.bahaa.eventapp.adapters.HorizontalEventAdapter;
-import com.bahaa.eventapp.models.HorizontalEventModel;
+import com.bahaa.eventapp.adapters.CurrentEventsAdapter;
+import com.bahaa.eventapp.models.CurrentEventsModel;
 
 import java.util.ArrayList;
 
@@ -30,12 +28,12 @@ public class ExploreFragment extends Fragment {
 
     @BindView(R.id.search_view)
     public SearchView searchView;
-    @BindView(R.id.events_rv_horiz)
-    public RecyclerView horizontalEventRV;
+    @BindView(R.id.current_events_rv)
+    public RecyclerView currentEventsRV;
 
     private Unbinder unbinder;
-    private ArrayList<HorizontalEventModel> horizontalEventsList;
-    private HorizontalEventAdapter horizontalEventAdapter;
+    private ArrayList<CurrentEventsModel> currentEventsList;
+    private CurrentEventsAdapter currentEventsAdapter;
     private LinearLayoutManager linearLayoutManager;
 
 
@@ -52,33 +50,33 @@ public class ExploreFragment extends Fragment {
 
         unbinder = ButterKnife.bind(this, v);
 
-        setupHorizontalRV();
+        setupCurrentEventsRV();
 
         //fill mocked data
         for (int i = 0; i < 3; i++) {
-            HorizontalEventModel model = new HorizontalEventModel();
+            CurrentEventsModel model = new CurrentEventsModel();
             model.setImage(MockedData.images[i]);
             model.setDate(MockedData.dates[i]);
             model.setTitle(MockedData.titles[i]);
             model.setCapacity(MockedData.capacity[i]);
             model.setTicketsAvailable(MockedData.ticketsAvailable[i]);
 
-            horizontalEventsList.add(model);
+            currentEventsList.add(model);
         }
 
 
-        horizontalEventAdapter.notifyDataSetChanged();
+        currentEventsAdapter.notifyDataSetChanged();
 
 
         return v;
     }
 
-    private void setupHorizontalRV() {
-        horizontalEventsList = new ArrayList<>();
-        horizontalEventAdapter = new HorizontalEventAdapter(getActivity(), horizontalEventsList);
-        horizontalEventRV.setAdapter(horizontalEventAdapter);
+    private void setupCurrentEventsRV() {
+        currentEventsList = new ArrayList<>();
+        currentEventsAdapter = new CurrentEventsAdapter(getActivity(), currentEventsList);
+        currentEventsRV.setAdapter(currentEventsAdapter);
         linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        horizontalEventRV.setLayoutManager(linearLayoutManager);
+        currentEventsRV.setLayoutManager(linearLayoutManager);
     }
 
     @Override
