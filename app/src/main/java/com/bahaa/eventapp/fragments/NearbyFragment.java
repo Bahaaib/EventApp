@@ -14,7 +14,7 @@ import com.bahaa.eventapp.R;
 
 public class NearbyFragment extends Fragment {
 
-
+    // @todo #4 start building Nearby Fragment
     public NearbyFragment() {
         // Required empty public constructor
     }
