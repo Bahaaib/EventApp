@@ -42,7 +42,7 @@ public class ExploreFragment extends Fragment {
     private ArrayList<EventModel> futureEventsList;
     private FutureEventsAdapter futureEventsAdapter;
 
-
+    // @todo #3 added interested button to future events
     public ExploreFragment() {
         // Required empty public constructor
     }
