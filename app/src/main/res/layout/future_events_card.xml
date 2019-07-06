@@ -18,7 +18,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0.6"
+            android:alpha="0.5"
             android:background="@color/colorInactive" />
 
 
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="50dp"
             android:text="Fri, Apr 19"
             android:textColor="@color/colorWhite"
             android:textStyle="bold" />
@@ -37,12 +37,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:layout_marginTop="80dp"
             android:gravity="center"
             android:maxLength="110"
             android:padding="3dp"
             android:text="Codemotion Amsterdam Lorem ipsum dolor sit amet, consectetur adipisicing elit"
             android:textColor="@color/colorWhite" />
+
+        <com.like.LikeButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            card_view:circle_end_color="@color/colorLikeButton"
+            card_view:circle_start_color="@color/colorLikeButton"
+            card_view:dots_primary_color="@color/colorLikeButton"
+            card_view:dots_secondary_color="@color/colorLikeButton"
+            card_view:icon_size="30dp"
+            card_view:icon_type="Star"
+            card_view:unlike_drawable="@drawable/ic_star_off"
+            card_view:like_drawable="@drawable/ic_star_on"/>
 
 
     </RelativeLayout>

@@ -7,4 +7,6 @@
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorInactive">#757575</color>
+    <color name="colorLikeButton">#ffff00</color>
+
 </resources>
