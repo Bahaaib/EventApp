@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 import com.bahaa.eventapp.MockedData;
 import com.bahaa.eventapp.R;
@@ -27,6 +28,8 @@ import butterknife.Unbinder;
 
 public class ExploreFragment extends Fragment {
 
+    @BindView(R.id.explore_scrollview)
+    public ScrollView scrollView;
     @BindView(R.id.search_view)
     public SearchView searchView;
     @BindView(R.id.current_events_rv)
@@ -54,6 +57,7 @@ public class ExploreFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_explore, container, false);
 
         unbinder = ButterKnife.bind(this, v);
+
 
         setupCurrentEventsRV();
 
@@ -102,6 +106,7 @@ public class ExploreFragment extends Fragment {
         linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         futureEventsRV.setLayoutManager(linearLayoutManager);
     }
+
 
     @Override
     public void onDestroyView() {
