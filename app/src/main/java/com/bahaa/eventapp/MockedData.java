@@ -5,9 +5,13 @@ public class MockedData {
 
     public static String[] dates = {"Fri, Apr 19", "Thu, Jun 07", "Mon, Sep 30"};
 
-    public static String[] titles = {"This is an event short title", "This is an event medium but beautiful title", "This is an event very very very long and ugly title"};
+    public static String[] titles = {"This is an event short title", "This is an event very very very long and ugly title, This is an event very very very long and ugly title, But that's OK", "This is an event medium but beautiful title"};
 
     public static int[] capacity = {10, 20, 30};
 
     public static int[] ticketsAvailable = {8, 6, 0};
+
+    public static double[] latitude = {30.003722, 30.044740, 26.563984};
+
+    public static double[] longitude = {31.168816, 31.235614, 31.695623};
 }

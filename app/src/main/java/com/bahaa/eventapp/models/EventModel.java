@@ -7,6 +7,9 @@ public class EventModel {
     private String title;
     private int capacity;
     private int ticketsAvailable;
+    private double latitude;
+    private double longitude;
+    private String distance;
 
     public EventModel() {
     }
@@ -49,5 +52,29 @@ public class EventModel {
 
     public void setTicketsAvailable(int ticketsAvailable) {
         this.ticketsAvailable = ticketsAvailable;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
     }
 }
