@@ -10,7 +10,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="220dp">
 
         <ImageView
             android:id="@+id/nearby_events_image"
@@ -43,6 +43,7 @@
                 android:id="@+id/nearby_events_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
                 android:gravity="center"
                 android:maxLength="110"
@@ -53,20 +54,19 @@
 
         </RelativeLayout>
 
-
-
-
         <TextView
             android:id="@+id/nearby_events_dist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:background="@color/colorInactive"
+            android:drawableStart="@drawable/ic_location"
+            android:drawablePadding="3dp"
+            android:gravity="center"
             android:paddingStart="3dp"
             android:paddingEnd="3dp"
-            android:background="@color/colorInactive"
-            android:gravity="center"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/colorWhite" />
 
 
     </RelativeLayout>

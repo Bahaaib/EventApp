@@ -26,10 +26,13 @@ import com.bahaa.eventapp.models.EventModel;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+
+import static android.content.Context.LOCATION_SERVICE;
 
 
 public class NearbyFragment extends Fragment {
@@ -59,30 +62,6 @@ public class NearbyFragment extends Fragment {
 
         unbinder = ButterKnife.bind(this, v);
 
-        //My location
-        double mLat = 30.000868333333333;
-        double mLong = 31.165094999999997;
-
-        //Test Location1
-        double vLat1 = 30.003722;
-        double vLong1 = 31.168816;
-
-        //Test Location2
-        double vLat2 = 30.044740;
-        double vLong2 = 31.235614;
-
-        //Test Location3
-        double vLat3 = 26.563984;
-        double vLong3 = 31.695623;
-
-
-        float dist = (float) meterDistanceBetweenLocations(mLat, mLong, vLat3, vLong3) / 1000;
-        DecimalFormat df = new DecimalFormat("#.##");
-        df.setRoundingMode(RoundingMode.UP);
-
-
-        Log.i("Distance: ", df.format(dist) + " Kilometers");
-        ////////////
         setupNearbyEventsRV();
         getDeviceLocation();
 
@@ -108,15 +87,27 @@ public class NearbyFragment extends Fragment {
     }
 
     private void getDeviceLocation() {
+        LocationManager mLocationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
+        List<String> providers = mLocationManager.getProviders(true);
+        Location bestLocation = null;
         try {
-            LocationManager lm = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-            Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            mLatitude = location.getLatitude();
-            mLongitude = location.getLongitude();
+            for (String provider : providers) {
+                Location loc = mLocationManager.getLastKnownLocation(provider);
+                if (loc == null) {
+                    continue;
+                }
+                if (bestLocation == null || loc.getAccuracy() < bestLocation.getAccuracy()) {
+                    bestLocation = loc;
+                }
+            }
+
+            mLatitude = bestLocation.getLatitude();
+            mLongitude = bestLocation.getLongitude();
 
         } catch (SecurityException e) {
             e.printStackTrace();
         }
+
     }
 
     private void setupNearbyEventsRV() {
