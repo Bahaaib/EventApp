@@ -35,7 +35,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="170dp"
             android:maxLength="110"
-            android:paddingEnd="3dp"
+            android:paddingEnd="8dp"
             android:text="Codemotion Amsterdam Lorem ipsum dolor sit amet, consectetur adipisicing elit" />
 
         <TextView

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/interested_events_cardview"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:elevation="6dp"
+    app:cardCornerRadius="0dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/interested_events_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:contentDescription="Interested Event"
+            android:scaleType="centerCrop"
+            android:transitionName="transition" />
+
+        <View
+            android:id="@+id/interested_events_blackLayer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.4"
+            android:background="@color/colorAccent" />
+
+
+        <TextView
+            android:id="@+id/interested_events_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="130dp"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-light"
+            android:maxLines="1"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:text="Software Engineering Specialization"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/colorWhite"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/interested_events_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="170dp"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:maxLines="1"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:text="Fri, Apr 19 @11:00 A.M."
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:id="@+id/interested_events_capacity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="270dp"
+            android:layout_marginBottom="15dp"
+            android:contentDescription="Capacity"
+            android:drawableStart="@drawable/ic_person"
+            android:gravity="center"
+            android:text="10"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp"
+            android:drawableTint="@color/colorPrimaryLight"/>
+
+        <TextView
+            android:id="@+id/interested_events_available"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="170dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="15dp"
+            android:contentDescription="Available Tickets"
+            android:drawableStart="@drawable/ic_ticket"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:text="8"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp"
+            android:drawableTint="@color/colorPrimaryLight"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

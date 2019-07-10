@@ -28,8 +28,6 @@ import butterknife.Unbinder;
 
 public class ExploreFragment extends Fragment {
 
-    @BindView(R.id.explore_scrollview)
-    public ScrollView scrollView;
     @BindView(R.id.search_view)
     public SearchView searchView;
     @BindView(R.id.current_events_rv)
