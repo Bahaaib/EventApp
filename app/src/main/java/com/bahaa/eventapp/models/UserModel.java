@@ -1,8 +1,8 @@
-package com.bahaa.eventapp;
+package com.bahaa.eventapp.models;
 
 public class UserModel {
 
-    private String imageUrl;
+    private int imageUrl;
     private String name;
     private String email;
     private String mobileNumber;
@@ -10,11 +10,11 @@ public class UserModel {
     public UserModel() {
     }
 
-    public String getImageUrl() {
+    public int getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
+    public void setImageUrl(int imageUrl) {
         this.imageUrl = imageUrl;
     }
 

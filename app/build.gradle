@@ -42,6 +42,10 @@ dependencies {
     //Like Button
     implementation 'com.github.jd-alexander:LikeButton:0.2.3'
 
+    //Circular ImageView
+    implementation 'com.mikhaellopez:circularimageview:4.0.1'
+
+
 
 
 

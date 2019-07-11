@@ -11,11 +11,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.bahaa.eventapp.models.UserModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,8 +37,11 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.nv)
     public NavigationView navigationView;
 
+
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private Unbinder unbinder;
+    private View header;
+    private NavigationHeaderViewHolder holder;
 
 
     @Override
@@ -50,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         setupViewPager();
         setupBottomNavigationView();
         setupNavigationDrawer();
+        setupNavigationDrawerHeader();
 
     }
 
@@ -123,6 +130,27 @@ public class MainActivity extends AppCompatActivity {
                     return true;
             }
         });
+
+    }
+
+    private void setupNavigationDrawerHeader() {
+        header = navigationView.getHeaderView(0);
+        holder = new NavigationHeaderViewHolder(header);
+
+        UserModel user = new UserModel();
+        user.setImageUrl(R.drawable.bahaa);
+        user.setName("Bahaa Ibrahim");
+        user.setEmail("Bahaa@test.com");
+
+        if (user.getImageUrl() != 0) {
+            Picasso.get().load(user.getImageUrl()).fit().into(holder.userImageView);
+        }else {
+            char letter = user.getName().charAt(0);
+            holder.userInitLetter.setText(String.valueOf(letter));
+            holder.userInitLetter.setVisibility(View.VISIBLE);
+        }
+        holder.usernameTv.setText(user.getName());
+        holder.usermailTv.setText(user.getEmail());
     }
 
     private void displayToast(String msg) {
