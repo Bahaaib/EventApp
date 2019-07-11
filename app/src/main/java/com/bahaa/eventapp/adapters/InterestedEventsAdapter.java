@@ -1,11 +1,13 @@
 package com.bahaa.eventapp.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -63,6 +65,9 @@ public class InterestedEventsAdapter extends RecyclerView.Adapter {
     // actions to show & interact with them
     public class InterestedEventsViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.interested_events_relativeLayout)
+        public RelativeLayout relativeLayout;
+
         @BindView(R.id.interested_events_img)
         public ImageView intstdImage;
 
@@ -75,7 +80,7 @@ public class InterestedEventsAdapter extends RecyclerView.Adapter {
         @BindView(R.id.interested_events_capacity)
         public TextView intstdCapacity;
 
-        @BindView(R.id.interested_events_available)
+        @BindView(R.id.interested_events_availability)
         public TextView intstdAvailable;
 
 
@@ -94,8 +99,21 @@ public class InterestedEventsAdapter extends RecyclerView.Adapter {
 
             intstdTitle.setText(adapterModel.get(position).getTitle());
             intstdDate.setText(adapterModel.get(position).getDate());
-            intstdCapacity.setText(adapterModel.get(position).getCapacity());
-            intstdAvailable.setText(adapterModel.get(position).getTicketsAvailable());
+            intstdCapacity.setText(String.valueOf(adapterModel.get(position).getCapacity()));
+            if (adapterModel.get(position).getTicketsAvailable() == 0) {
+                intstdAvailable.setText("SOLD OUT");
+                intstdAvailable.setTextColor(Color.RED);
+                intstdAvailable.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) intstdAvailable.getLayoutParams();
+                int rightMarginDP = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12, context.getResources().getDisplayMetrics());
+                params.setMarginEnd(rightMarginDP);
+                intstdAvailable.setLayoutParams(params);
+                intstdAvailable.setBackgroundColor(Color.WHITE);
+                intstdAvailable.setPadding(5,0,5, 0);
+            } else {
+                intstdAvailable.setText(String.valueOf(adapterModel.get(position).getTicketsAvailable()));
+
+            }
 
 
         }
