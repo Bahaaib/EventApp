@@ -47,6 +47,7 @@
             android:layout_marginBottom="10dp"
             android:contentDescription="Capacity"
             android:drawableStart="@drawable/ic_person"
+            android:drawableTint="@color/colorPrimary"
             android:gravity="center"
             android:text="10"
             android:textSize="16sp" />

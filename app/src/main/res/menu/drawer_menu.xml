@@ -1,24 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group
+        android:id="@+id/menu_top"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/action_profile"
+            android:enabled="true"
+            android:icon="@drawable/ic_person"
+            android:title="Profile"
+            app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/action_interested"
+            android:enabled="true"
+            android:icon="@drawable/ic_star"
+            android:title="Interested"
+            app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/action_orders"
+            android:enabled="true"
+            android:icon="@drawable/ic_cart"
+            android:title="Orders"
+            app:showAsAction="ifRoom" />
 
-    <item
-        android:id="@+id/action_nearby"
-        android:enabled="true"
-        android:icon="@drawable/ic_nearby"
-        android:title="Nearby"
-        app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/action_explore"
-        android:enabled="true"
-        android:icon="@drawable/ic_explore"
-        android:title="Favorites"
-        app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/action_interested"
-        android:enabled="true"
-        android:icon="@drawable/ic_star"
-        android:title="Nearby"
-        app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/action_points"
+            android:enabled="true"
+            android:icon="@drawable/ic_points"
+            android:title="Points"
+            app:showAsAction="ifRoom" />
+
+        <item
+            android:id="@+id/action_settings"
+            android:enabled="true"
+            android:icon="@drawable/ic_settings"
+            android:title="Settings"
+            app:showAsAction="ifRoom" />
+
+    </group>
+
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/action_logout"
+            android:enabled="true"
+            android:icon="@drawable/ic_arrow_back"
+            android:title="Logout"
+            app:showAsAction="ifRoom" />
+
+    </group>
+
 
 </menu>

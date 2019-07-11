@@ -137,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
         header = navigationView.getHeaderView(0);
         holder = new NavigationHeaderViewHolder(header);
 
+        //Mocked User data
         UserModel user = new UserModel();
         user.setImageUrl(R.drawable.bahaa);
         user.setName("Bahaa Ibrahim");
