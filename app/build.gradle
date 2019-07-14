@@ -37,6 +37,7 @@ dependencies {
 
     //Butterknife
     implementation 'com.jakewharton:butterknife:10.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
 
     //Like Button
@@ -44,9 +45,6 @@ dependencies {
 
     //Circular ImageView
     implementation 'com.mikhaellopez:circularimageview:4.0.1'
-
-
-
 
 
     //testing

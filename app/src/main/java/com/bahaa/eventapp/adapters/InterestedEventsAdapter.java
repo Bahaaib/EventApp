@@ -12,11 +12,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bahaa.eventapp.MainActivity;
+import com.bahaa.eventapp.activities.MainActivity;
 import com.bahaa.eventapp.R;
 import com.bahaa.eventapp.models.EventModel;
 import com.google.android.material.snackbar.Snackbar;
