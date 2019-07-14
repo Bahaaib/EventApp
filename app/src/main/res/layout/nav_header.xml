@@ -19,7 +19,6 @@
         android:layout_height="70dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="30dp"
-        android:text="B"
         android:gravity="center"
         android:background="@drawable/shape_circle"
         android:textSize="30sp"
