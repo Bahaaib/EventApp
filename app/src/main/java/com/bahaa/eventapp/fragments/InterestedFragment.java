@@ -4,6 +4,7 @@ package com.bahaa.eventapp.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.bahaa.eventapp.MockedData;
 import com.bahaa.eventapp.R;
+import com.bahaa.eventapp.SwipeToDeleteCallback;
 import com.bahaa.eventapp.adapters.InterestedEventsAdapter;
 import com.bahaa.eventapp.models.EventModel;
 
@@ -72,6 +74,8 @@ public class InterestedFragment extends Fragment {
         intstdRV.setAdapter(interestedEventsAdapter);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         intstdRV.setLayoutManager(linearLayoutManager);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(interestedEventsAdapter));
+        itemTouchHelper.attachToRecyclerView(intstdRV);
     }
 
 }

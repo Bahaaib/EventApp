@@ -3,6 +3,7 @@ package com.bahaa.eventapp.adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bahaa.eventapp.MainActivity;
 import com.bahaa.eventapp.R;
 import com.bahaa.eventapp.models.EventModel;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -28,6 +33,8 @@ public class InterestedEventsAdapter extends RecyclerView.Adapter {
     private Context context;
     private ArrayList<EventModel> adapterModel;
     private Unbinder unbinder;
+    private EventModel recentlyDeletedItem;
+    private int recentlyDeletedItemPosition;
 
     {
         adapterModel = new ArrayList<>();
@@ -38,6 +45,46 @@ public class InterestedEventsAdapter extends RecyclerView.Adapter {
         this.adapterModel = adapterModel;
 
 
+    }
+
+    /*Swipe to Delete feature methods
+    *
+    */
+    public Context getContext() {
+        return context;
+    }
+
+    public void deleteItem(int position) {
+        recentlyDeletedItem = adapterModel.get(position);
+        recentlyDeletedItemPosition = position;
+        adapterModel.remove(position);
+        notifyItemRemoved(position);
+        showSnackBar();
+    }
+
+    private void showSnackBar() {
+        //init Snackbar
+        View view = ((MainActivity) context).getMainCoordinatorLayout();
+        Snackbar snackbar = Snackbar.make(view, "Item Deleted",
+                Snackbar.LENGTH_LONG);
+
+        //Hang Snackbar above Bottom Nav View
+        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams)
+                snackbar.getView().getLayoutParams();
+        params.setAnchorId(R.id.btm_nav);
+        params.gravity = Gravity.TOP;
+        params.anchorGravity = Gravity.TOP;
+        snackbar.getView().setLayoutParams(params);
+
+        //Set Actions to Snackbar
+        snackbar.setAction("UNDO", v -> undoDelete());
+        snackbar.setActionTextColor(context.getResources().getColor(R.color.colorPrimary));
+        snackbar.show();
+    }
+
+    private void undoDelete() {
+        adapterModel.add(recentlyDeletedItemPosition, recentlyDeletedItem);
+        notifyItemInserted(recentlyDeletedItemPosition);
     }
 
 
@@ -109,7 +156,7 @@ public class InterestedEventsAdapter extends RecyclerView.Adapter {
                 params.setMarginEnd(rightMarginDP);
                 intstdAvailable.setLayoutParams(params);
                 intstdAvailable.setBackgroundColor(Color.WHITE);
-                intstdAvailable.setPadding(5,0,5, 0);
+                intstdAvailable.setPadding(5, 0, 5, 0);
             } else {
                 intstdAvailable.setText(String.valueOf(adapterModel.get(position).getTicketsAvailable()));
 
