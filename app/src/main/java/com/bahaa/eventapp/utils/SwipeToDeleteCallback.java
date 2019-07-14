@@ -1,4 +1,4 @@
-package com.bahaa.eventapp;
+package com.bahaa.eventapp.utils;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bahaa.eventapp.R;
 import com.bahaa.eventapp.adapters.InterestedEventsAdapter;
 
 public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {

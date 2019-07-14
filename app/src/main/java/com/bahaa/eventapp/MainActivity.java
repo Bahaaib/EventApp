@@ -1,6 +1,5 @@
 package com.bahaa.eventapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -16,7 +15,9 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.bahaa.eventapp.adapters.PagerAdapter;
 import com.bahaa.eventapp.models.UserModel;
+import com.bahaa.eventapp.utils.NavigationHeaderViewHolder;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;

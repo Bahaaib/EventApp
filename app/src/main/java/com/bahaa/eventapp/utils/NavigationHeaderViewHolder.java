@@ -1,8 +1,10 @@
-package com.bahaa.eventapp;
+package com.bahaa.eventapp.utils;
 
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bahaa.eventapp.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -11,16 +13,16 @@ import butterknife.Unbinder;
 public class NavigationHeaderViewHolder {
 
     @BindView(R.id.user_image)
-    protected ImageView userImageView;
+    public ImageView userImageView;
 
     @BindView(R.id.user_init_letter)
-    protected TextView userInitLetter;
+    public TextView userInitLetter;
 
     @BindView(R.id.user_name)
-    protected TextView usernameTv;
+    public TextView usernameTv;
 
     @BindView(R.id.user_mail)
-    protected TextView usermailTv;
+    public TextView usermailTv;
 
     private Unbinder unbinder;
 

@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 
 import com.bahaa.eventapp.MockedData;
 import com.bahaa.eventapp.R;
-import com.bahaa.eventapp.SwipeToDeleteCallback;
+import com.bahaa.eventapp.utils.SwipeToDeleteCallback;
 import com.bahaa.eventapp.adapters.InterestedEventsAdapter;
 import com.bahaa.eventapp.models.EventModel;
 

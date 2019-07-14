@@ -1,4 +1,4 @@
-package com.bahaa.eventapp;
+package com.bahaa.eventapp.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
