@@ -10,7 +10,7 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         app:civ_border_width="2dp"/>
 
     <TextView
@@ -18,7 +18,7 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="30dp"
         android:text="B"
         android:gravity="center"
         android:background="@drawable/shape_circle"
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="15dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="30dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:text="Bahaa Ibrahim"
         android:textStyle="bold" />
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="15dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="10dp"
         android:fontFamily="sans-serif-light"
         android:text="Bahaa@test.com" />
 

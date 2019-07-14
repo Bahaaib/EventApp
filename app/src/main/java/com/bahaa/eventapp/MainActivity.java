@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Mocked User data
         UserModel user = new UserModel();
-        user.setImageUrl(R.drawable.bahaa);
+        //user.setImageUrl(R.drawable.bahaa);
         user.setName("Bahaa Ibrahim");
         user.setEmail("Bahaa@test.com");
 
