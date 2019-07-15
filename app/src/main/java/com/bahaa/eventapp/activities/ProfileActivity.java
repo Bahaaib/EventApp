@@ -1,6 +1,8 @@
 package com.bahaa.eventapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
@@ -13,12 +15,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bahaa.eventapp.R;
+import com.bahaa.eventapp.dialogs.UsernameDialog;
 import com.bahaa.eventapp.models.UserModel;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -28,6 +32,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     @BindView(R.id.profile_init_letter)
     public TextView userInitLetterTV;
+
+    @BindView(R.id.profile_user_name)
+    public TextView usernameTV;
 
     @BindView(R.id.profile_user_password)
     public TextView userPasswordTV;
@@ -45,6 +52,8 @@ public class ProfileActivity extends AppCompatActivity {
     public Drawable rect;
 
     private Unbinder unbinder;
+    private final String TAG = "username_dialog";
+    private UsernameDialog usernameDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +62,22 @@ public class ProfileActivity extends AppCompatActivity {
 
         unbinder = ButterKnife.bind(this);
         showUserImage();
+        usernameDialog = new UsernameDialog();
+
+
     }
 
-    private void showUserImage(){
+    @OnClick(R.id.profile_user_name)
+    public void changeUsername() {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG);
+        if (fragment != null) {
+            fragmentTransaction.remove(fragment);
+        }
+        fragmentTransaction.add(usernameDialog, TAG).commit();
+    }
+
+    private void showUserImage() {
         //Mocked User data
         UserModel user = new UserModel();
         user.setImageUrl(R.drawable.bahaa);
@@ -64,7 +86,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         if (user.getImageUrl() != 0) {
             Picasso.get().load(user.getImageUrl()).fit().into(userIV);
-        }else {
+        } else {
             char letter = user.getName().charAt(0);
             userInitLetterTV.setText(String.valueOf(letter));
             userInitLetterTV.setVisibility(View.VISIBLE);
