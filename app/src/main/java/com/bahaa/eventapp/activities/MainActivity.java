@@ -8,6 +8,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -69,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         setupNavigationDrawerHeader();
 
     }
-
     private void setupViewPager() {
         final PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), 3);
         viewPager.setAdapter(pagerAdapter);
@@ -124,8 +124,8 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             switch (id) {
-                case R.id.action_nearby:
-                    displayToast("Clicked Nearby");
+                case R.id.action_profile:
+                    navigateToActivity(ProfileActivity.class);
                     return true;
 
                 case R.id.action_explore:
@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (user.getImageUrl() != 0) {
             Picasso.get().load(user.getImageUrl()).fit().into(holder.userImageView);
-        }else {
+        } else {
             char letter = user.getName().charAt(0);
             holder.userInitLetter.setText(String.valueOf(letter));
             holder.userInitLetter.setVisibility(View.VISIBLE);
@@ -168,8 +168,13 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
     }
 
-    public CoordinatorLayout getMainCoordinatorLayout(){
+    public CoordinatorLayout getMainCoordinatorLayout() {
         return mainCooLayout;
+    }
+
+    private void navigateToActivity(Class<? extends  AppCompatActivity> TargetActivity) {
+        Intent intent = new Intent(MainActivity.this, TargetActivity);
+        startActivity(intent);
     }
 
     @Override

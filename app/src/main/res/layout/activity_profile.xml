@@ -8,17 +8,19 @@
 
     <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/profile_user_img"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp" />
+        android:layout_marginTop="70dp"
+        app:civ_border_color="@color/colorPrimary"
+        app:civ_border_width="2dp" />
 
     <TextView
         android:id="@+id/profile_init_letter"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="70dp"
         android:background="@drawable/shape_circle"
         android:gravity="center"
         android:textSize="30sp"
@@ -113,14 +115,16 @@
         android:textSize="18sp" />
 
     <Button
+        android:id="@+id/profile_save_btn"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:id="@+id/profile_save_btn"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="470dp"
-        android:textColor="@color/colorPrimary"
-        android:text="SAVE"
         android:background="@drawable/rounded_rec"
-        android:drawableTint="@color/colorPrimary"/>
+        android:backgroundTint="@color/colorPrimary"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="SAVE"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold" />
 
 </RelativeLayout>
