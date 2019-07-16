@@ -6,25 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".activities.ProfileActivity">
 
-    <com.mikhaellopez.circularimageview.CircularImageView
-        android:id="@+id/profile_user_img"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+    <RelativeLayout
+        android:id="@+id/profile_img_content"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
-        app:civ_border_color="@color/colorPrimary"
-        app:civ_border_width="2dp" />
+        android:layout_marginTop="50dp">
 
-    <TextView
-        android:id="@+id/profile_init_letter"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
-        android:background="@drawable/shape_circle"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:visibility="invisible" />
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/profile_user_img"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            app:civ_border_color="@color/colorPrimary"
+            app:civ_border_width="2dp" />
+
+        <TextView
+            android:id="@+id/profile_init_letter"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/shape_circle"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/shape_circle"
+            android:backgroundTint="@color/colorPrimary"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_camera" />
+
+
+    </RelativeLayout>
+
 
     <TextView
         android:layout_width="wrap_content"
