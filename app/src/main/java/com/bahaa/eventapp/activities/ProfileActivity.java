@@ -2,6 +2,7 @@ package com.bahaa.eventapp.activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -20,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bahaa.eventapp.R;
+import com.bahaa.eventapp.dialogs.PasswordDialog;
 import com.bahaa.eventapp.dialogs.UsernameDialog;
 import com.bahaa.eventapp.models.UserModel;
 import com.squareup.picasso.Picasso;
@@ -60,8 +62,10 @@ public class ProfileActivity extends AppCompatActivity {
     public ImageView imageIconIV;
 
     private Unbinder unbinder;
-    private final String TAG = "username_dialog";
+    private final String USERNAME_TAG = "username_dialog";
+    private final String PASS_TAG = "password_dialog";
     private UsernameDialog usernameDialog;
+    private PasswordDialog passwordDialog;
     private final int GALLERY_INTENT = 22;
     private ProgressDialog progressDialog;
 
@@ -73,6 +77,7 @@ public class ProfileActivity extends AppCompatActivity {
         unbinder = ButterKnife.bind(this);
         showUserImage();
         usernameDialog = new UsernameDialog();
+        passwordDialog = new PasswordDialog();
         progressDialog = new ProgressDialog(this);
 
 
@@ -87,13 +92,24 @@ public class ProfileActivity extends AppCompatActivity {
 
     @OnLongClick(R.id.profile_user_name)
     public void editUsername() {
+        showDialogFragment(usernameDialog, USERNAME_TAG);
+    }
+
+    @OnLongClick(R.id.profile_user_password)
+    public void changeUserPassword() {
+        showDialogFragment(passwordDialog, PASS_TAG);
+    }
+
+
+    private void showDialogFragment(DialogFragment dialogFragment, String tag) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG);
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(tag);
         if (fragment != null) {
             fragmentTransaction.remove(fragment);
         }
-        fragmentTransaction.add(usernameDialog, TAG).commit();
+        fragmentTransaction.add(dialogFragment, tag).commit();
     }
+
 
     private void showUserImage() {
         //Mocked User data

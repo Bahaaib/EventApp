@@ -12,11 +12,9 @@ import androidx.fragment.app.DialogFragment;
 
 import com.bahaa.eventapp.R;
 
-import org.w3c.dom.Text;
+public class PasswordDialog extends DialogFragment {
 
-public class UsernameDialog extends DialogFragment {
-
-    public UsernameDialog() {
+    public PasswordDialog() {
     }
 
     @Override
@@ -32,7 +30,7 @@ public class UsernameDialog extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.dialog_username, container, false);
+        View v = inflater.inflate(R.layout.dialog_password, container, false);
 
 
         return v;
