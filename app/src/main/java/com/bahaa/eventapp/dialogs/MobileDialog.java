@@ -98,7 +98,6 @@ public class MobileDialog extends DialogFragment {
         getDialog().dismiss();
     }
 
-
     private boolean isValidNumeric(String number) {
         NumberFormat formatter = NumberFormat.getInstance();
         ParsePosition pos = new ParsePosition(0);
