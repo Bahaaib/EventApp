@@ -1,14 +1,19 @@
 package com.bahaa.eventapp.activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,6 +23,8 @@ import com.bahaa.eventapp.R;
 import com.bahaa.eventapp.dialogs.UsernameDialog;
 import com.bahaa.eventapp.models.UserModel;
 import com.squareup.picasso.Picasso;
+
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindDrawable;
 import butterknife.BindView;
@@ -48,12 +55,14 @@ public class ProfileActivity extends AppCompatActivity {
     @BindView(R.id.profile_save_btn)
     public Button saveBtn;
 
-    @BindDrawable(R.drawable.rounded_rec)
-    public Drawable rect;
+    @BindView(R.id.profile_img_icon)
+    public ImageView imageIconIV;
 
     private Unbinder unbinder;
     private final String TAG = "username_dialog";
     private UsernameDialog usernameDialog;
+    private final int GALLERY_INTENT = 22;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +72,20 @@ public class ProfileActivity extends AppCompatActivity {
         unbinder = ButterKnife.bind(this);
         showUserImage();
         usernameDialog = new UsernameDialog();
+        progressDialog = new ProgressDialog(this);
 
 
     }
 
+    @OnClick(R.id.profile_img_icon)
+    public void editUserProfileImg() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, GALLERY_INTENT);
+    }
+
     @OnClick(R.id.profile_user_name)
-    public void changeUsername() {
+    public void editUsername() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG);
         if (fragment != null) {
@@ -90,6 +107,27 @@ public class ProfileActivity extends AppCompatActivity {
             char letter = user.getName().charAt(0);
             userInitLetterTV.setText(String.valueOf(letter));
             userInitLetterTV.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GALLERY_INTENT && resultCode == RESULT_OK) {
+            Uri uri = null;
+            if (data != null) {
+                uri = data.getData();
+            }
+
+            if (uri != null) {
+                String path = uri.getLastPathSegment();
+                Log.i("Statuss", path);
+                progressDialog.setMessage("Updating Profile Picture..");
+                progressDialog.show();
+
+                // @todo #4 Upload and Update profile img
+
+            }
         }
     }
 
