@@ -77,7 +77,20 @@ public class MobileDialog extends DialogFragment {
 
     @OnClick(R.id.mobile_ok_button)
     public void onOKPressed() {
-        textInputLayout.setError("Invalid Mobile Format");
+        String mobileNumber = mobileEditText.getText().toString();
+        mobileNumber = mobileNumber.replace("\\s+", "");
+
+        if (mobileNumber.isEmpty()){
+            textInputLayout.setError("Please type a mobile number");
+        }else if (!isValidNumeric(mobileNumber)){
+            textInputLayout.setError("Only numbers are allowed");
+        }else if (!isValidMobileNumberFormat(mobileNumber)){
+            textInputLayout.setError("Invalid mobile number format");
+        }else if (!hasValidStarters(mobileNumber)){
+            textInputLayout.setError("Mobile Number MUST start with 0 or +20");
+        }else {
+            // @todo #5 Update UI with valid mobile number
+        }
     }
 
     @OnClick(R.id.mobile_cancel_button)
