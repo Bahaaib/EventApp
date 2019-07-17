@@ -7,20 +7,20 @@
     android:focusableInTouchMode="true">
 
     <TextView
-        android:id="@+id/username_tv"
-        android:layout_width="140dp"
+        android:id="@+id/mobile_tv"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:text="Edit Username"
+        android:text="Edit Mobile Number"
         android:textColor="@color/colorPrimary"
 
         android:textSize="16sp" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/username_textfield_layout"
+        android:id="@+id/mobile_textfield_layout"
         style="@style/TextInputLayout"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -29,13 +29,13 @@
         android:layout_marginTop="50dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/username_textfield"
+            android:id="@+id/mobile_textfield"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:gravity="left"
-            android:hint="New Username"
-            android:inputType="textPersonName"
+            android:hint="New Mobile Number"
+            android:inputType="phone"
             android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -43,7 +43,7 @@
         android:id="@+id/horizontal_line"
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/username_textfield_layout"
+        android:layout_below="@+id/mobile_textfield_layout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@android:color/darker_gray" />
@@ -55,7 +55,7 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/username_cancel_button"
+            android:id="@+id/mobile_cancel_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -76,7 +76,7 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/username_ok_button"
+            android:id="@+id/mobile_ok_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

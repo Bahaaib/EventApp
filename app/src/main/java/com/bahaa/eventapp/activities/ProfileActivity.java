@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bahaa.eventapp.R;
+import com.bahaa.eventapp.dialogs.MobileDialog;
 import com.bahaa.eventapp.dialogs.PasswordDialog;
 import com.bahaa.eventapp.dialogs.UsernameDialog;
 import com.bahaa.eventapp.models.UserModel;
@@ -65,8 +66,10 @@ public class ProfileActivity extends AppCompatActivity {
     private Unbinder unbinder;
     private final String USERNAME_TAG = "username_dialog";
     private final String PASS_TAG = "password_dialog";
+    private final String  MOBILE_TAG = "mobile_dialog";
     private UsernameDialog usernameDialog;
     private PasswordDialog passwordDialog;
+    private MobileDialog mobileDialog;
     private final int GALLERY_INTENT = 22;
     private ProgressDialog progressDialog;
 
@@ -79,13 +82,14 @@ public class ProfileActivity extends AppCompatActivity {
         showUserImage();
         usernameDialog = new UsernameDialog();
         passwordDialog = new PasswordDialog();
+        mobileDialog = new MobileDialog();
         progressDialog = new ProgressDialog(this);
 
 
     }
 
     @OnClick(R.id.profile_img_icon)
-    public void editUserProfileImg() {
+    public void editProfileImg() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, GALLERY_INTENT);
@@ -97,8 +101,13 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     @OnLongClick(R.id.profile_user_password)
-    public void changeUserPassword() {
+    public void changePassword() {
         showDialogFragment(passwordDialog, PASS_TAG);
+    }
+
+    @OnLongClick(R.id.profile_user_mobile)
+    public void editMobileNumber(){
+        showDialogFragment(mobileDialog, MOBILE_TAG);
     }
 
 
