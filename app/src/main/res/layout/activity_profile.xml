@@ -70,6 +70,7 @@
         android:layout_marginEnd="30dp"
         android:fontFamily="sans-serif-light"
         android:text="iBahaa"
+        android:textColor="@color/colorAccent"
         android:textSize="18sp" />
 
     <TextView
@@ -92,6 +93,7 @@
         android:layout_marginEnd="30dp"
         android:fontFamily="sans-serif-condensed"
         android:text="********"
+        android:textColor="@color/colorAccent"
         android:textSize="18sp" />
 
     <TextView
@@ -136,6 +138,7 @@
         android:layout_marginEnd="30dp"
         android:fontFamily="sans-serif-light"
         android:text="010012345678"
+        android:textColor="@color/colorAccent"
         android:textSize="18sp" />
 
     <androidx.appcompat.widget.AppCompatButton

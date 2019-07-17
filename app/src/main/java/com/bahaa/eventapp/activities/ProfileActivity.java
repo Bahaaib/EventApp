@@ -30,6 +30,7 @@ import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnLongClick;
 import butterknife.Unbinder;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -84,7 +85,7 @@ public class ProfileActivity extends AppCompatActivity {
         startActivityForResult(intent, GALLERY_INTENT);
     }
 
-    @OnClick(R.id.profile_user_name)
+    @OnLongClick(R.id.profile_user_name)
     public void editUsername() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG);
