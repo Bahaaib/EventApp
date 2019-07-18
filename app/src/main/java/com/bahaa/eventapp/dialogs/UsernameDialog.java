@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,8 +81,10 @@ public class UsernameDialog extends DialogFragment {
 
         if (username.isEmpty()){
             usernameLayout.setError("Username cannot be empty");
+            watchText(usernameInput, usernameLayout);
         }else if (!isValidUsername(username)){
-            usernameLayout.setError("Username MUST be 20 letters at most");
+            usernameLayout.setError("Username MUST be 20 letters maximum");
+            watchText(usernameInput, usernameLayout);
         }else {
             // @todo #8 Update Username
         }
@@ -94,6 +98,27 @@ public class UsernameDialog extends DialogFragment {
     private boolean isValidUsername(String username){
         return username.length() > 0 && username.length() < 20;
     }
+
+    private void watchText(TextInputEditText editText, TextInputLayout textInputLayout) {
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                textInputLayout.setErrorEnabled(false);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+
 
     @Override
     public void onDestroyView() {

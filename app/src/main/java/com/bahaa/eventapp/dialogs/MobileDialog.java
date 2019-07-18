@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,14 +82,20 @@ public class MobileDialog extends DialogFragment {
         String mobileNumber = mobileEditText.getText().toString();
         mobileNumber = mobileNumber.replace("\\s+", "");
 
+        textInputLayout.setErrorEnabled(true);
+
         if (mobileNumber.isEmpty()){
             textInputLayout.setError("Please type a mobile number");
+            watchText(mobileEditText, textInputLayout);
         }else if (!isValidNumeric(mobileNumber)){
             textInputLayout.setError("Only numbers are allowed");
+            watchText(mobileEditText, textInputLayout);
         }else if (!isValidMobileNumberFormat(mobileNumber)){
             textInputLayout.setError("Invalid mobile number format");
+            watchText(mobileEditText, textInputLayout);
         }else if (!hasValidStarters(mobileNumber)){
             textInputLayout.setError("Mobile Number MUST start with 0 or +20");
+            watchText(mobileEditText, textInputLayout);
         }else {
             // @todo #5 Update UI with valid mobile number
         }
@@ -115,6 +123,27 @@ public class MobileDialog extends DialogFragment {
             return true;
         } else return number.charAt(0) == '+' && number.charAt(1) == '2' && number.charAt(2) == '0';
     }
+
+    private void watchText(TextInputEditText editText, TextInputLayout textInputLayout) {
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                textInputLayout.setErrorEnabled(false);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+
 
     @Override
     public void onDestroyView() {

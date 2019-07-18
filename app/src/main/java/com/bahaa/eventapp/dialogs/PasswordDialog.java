@@ -94,8 +94,12 @@ public class PasswordDialog extends DialogFragment {
         final String newPassword = newPasswordInput.getText().toString();
         final String confirmPassword = confirmPasswordInput.getText().toString();
 
+        oldPasswordLayout.setErrorEnabled(true);
+        newPasswordLayout.setErrorEnabled(true);
+        confirmPasswordLayout.setErrorEnabled(true);
+
         //Validate old password
-        if (!isValidPassword(oldPassword)) {
+        if (isInvalidPassword(oldPassword)) {
             oldPasswordLayout.setErrorEnabled(true);
             oldPasswordLayout.setError("Password Must be between 8 and 64 characters");
             watchText(oldPasswordInput, oldPasswordLayout);
@@ -105,16 +109,13 @@ public class PasswordDialog extends DialogFragment {
         }
 
         //Validate new password
-        if (!isValidPassword(newPassword)) {
-            newPasswordLayout.setErrorEnabled(true);
+        if (isInvalidPassword(newPassword)) {
             newPasswordLayout.setError("Password Must be between 8 and 64 characters");
             watchText(newPasswordInput, newPasswordLayout);
         } else if (oldPassword.equals(newPassword)) {
-            newPasswordLayout.setErrorEnabled(true);
             newPasswordLayout.setError("New and old passwords MUST be different");
             watchText(newPasswordInput, newPasswordLayout);
         } else if (!confirmPassword.equals(newPassword)) {
-            confirmPasswordLayout.setErrorEnabled(true);
             confirmPasswordLayout.setError("Passwords are not matched");
             watchText(confirmPasswordInput, confirmPasswordLayout);
         } else {
@@ -123,12 +124,12 @@ public class PasswordDialog extends DialogFragment {
     }
 
     @OnClick(R.id.password_cancel_button)
-    public void onCancelButtonPressed(){
+    public void onCancelButtonPressed() {
         getDialog().dismiss();
     }
 
-    private boolean isValidPassword(String password) {
-        return !password.isEmpty() && password.length() > 7;
+    private boolean isInvalidPassword(String password) {
+        return password.isEmpty() || password.length() < 8;
     }
 
     private void watchText(TextInputEditText editText, TextInputLayout textInputLayout) {
