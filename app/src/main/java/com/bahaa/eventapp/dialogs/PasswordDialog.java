@@ -80,7 +80,7 @@ public class PasswordDialog extends DialogFragment {
         return v;
     }
 
-    private void setupDialogRoundedCorners(){
+    private void setupDialogRoundedCorners() {
         if (getDialog() != null && getDialog().getWindow() != null) {
             getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
@@ -88,32 +88,45 @@ public class PasswordDialog extends DialogFragment {
     }
 
     @OnClick(R.id.password_ok_button)
-    public void onOKPressed(){
+    public void onOKPressed() {
 
         final String oldPassword = oldPasswordInput.getText().toString();
         final String newPassword = newPasswordInput.getText().toString();
         final String confirmPassword = confirmPasswordInput.getText().toString();
 
-        if (!isValidPassword(oldPassword)){
+        //Validate old password
+        if (!isValidPassword(oldPassword)) {
+            oldPasswordLayout.setErrorEnabled(true);
             oldPasswordLayout.setError("Password Must be between 8 and 64 characters");
-        }else {
+            watchText(oldPasswordInput, oldPasswordLayout);
+        } else {
+
             // @todo #6 verify old password
         }
 
-        if (!isValidPassword(newPassword)){
+        //Validate new password
+        if (!isValidPassword(newPassword)) {
+            newPasswordLayout.setErrorEnabled(true);
             newPasswordLayout.setError("Password Must be between 8 and 64 characters");
-        }else if (!confirmPassword.equals(newPassword)){
-            confirmPasswordLayout.setError("Passwords are not matching");
-        }else {
+            watchText(newPasswordInput, newPasswordLayout);
+        } else if (oldPassword.equals(newPassword)) {
+            newPasswordLayout.setErrorEnabled(true);
+            newPasswordLayout.setError("New and old passwords MUST be different");
+            watchText(newPasswordInput, newPasswordLayout);
+        } else if (!confirmPassword.equals(newPassword)) {
+            confirmPasswordLayout.setErrorEnabled(true);
+            confirmPasswordLayout.setError("Passwords are not matched");
+            watchText(confirmPasswordInput, confirmPasswordLayout);
+        } else {
             // @todo #7 Update password
         }
     }
 
-    private boolean isValidPassword(String password){
+    private boolean isValidPassword(String password) {
         return !password.isEmpty() && password.length() > 7;
     }
 
-    private void watchText(TextInputEditText editText, TextInputLayout textInputLayout){
+    private void watchText(TextInputEditText editText, TextInputLayout textInputLayout) {
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -122,7 +135,6 @@ public class PasswordDialog extends DialogFragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                editText.setTransformationMethod(new PasswordTransformationMethod());
                 textInputLayout.setErrorEnabled(false);
 
             }
