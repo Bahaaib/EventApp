@@ -122,6 +122,11 @@ public class PasswordDialog extends DialogFragment {
         }
     }
 
+    @OnClick(R.id.password_cancel_button)
+    public void onCancelButtonPressed(){
+        getDialog().dismiss();
+    }
+
     private boolean isValidPassword(String password) {
         return !password.isEmpty() && password.length() > 7;
     }
