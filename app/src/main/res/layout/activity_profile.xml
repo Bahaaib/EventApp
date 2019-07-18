@@ -69,6 +69,7 @@
         android:layout_marginTop="240dp"
         android:layout_marginEnd="30dp"
         android:fontFamily="sans-serif-light"
+        android:maxLength="20"
         android:text="iBahaa"
         android:textColor="@color/colorAccent"
         android:textSize="18sp" />

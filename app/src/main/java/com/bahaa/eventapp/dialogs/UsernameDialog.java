@@ -11,13 +11,35 @@ import android.view.Window;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.DialogFragment;
 
 import com.bahaa.eventapp.R;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.w3c.dom.Text;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+
 public class UsernameDialog extends DialogFragment {
+
+    @BindView(R.id.username_textfield_layout)
+    public TextInputLayout usernameLayout;
+
+    @BindView(R.id.username_textfield)
+    public TextInputEditText usernameInput;
+
+    @BindView(R.id.username_ok_button)
+    public AppCompatButton okButton;
+
+    @BindView(R.id.username_cancel_button)
+    public AppCompatButton cancelButton;
+
+    private Unbinder unbinder;
 
     public UsernameDialog() {
     }
@@ -37,6 +59,8 @@ public class UsernameDialog extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.dialog_username, container, false);
 
+        unbinder = ButterKnife.bind(this, v);
+
         setupDialogRoundedCorners();
 
         return v;
@@ -47,5 +71,34 @@ public class UsernameDialog extends DialogFragment {
             getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         }
+    }
+
+    @OnClick(R.id.username_ok_button)
+    public void onOKPressed(){
+        final String username = usernameInput.getText().toString();
+
+        if (username.isEmpty()){
+            usernameLayout.setError("Username cannot be empty");
+        }else if (!isValidUsername(username)){
+            usernameLayout.setError("Username MUST be 20 letters at most");
+        }else {
+            // @todo #8 Update Username
+        }
+    }
+
+    @OnClick(R.id.username_cancel_button)
+    public void onCancelPressed(){
+        getDialog().dismiss();
+    }
+
+    private boolean isValidUsername(String username){
+        return username.length() > 0 && username.length() < 20;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        unbinder.unbind();
     }
 }
