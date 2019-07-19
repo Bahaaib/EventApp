@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.InterestedFragment">
+    tools:context=".fragments.InterestedFragment"
+    android:background="@color/colorGrayLight">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/interested_event_rv"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" />
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="true">
 
-</RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:text="Your most favorite Events"
+            android:textColor="@color/colorInactive"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-light"
+            android:textStyle="bold"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="60dp"
+            android:id="@+id/interested_event_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
+    </RelativeLayout>
+
+
+
+</androidx.core.widget.NestedScrollView>
