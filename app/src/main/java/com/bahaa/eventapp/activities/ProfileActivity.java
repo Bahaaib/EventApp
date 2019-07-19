@@ -57,9 +57,6 @@ public class ProfileActivity extends AppCompatActivity {
     @BindView(R.id.profile_user_mobile)
     public TextView userMobileTV;
 
-    @BindView(R.id.profile_save_btn)
-    public Button saveBtn;
-
     @BindView(R.id.profile_img_icon)
     public ImageView imageIconIV;
 

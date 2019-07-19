@@ -3,9 +3,10 @@
     <color name="colorPrimary">#05a5d1</color>
     <color name="colorPrimaryDark">#0076a0</color>
     <color name="colorPrimaryLight">#60d6ff</color>
-    <color name="colorAccent">#000000</color>
+    <color name="colorAccent">#FFFFFF</color>
 
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
     <color name="colorInactive">#757575</color>
     <color name="colorLikeButton">#FF0000</color>
 

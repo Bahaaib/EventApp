@@ -58,7 +58,7 @@
         android:layout_marginTop="240dp"
         android:fontFamily="sans-serif-condensed"
         android:text="Username: "
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorBlack"
         android:textSize="18sp" />
 
     <TextView
@@ -71,7 +71,7 @@
         android:fontFamily="sans-serif-light"
         android:maxLength="20"
         android:text="iBahaa"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorBlack"
         android:textSize="18sp" />
 
     <TextView
@@ -82,7 +82,7 @@
         android:layout_marginTop="290dp"
         android:fontFamily="sans-serif-condensed"
         android:text="Password: "
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorBlack"
         android:textSize="18sp" />
 
     <TextView
@@ -94,7 +94,7 @@
         android:layout_marginEnd="30dp"
         android:fontFamily="sans-serif-condensed"
         android:text="********"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorBlack"
         android:textSize="18sp" />
 
     <TextView
@@ -105,7 +105,7 @@
         android:layout_marginTop="340dp"
         android:fontFamily="sans-serif-condensed"
         android:text="E-mail: "
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorBlack"
         android:textSize="18sp" />
 
     <TextView
@@ -127,7 +127,7 @@
         android:layout_marginTop="390dp"
         android:fontFamily="sans-serif-condensed"
         android:text="Mobile No: "
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorBlack"
         android:textSize="18sp" />
 
     <TextView
@@ -139,20 +139,8 @@
         android:layout_marginEnd="30dp"
         android:fontFamily="sans-serif-light"
         android:text="010012345678"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorBlack"
         android:textSize="18sp" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/profile_save_btn"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="470dp"
-        android:background="@drawable/rounded_rec"
-        android:backgroundTint="@color/colorPrimary"
-        android:foreground="?attr/selectableItemBackground"
-        android:text="SAVE"
-        android:textColor="@color/colorAccent"
-        android:textStyle="bold" />
 
 </RelativeLayout>
