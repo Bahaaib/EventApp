@@ -51,9 +51,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     private ActionBarDrawerToggle actionBarDrawerToggle;
-    private Unbinder unbinder;
     private View header;
     private NavigationHeaderViewHolder holder;
+    private Unbinder unbinder;
+
 
 
     @Override
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         setupNavigationDrawerHeader();
 
     }
+
     private void setupViewPager() {
         final PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), 3);
         viewPager.setAdapter(pagerAdapter);

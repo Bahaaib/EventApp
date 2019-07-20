@@ -1,7 +1,11 @@
 package com.bahaa.eventapp.activities;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -16,16 +20,20 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bahaa.eventapp.R;
 import com.bahaa.eventapp.dialogs.MobileDialog;
 import com.bahaa.eventapp.dialogs.PasswordDialog;
 import com.bahaa.eventapp.dialogs.UsernameDialog;
 import com.bahaa.eventapp.models.UserModel;
+import com.bahaa.eventapp.utils.NavigationHeaderViewHolder;
+import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
 import java.util.concurrent.TimeUnit;
@@ -60,6 +68,19 @@ public class ProfileActivity extends AppCompatActivity {
     @BindView(R.id.profile_img_icon)
     public ImageView imageIconIV;
 
+    @BindView(R.id.profile_drawer)
+    public DrawerLayout drawerLayout;
+
+    @BindView(R.id.profile_nv)
+    public NavigationView navigationView;
+
+    @BindView(R.id.profile_toolbar)
+    public Toolbar toolbar;
+
+
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+    private View header;
+    private NavigationHeaderViewHolder holder;
     private Unbinder unbinder;
     private final String USERNAME_TAG = "username_dialog";
     private final String PASS_TAG = "password_dialog";
@@ -76,12 +97,12 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         unbinder = ButterKnife.bind(this);
-        showUserImage();
-        usernameDialog = new UsernameDialog();
-        passwordDialog = new PasswordDialog();
-        mobileDialog = new MobileDialog();
-        progressDialog = new ProgressDialog(this);
+        setSupportActionBar(toolbar);
+        setupNavigationDrawer();
+        setupNavigationDrawerHeader();
 
+        showUserImage();
+        initDialogs();
 
     }
 
@@ -117,6 +138,71 @@ public class ProfileActivity extends AppCompatActivity {
         fragmentTransaction.add(dialogFragment, tag).commit();
     }
 
+    private void setupNavigationDrawer() {
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+        actionBarDrawerToggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.colorAccent));
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        navigationView.getMenu().getItem(0).setChecked(true);
+
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            switch (id) {
+                case R.id.action_explore:
+                    displayToast("Clicked Explore");
+                    return true;
+
+                case R.id.action_interested:
+                    displayToast("Clicked Interested");
+                    return true;
+
+                default:
+                    return true;
+            }
+        });
+
+    }
+
+    private void setupNavigationDrawerHeader() {
+        header = navigationView.getHeaderView(0);
+        holder = new NavigationHeaderViewHolder(header);
+
+        //Mocked User data
+        UserModel user = new UserModel();
+        //user.setImageUrl(R.drawable.bahaa);
+        user.setName("Bahaa Ibrahim");
+        user.setEmail("Bahaa@test.com");
+
+        if (user.getImageUrl() != 0) {
+            Picasso.get().load(user.getImageUrl()).fit().into(holder.userImageView);
+        } else {
+            char letter = user.getName().charAt(0);
+            holder.userInitLetter.setText(String.valueOf(letter));
+            holder.userInitLetter.setVisibility(View.VISIBLE);
+        }
+        holder.usernameTv.setText(user.getName());
+        holder.usermailTv.setText(user.getEmail());
+    }
+
+    private void displayToast(String msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+    }
+
+    private void navigateToActivity(Class<? extends  AppCompatActivity> TargetActivity) {
+        Intent intent = new Intent(ProfileActivity.this, TargetActivity);
+        startActivity(intent);
+    }
+
+    private void initDialogs(){
+        usernameDialog = new UsernameDialog();
+        passwordDialog = new PasswordDialog();
+        mobileDialog = new MobileDialog();
+        progressDialog = new ProgressDialog(this);
+    }
 
     private void showUserImage() {
         //Mocked User data
@@ -132,6 +218,15 @@ public class ProfileActivity extends AppCompatActivity {
             userInitLetterTV.setText(String.valueOf(letter));
             userInitLetterTV.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (actionBarDrawerToggle.onOptionsItemSelected(item))
+            return true;
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -152,6 +247,15 @@ public class ProfileActivity extends AppCompatActivity {
                 // @todo #4 Upload and Update profile img
 
             }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            this.drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
         }
     }
 
