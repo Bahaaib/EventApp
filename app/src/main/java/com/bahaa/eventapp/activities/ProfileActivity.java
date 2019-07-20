@@ -81,15 +81,15 @@ public class ProfileActivity extends AppCompatActivity {
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private View header;
     private NavigationHeaderViewHolder holder;
-    private Unbinder unbinder;
     private final String USERNAME_TAG = "username_dialog";
     private final String PASS_TAG = "password_dialog";
-    private final String  MOBILE_TAG = "mobile_dialog";
+    private final String MOBILE_TAG = "mobile_dialog";
     private UsernameDialog usernameDialog;
     private PasswordDialog passwordDialog;
     private MobileDialog mobileDialog;
     private final int GALLERY_INTENT = 22;
     private ProgressDialog progressDialog;
+    private Unbinder unbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,7 +124,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     @OnLongClick(R.id.profile_user_mobile)
-    public void editMobileNumber(){
+    public void editMobileNumber() {
         showDialogFragment(mobileDialog, MOBILE_TAG);
     }
 
@@ -152,8 +152,8 @@ public class ProfileActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             switch (id) {
-                case R.id.action_explore:
-                    displayToast("Clicked Explore");
+                case R.id.action_orders:
+                    navigateToActivity(OrdersActivity.class);
                     return true;
 
                 case R.id.action_interested:
@@ -192,12 +192,12 @@ public class ProfileActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
     }
 
-    private void navigateToActivity(Class<? extends  AppCompatActivity> TargetActivity) {
+    private void navigateToActivity(Class<? extends AppCompatActivity> TargetActivity) {
         Intent intent = new Intent(ProfileActivity.this, TargetActivity);
         startActivity(intent);
     }
 
-    private void initDialogs(){
+    private void initDialogs() {
         usernameDialog = new UsernameDialog();
         passwordDialog = new PasswordDialog();
         mobileDialog = new MobileDialog();
@@ -256,6 +256,16 @@ public class ProfileActivity extends AppCompatActivity {
             this.drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            this.drawerLayout.closeDrawer(GravityCompat.START);
+            super.onResume();
+        } else {
+            super.onResume();
         }
     }
 

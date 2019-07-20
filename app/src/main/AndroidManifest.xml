@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.ProfileActivity" android:theme="@style/AppTheme"></activity>
+        <activity android:name=".activities.OrdersActivity"/>
+        <activity
+            android:name=".activities.ProfileActivity"/>
         <activity
             android:name=".activities.MainActivity"
             android:windowSoftInputMode="adjustPan">
