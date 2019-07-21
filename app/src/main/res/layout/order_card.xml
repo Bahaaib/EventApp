@@ -11,40 +11,86 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/order_img"
+        <ir.beigirad.zigzagview.ZigzagView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="320dp"
+            android:elevation="6dp"
+            card_view:zigzagBackgroundColor="#ff757575"
+            card_view:zigzagHeight="10dp"
+            card_view:zigzagSides="bottom">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:alpha="0.5"
-            android:background="@color/colorInactive" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/order_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.5"
+                    android:background="@color/colorInactive" />
+
+                <TextView
+                    android:id="@+id/order_events_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="130dp"
+                    android:text="Fri, Apr 19"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/order_events_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="180dp"
+                    android:gravity="center"
+                    android:maxLength="110"
+                    android:padding="8dp"
+                    android:text="Codemotion Amsterdam Lorem ipsum dolor sit amet, consectetur adipisicing elit"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="24sp" />
+            </RelativeLayout>
+
+        </ir.beigirad.zigzagview.ZigzagView>
 
         <TextView
-            android:id="@+id/order_events_date"
+            android:id="@+id/order_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="130dp"
-            android:text="Fri, Apr 19"
-            android:textColor="@color/colorWhite"
-            android:textStyle="bold"
-            android:textSize="18sp"/>
-
-        <TextView
-            android:id="@+id/order_events_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="180dp"
+            android:layout_marginBottom="20dp"
+            android:drawableEnd="@drawable/ic_check"
+            android:drawablePadding="10dp"
+            android:fontFamily="sans-serif-light"
             android:gravity="center"
-            android:maxLength="110"
-            android:padding="8dp"
+            android:text="CONFIRMED"
+            android:textColor="@color/colorGreen"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/order_pending"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:drawableEnd="@drawable/ic_pending"
+            android:drawablePadding="10dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:text="PENDING"
+            android:textColor="@color/colorInactive"
             android:textSize="24sp"
-            android:text="Codemotion Amsterdam Lorem ipsum dolor sit amet, consectetur adipisicing elit"
-            android:textColor="@color/colorWhite" />
+            android:visibility="invisible" />
 
 
     </RelativeLayout>

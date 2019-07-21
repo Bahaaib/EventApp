@@ -70,6 +70,12 @@ public class OrdersAdapter extends RecyclerView.Adapter {
         @BindView(R.id.order_events_title)
         public TextView orderTitle;
 
+        @BindView(R.id.order_confirm)
+        public TextView orderConfirm;
+
+        @BindView(R.id.order_pending)
+        public TextView orderPending;
+
 
         public OrdersViewHolder(View itemView) {
             super(itemView);
@@ -86,6 +92,11 @@ public class OrdersAdapter extends RecyclerView.Adapter {
 
             orderDate.setText(adapterModel.get(position).getDate());
             orderTitle.setText(adapterModel.get(position).getTitle());
+
+            if (position % 2 != 0) {
+                orderConfirm.setVisibility(View.INVISIBLE);
+                orderPending.setVisibility(View.VISIBLE);
+            }
 
         }
 

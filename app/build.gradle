@@ -46,8 +46,12 @@ dependencies {
     //Circular ImageView
     implementation 'com.mikhaellopez:circularimageview:4.0.1'
 
-    //SliderCard
+    //CardSlider
     implementation 'com.ramotion.cardslider:card-slider:0.3.1'
+
+    //Zigzag Layout
+    implementation 'com.github.beigirad:ZigzagView:1.0.7'
+
 
 
 

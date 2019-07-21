@@ -9,8 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.util.TypedValue;
 import android.util.Xml;
 import android.view.MenuItem;
 import android.view.View;
@@ -84,24 +87,16 @@ public class OrdersActivity extends AppCompatActivity {
         ordersList = new ArrayList<>();
         ordersAdapter = new OrdersAdapter(this, ordersList);
         ordersRV.setAdapter(ordersAdapter);
-        CardSliderLayoutManager layoutManager = new CardSliderLayoutManager(this, getCardAttrs(), 0, 0);
-        layoutManager.smoothScrollToPosition(ordersRV, null, ordersList.size() - 1);
+        int cardWidth = convertToPixels(300);
+        CardSliderLayoutManager layoutManager = new CardSliderLayoutManager(30, cardWidth, 12f);
         ordersRV.setLayoutManager(layoutManager);
         new CardSnapHelper().attachToRecyclerView(ordersRV);
 
     }
 
-    private AttributeSet getCardAttrs(){
-        XmlPullParser parser = getResources().getXml(R.xml.card_slider);
-        try {
-            parser.next();
-            parser.nextTag();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private int convertToPixels(int dp) {
+        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
 
-        AttributeSet attr = Xml.asAttributeSet(parser);
-        return attr;
     }
 
     private void setupNavigationDrawer() {
@@ -162,7 +157,7 @@ public class OrdersActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
     }
 
-    private void navigateToActivity(Class<? extends  AppCompatActivity> TargetActivity) {
+    private void navigateToActivity(Class<? extends AppCompatActivity> TargetActivity) {
         Intent intent = new Intent(OrdersActivity.this, TargetActivity);
         startActivity(intent);
     }
