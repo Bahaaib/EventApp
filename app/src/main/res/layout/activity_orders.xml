@@ -48,6 +48,18 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/order_rv"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginTop="100dp"
+            android:clipChildren="false"
+            android:overScrollMode="never"
+            android:paddingStart="10dp"
+            app:activeCardLeftOffset="80dp"
+            android:paddingEnd="10dp"
+            app:viewUpdater="com.ramotion.cardslider.examples.simple.cards.CardsUpdater" />
+
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

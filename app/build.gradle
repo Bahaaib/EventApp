@@ -46,6 +46,10 @@ dependencies {
     //Circular ImageView
     implementation 'com.mikhaellopez:circularimageview:4.0.1'
 
+    //SliderCard
+    implementation 'com.ramotion.cardslider:card-slider:0.3.1'
+
+
 
     //testing
     testImplementation 'junit:junit:4.12'

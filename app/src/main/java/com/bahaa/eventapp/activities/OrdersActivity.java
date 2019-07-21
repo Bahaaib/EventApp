@@ -5,18 +5,32 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.AttributeSet;
+import android.util.Xml;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.bahaa.eventapp.MockedData;
 import com.bahaa.eventapp.R;
+import com.bahaa.eventapp.adapters.CurrentEventsAdapter;
+import com.bahaa.eventapp.adapters.OrdersAdapter;
+import com.bahaa.eventapp.models.EventModel;
 import com.bahaa.eventapp.models.UserModel;
 import com.bahaa.eventapp.utils.NavigationHeaderViewHolder;
 import com.google.android.material.navigation.NavigationView;
+import com.ramotion.cardslider.CardSliderLayoutManager;
+import com.ramotion.cardslider.CardSnapHelper;
 import com.squareup.picasso.Picasso;
+
+import org.xmlpull.v1.XmlPullParser;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,9 +47,15 @@ public class OrdersActivity extends AppCompatActivity {
     @BindView(R.id.orders_toolbar)
     public Toolbar toolbar;
 
+    @BindView(R.id.order_rv)
+    public RecyclerView ordersRV;
+
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private View header;
     private NavigationHeaderViewHolder holder;
+    private ArrayList<EventModel> ordersList;
+    private OrdersAdapter ordersAdapter;
+
     private Unbinder unbinder;
 
     @Override
@@ -47,6 +67,41 @@ public class OrdersActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setupNavigationDrawer();
         setupNavigationDrawerHeader();
+        setupOrdersRV();
+
+        for (int j = 0; j < 3; j++) {
+            EventModel model = new EventModel();
+            model.setImage(MockedData.images[j]);
+            model.setDate(MockedData.dates[j]);
+            model.setTitle(MockedData.titles[j]);
+
+            ordersList.add(model);
+        }
+        ordersAdapter.notifyDataSetChanged();
+    }
+
+    private void setupOrdersRV() {
+        ordersList = new ArrayList<>();
+        ordersAdapter = new OrdersAdapter(this, ordersList);
+        ordersRV.setAdapter(ordersAdapter);
+        CardSliderLayoutManager layoutManager = new CardSliderLayoutManager(this, getCardAttrs(), 0, 0);
+        layoutManager.smoothScrollToPosition(ordersRV, null, ordersList.size() - 1);
+        ordersRV.setLayoutManager(layoutManager);
+        new CardSnapHelper().attachToRecyclerView(ordersRV);
+
+    }
+
+    private AttributeSet getCardAttrs(){
+        XmlPullParser parser = getResources().getXml(R.xml.card_slider);
+        try {
+            parser.next();
+            parser.nextTag();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        AttributeSet attr = Xml.asAttributeSet(parser);
+        return attr;
     }
 
     private void setupNavigationDrawer() {
