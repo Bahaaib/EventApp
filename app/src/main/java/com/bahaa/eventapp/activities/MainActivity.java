@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bahaa.eventapp.R;
@@ -27,6 +29,7 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,6 +52,15 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.nv)
     public NavigationView navigationView;
 
+    @BindView(R.id.main_toolbar_triangle)
+    public ImageView triangle;
+
+    @BindView(R.id.main_points_layout)
+    public RelativeLayout pointsLayout;
+
+    @BindView(R.id.main_toolbar_points_icon)
+    public ImageView pointsIcon;
+
 
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private View header;
@@ -70,6 +82,17 @@ public class MainActivity extends AppCompatActivity {
         setupNavigationDrawer();
         setupNavigationDrawerHeader();
 
+    }
+
+    @OnClick(R.id.main_toolbar_points_icon)
+    public void showPointsLayout(){
+        if (pointsLayout.getVisibility() == View.VISIBLE){
+            pointsLayout.setVisibility(View.INVISIBLE);
+            triangle.setVisibility(View.INVISIBLE);
+        }else {
+            pointsLayout.setVisibility(View.VISIBLE);
+            triangle.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setupViewPager() {
