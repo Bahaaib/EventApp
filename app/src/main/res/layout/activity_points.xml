@@ -54,9 +54,44 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="150dp"
                 android:src="@drawable/ic_treasure" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="YOU HAVE"
+                android:textSize="24sp"
+                android:textColor="@android:color/holo_red_light"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="320dp"
+                android:gravity="center"
+                android:fontFamily="sans-serif-light"/>
+
+            <com.robinhood.ticker.TickerView
+                android:id="@+id/points_ticker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="360dp"
+                android:gravity="center"
+                app:ticker_animationDuration="1500"
+                app:ticker_defaultCharacterList="number"
+                android:textSize="40sp"
+                android:textColor="@color/colorGold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="POINTS"
+                android:textSize="24sp"
+                android:textColor="@android:color/holo_red_light"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="420dp"
+                android:gravity="center"
+                android:fontFamily="sans-serif-condensed-light"/>
         </RelativeLayout>
+
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -19,9 +19,11 @@ import com.bahaa.eventapp.models.EventModel;
 import com.bahaa.eventapp.models.UserModel;
 import com.bahaa.eventapp.utils.NavigationHeaderViewHolder;
 import com.google.android.material.navigation.NavigationView;
+import com.robinhood.ticker.TickerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +39,9 @@ public class PointsActivity extends AppCompatActivity {
 
     @BindView(R.id.points_toolbar)
     public Toolbar toolbar;
+
+    @BindView(R.id.points_ticker)
+    public TickerView pointsTicker;
 
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private View header;
@@ -54,6 +59,7 @@ public class PointsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setupNavigationDrawer();
         setupNavigationDrawerHeader();
+        setupPointsTicker();
     }
 
     private void setupNavigationDrawer() {
@@ -117,6 +123,36 @@ public class PointsActivity extends AppCompatActivity {
     private void navigateToActivity(Class<? extends AppCompatActivity> TargetActivity) {
         Intent intent = new Intent(PointsActivity.this, TargetActivity);
         startActivity(intent);
+    }
+
+    private void setupPointsTicker() {
+        int initPoints;
+        int finalPoints = 20;
+
+        if (finalPoints > 10) {
+            initPoints = generateRandomNumber(0, finalPoints);
+            setTickerValues(String.valueOf(initPoints), String.valueOf(finalPoints));
+        }else if (finalPoints > 100){
+            initPoints = generateRandomNumber(10, finalPoints);
+            setTickerValues(String.valueOf(initPoints), String.valueOf(finalPoints));
+        }else if (finalPoints > 1000){
+            initPoints = generateRandomNumber(100, finalPoints);
+            setTickerValues(String.valueOf(initPoints), String.valueOf(finalPoints));
+        }else {//Less than 10
+            initPoints = generateRandomNumber(0, finalPoints);
+            setTickerValues(String.valueOf(initPoints), String.valueOf(finalPoints));
+        }
+
+    }
+
+    private void setTickerValues(String initValue, String finalValue) {
+        pointsTicker.setText(initValue);
+        pointsTicker.setText(finalValue);
+    }
+
+    private int generateRandomNumber(int min, int max) {
+        Random random = new Random();
+        return random.nextInt((max - min) + 1) + min;
     }
 
     @Override
