@@ -3,114 +3,57 @@ package com.bahaa.eventapp.activities;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.bahaa.eventapp.R;
-import com.bahaa.eventapp.adapters.PagerAdapter;
+import com.bahaa.eventapp.adapters.OrdersAdapter;
+import com.bahaa.eventapp.models.EventModel;
 import com.bahaa.eventapp.models.UserModel;
 import com.bahaa.eventapp.utils.NavigationHeaderViewHolder;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class MainActivity extends AppCompatActivity {
+public class PointsActivity extends AppCompatActivity {
 
-    @BindView(R.id.main_coordinator_layout)
-    public CoordinatorLayout mainCooLayout;
-
-    @BindView(R.id.main_toolbar)
-    public Toolbar toolbar;
-
-    @BindView(R.id.btm_nav)
-    public BottomNavigationView bottomNavigationView;
-
-    @BindView(R.id.pager)
-    public ViewPager viewPager;
-
-    @BindView(R.id.drawer_layout)
+    @BindView(R.id.points_drawer)
     public DrawerLayout drawerLayout;
 
-    @BindView(R.id.nv)
+    @BindView(R.id.points_nv)
     public NavigationView navigationView;
 
+    @BindView(R.id.points_toolbar)
+    public Toolbar toolbar;
 
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private View header;
     private NavigationHeaderViewHolder holder;
+
     private Unbinder unbinder;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_points);
 
         unbinder = ButterKnife.bind(this);
-
         setSupportActionBar(toolbar);
-
-        setupViewPager();
-        setupBottomNavigationView();
         setupNavigationDrawer();
         setupNavigationDrawerHeader();
-
-    }
-
-    private void setupViewPager() {
-        final PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), 3);
-        viewPager.setAdapter(pagerAdapter);
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-                bottomNavigationView.getMenu().getItem(position).setChecked(true);
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-    }
-
-    private void setupBottomNavigationView() {
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.action_nearby:
-                    viewPager.setCurrentItem(0);
-                    break;
-                case R.id.action_explore:
-                    viewPager.setCurrentItem(1);
-                    break;
-                case R.id.action_interested:
-                    viewPager.setCurrentItem(2);
-                    break;
-            }
-            return true;
-        });
     }
 
     private void setupNavigationDrawer() {
@@ -122,8 +65,7 @@ public class MainActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
-        navigationView.getMenu().getItem(0).setChecked(false);
+        navigationView.getMenu().getItem(3).setChecked(true);
 
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
@@ -132,16 +74,12 @@ public class MainActivity extends AppCompatActivity {
                     navigateToActivity(ProfileActivity.class);
                     return true;
 
-                case R.id.action_orders:
-                    navigateToActivity(OrdersActivity.class);
+                case R.id.action_explore:
+                    displayToast("Clicked Explore");
                     return true;
 
                 case R.id.action_interested:
                     displayToast("Clicked Interested");
-                    return true;
-
-                case R.id.action_points:
-                    navigateToActivity(PointsActivity.class);
                     return true;
 
                 default:
@@ -176,21 +114,9 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
     }
 
-    public CoordinatorLayout getMainCoordinatorLayout() {
-        return mainCooLayout;
-    }
-
     private void navigateToActivity(Class<? extends AppCompatActivity> TargetActivity) {
-        Intent intent = new Intent(MainActivity.this, TargetActivity);
+        Intent intent = new Intent(PointsActivity.this, TargetActivity);
         startActivity(intent);
-    }
-
-    private void uncheckAllDrawerItems() {
-        int size = navigationView.getMenu().size();
-
-        for (int i = 0; i < size; i++) {
-            navigationView.getMenu().getItem(i).setChecked(false);
-        }
     }
 
     @Override
@@ -203,18 +129,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (getCurrentFocus() != null) {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-        }
-        return super.dispatchTouchEvent(ev);
-    }
-
-    @Override
     public void onBackPressed() {
         if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            navigationView.getMenu().getItem(0).setChecked(false);
             this.drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
@@ -225,7 +141,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             this.drawerLayout.closeDrawer(GravityCompat.START);
-            uncheckAllDrawerItems();
             super.onResume();
         } else {
             super.onResume();
@@ -235,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         unbinder.unbind();
     }
 }

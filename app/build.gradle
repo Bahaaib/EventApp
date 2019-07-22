@@ -53,8 +53,6 @@ dependencies {
     implementation 'com.github.beigirad:ZigzagView:1.0.7'
 
 
-
-
     //testing
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
