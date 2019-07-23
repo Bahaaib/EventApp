@@ -55,6 +55,8 @@ dependencies {
     //TickerView
     implementation 'com.robinhood.ticker:ticker:2.0.1'
 
+    //Expandable TextView
+    implementation 'at.blogc:expandabletextview:1.0.5'
 
     //testing
     testImplementation 'junit:junit:4.12'
