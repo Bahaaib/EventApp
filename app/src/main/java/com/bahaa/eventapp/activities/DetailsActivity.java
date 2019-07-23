@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.bahaa.eventapp.R;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -49,10 +50,29 @@ public class DetailsActivity extends AppCompatActivity {
 
     private void setupCollapsingToolbar() {
         String title = "Software Engineering Event Software Engineering Event";
-        title = title.substring(0, 31);
-        title = title.concat("...");
+
         collapsingToolbarLayout.setTitle(title);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedText);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.details_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.action_order:
+                Toast.makeText(getApplicationContext(),"Booked!", Toast.LENGTH_LONG).show();
+                return true;
+
+            default:
+                 return super.onOptionsItemSelected(item);
+        }
+
     }
 
     @Override

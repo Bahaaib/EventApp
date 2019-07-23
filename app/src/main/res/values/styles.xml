@@ -24,5 +24,10 @@
         <item name="android:textColor">@color/colorWhite</item>
     </style>
 
+    <style name="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorAccent">@color/colorWhite</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
 
 </resources>
