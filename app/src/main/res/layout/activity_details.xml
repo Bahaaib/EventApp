@@ -75,9 +75,9 @@
                 android:layout_marginTop="30dp"
                 android:drawableStart="@drawable/ic_timer"
                 android:drawablePadding="10dp"
+                android:drawableTint="@color/colorPrimary"
                 android:fontFamily="sans-serif-light"
                 android:gravity="center"
-                android:drawableTint="@color/colorPrimary"
                 android:text="Fri, Apr 19 @ 7:00 PM"
                 android:textColor="@color/colorInactive"
                 android:textSize="16sp" />
@@ -85,8 +85,8 @@
             <View
                 android:layout_width="300dp"
                 android:layout_height="1dp"
-                android:layout_marginTop="70dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="70dp"
                 android:background="@color/colorGrayLight" />
 
             <TextView
@@ -95,8 +95,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="80dp"
-                android:drawableStart="@drawable/ic_location"
                 android:layout_marginEnd="10dp"
+                android:drawableStart="@drawable/ic_location"
                 android:drawablePadding="10dp"
                 android:drawableTint="@color/colorPrimary"
                 android:fontFamily="sans-serif-light"
@@ -109,27 +109,27 @@
             <View
                 android:layout_width="300dp"
                 android:layout_height="1dp"
-                android:layout_marginTop="150dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="150dp"
                 android:background="@color/colorGrayLight" />
 
             <at.blogc.android.views.ExpandableTextView
                 android:id="@+id/details_event_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLines="5"
-                android:paddingEnd="10dp"
-                android:ellipsize="end"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="160dp"
                 android:drawableStart="@drawable/ic_info"
+                android:drawablePadding="10dp"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-light"
+                android:gravity="left"
+                android:maxLines="5"
+                android:paddingEnd="10dp"
+                android:paddingBottom="8dp"
                 android:textColor="@color/colorInactive"
                 android:textSize="16sp"
-                android:gravity="left"
-                android:fontFamily="sans-serif-light"
-                android:drawablePadding="10dp"
-                app:animation_duration="750"
-                android:paddingBottom="8dp"/>
+                app:animation_duration="750" />
         </RelativeLayout>
 
     </androidx.core.widget.NestedScrollView>
@@ -139,10 +139,10 @@
         android:layout_height="50dp"
         android:layout_gravity="bottom"
         android:background="@color/colorPrimary"
-        android:text="BOOK NOW"
-        android:textSize="24sp"
         android:fontFamily="sans-serif-light"
-        android:textColor="@color/colorWhite"/>
+        android:text="BOOK NOW"
+        android:textColor="@color/colorWhite"
+        android:textSize="24sp" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
