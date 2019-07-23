@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.action_interested:
-                    displayToast("Clicked Interested");
+                    navigateToActivity(DetailsActivity.class);
                     return true;
 
                 case R.id.action_points:
