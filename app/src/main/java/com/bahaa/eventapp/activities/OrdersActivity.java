@@ -1,27 +1,21 @@
 package com.bahaa.eventapp.activities;
 
+import android.content.Intent;
+import android.content.res.Resources;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.content.res.Resources;
-import android.os.Bundle;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.util.TypedValue;
-import android.util.Xml;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.bahaa.eventapp.MockedData;
 import com.bahaa.eventapp.R;
-import com.bahaa.eventapp.adapters.CurrentEventsAdapter;
 import com.bahaa.eventapp.adapters.OrdersAdapter;
 import com.bahaa.eventapp.models.EventModel;
 import com.bahaa.eventapp.models.UserModel;
@@ -30,8 +24,6 @@ import com.google.android.material.navigation.NavigationView;
 import com.ramotion.cardslider.CardSliderLayoutManager;
 import com.ramotion.cardslider.CardSnapHelper;
 import com.squareup.picasso.Picasso;
-
-import org.xmlpull.v1.XmlPullParser;
 
 import java.util.ArrayList;
 

@@ -1,25 +1,20 @@
 package com.bahaa.eventapp.fragments;
 
 
-import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import com.bahaa.eventapp.MockedData;
 import com.bahaa.eventapp.R;
-import com.bahaa.eventapp.adapters.CurrentEventsAdapter;
 import com.bahaa.eventapp.adapters.NearbyEventsAdapter;
 import com.bahaa.eventapp.models.EventModel;
 

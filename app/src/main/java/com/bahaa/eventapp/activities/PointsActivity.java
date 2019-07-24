@@ -1,28 +1,24 @@
 package com.bahaa.eventapp.activities;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.bahaa.eventapp.R;
-import com.bahaa.eventapp.adapters.OrdersAdapter;
-import com.bahaa.eventapp.models.EventModel;
 import com.bahaa.eventapp.models.UserModel;
 import com.bahaa.eventapp.utils.NavigationHeaderViewHolder;
 import com.google.android.material.navigation.NavigationView;
 import com.robinhood.ticker.TickerView;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import butterknife.BindView;
