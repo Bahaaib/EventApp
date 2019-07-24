@@ -66,7 +66,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/details_event_scroll_child">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -162,6 +163,17 @@
         android:textColor="@color/colorWhite"
         android:textSize="24sp"
         android:visibility="visible" />
+    
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_share"
+        app:backgroundTint="@color/colorPrimary"
+        app:tint="@null"
+        app:layout_anchor="@id/details_event_scroll_child"
+        app:layout_anchorGravity="bottom|right|end"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
