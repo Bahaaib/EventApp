@@ -5,11 +5,16 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.util.TypedValue;
@@ -33,6 +38,12 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.lang.ref.WeakReference;
 
 import at.blogc.android.views.ExpandableTextView;
 import butterknife.BindDrawable;
@@ -61,6 +72,10 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
     @BindView(R.id.details_event_map_container)
     public RelativeLayout mapContainer;
 
+    @BindView(R.id.details_event_fab)
+    public FloatingActionButton fab;
+
+
     private Unbinder unbinder;
 
     @Override
@@ -76,7 +91,6 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         setupExpandableDescription();
         setupEventLocationMap();
 
-
     }
 
     @OnClick(R.id.details_event_description)
@@ -91,9 +105,13 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         }
     }
 
-    @OnClick(R.id.details_event_map_container)
-    public void openInGoogleMap(){
-
+    @OnClick(R.id.details_event_fab)
+    public void shareEvent() {
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "Hey, \nI'm interested in Software Engineering Event. \nCheck it out on \n" + "https://play.google.com/store/apps/details?id=" + getPackageName());
+        shareIntent.setType("text/plain");
+        startActivity(Intent.createChooser(shareIntent, "Share with"));
     }
 
 
@@ -162,11 +180,12 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
     }
 
-    private void animateMap(){
+    private void animateMap() {
         AutoTransition autoTransition = new AutoTransition();
         autoTransition.setDuration(200);
         TransitionManager.beginDelayedTransition(mapContainer, autoTransition);
     }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -224,4 +243,5 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
         unbinder.unbind();
     }
+
 }
