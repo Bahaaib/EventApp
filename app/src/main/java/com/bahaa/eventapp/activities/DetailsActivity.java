@@ -10,6 +10,8 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -156,8 +158,14 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
         params.setMargins(0, topMarginDP, 0, 80);
         mapContainer.setLayoutParams(params);
+        animateMap();
 
+    }
 
+    private void animateMap(){
+        AutoTransition autoTransition = new AutoTransition();
+        autoTransition.setDuration(200);
+        TransitionManager.beginDelayedTransition(mapContainer, autoTransition);
     }
 
     @Override

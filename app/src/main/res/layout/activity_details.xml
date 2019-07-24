@@ -129,7 +129,7 @@
                 android:paddingBottom="8dp"
                 android:textColor="@color/colorInactive"
                 android:textSize="16sp"
-                app:animation_duration="750" />
+                app:animation_duration="600" />
 
             <RelativeLayout
                 android:id="@+id/details_event_map_container"
