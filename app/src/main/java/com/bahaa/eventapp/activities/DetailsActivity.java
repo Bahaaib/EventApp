@@ -5,16 +5,31 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bahaa.eventapp.MockedData;
 import com.bahaa.eventapp.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import at.blogc.android.views.ExpandableTextView;
@@ -24,7 +39,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     @BindView(R.id.details_event_collapsing_toolbar)
     public CollapsingToolbarLayout collapsingToolbarLayout;
@@ -41,6 +56,8 @@ public class DetailsActivity extends AppCompatActivity {
     @BindView(R.id.details_event_description)
     public ExpandableTextView description;
 
+    @BindView(R.id.details_event_map_container)
+    public RelativeLayout mapContainer;
 
     private Unbinder unbinder;
 
@@ -55,11 +72,28 @@ public class DetailsActivity extends AppCompatActivity {
         setupCollapsingToolbar();
         resizeAddressDrawable();
         setupExpandableDescription();
-
-
+        setupEventLocationMap();
 
 
     }
+
+    @OnClick(R.id.details_event_description)
+    public void toggleExpandableDescription() {
+
+        description.toggle();
+
+        if (!description.isExpanded()) {
+            adjustMapPosition(470);
+        } else {
+            adjustMapPosition(280);
+        }
+    }
+
+    @OnClick(R.id.details_event_map_container)
+    public void openInGoogleMap(){
+
+    }
+
 
     private void setupActionBar() {
         ActionBar actionBar = getSupportActionBar();
@@ -91,7 +125,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     }
 
-    private void setupExpandableDescription(){
+    private void setupExpandableDescription() {
 
         description.setInterpolator(new OvershootInterpolator());
 
@@ -106,12 +140,55 @@ public class DetailsActivity extends AppCompatActivity {
         description.setText(descriptionText);
     }
 
-    @OnClick(R.id.details_event_description)
-    public void toggleExpandableDescription(){
+    private void setupEventLocationMap() {
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.details_event_map);
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(this);
+        }
 
-        description.toggle();
     }
 
+    private void adjustMapPosition(int top) {
+        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mapContainer.getLayoutParams();
+
+        int topMarginDP = convertToPixels(top);
+
+        params.setMargins(0, topMarginDP, 0, 80);
+        mapContainer.setLayoutParams(params);
+
+
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        LatLng latLng = new LatLng(MockedData.latitude[0], MockedData.longitude[0]);
+
+        //Add Marker to location
+        googleMap.addMarker(
+                new MarkerOptions().position(latLng).title("Event Location"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+
+        //Zoom in to location
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(latLng)
+                .zoom(17)
+                .bearing(90)
+                .tilt(30)
+                .build();
+
+        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+        googleMap.setOnMapClickListener(latLng1 -> {
+            Uri mapUri = Uri.parse("geo:" + latLng.latitude + "," + latLng.longitude);
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapUri);
+            mapIntent.setPackage("com.google.android.apps.maps");
+            startActivity(mapIntent);
+        });
+
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

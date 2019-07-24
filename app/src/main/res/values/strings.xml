@@ -3,6 +3,7 @@
     <string name="toolbar_title">Home</string>
     <string name="open">open</string>
     <string name="close">close</string>
+    <string name="MAPS_API_KEY">AIzaSyAtuQ9DbGTfz81j288BkUGRsNxrKu7zSuo</string>
 
 
 </resources>

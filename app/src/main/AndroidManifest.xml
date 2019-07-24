@@ -14,7 +14,11 @@
         android:supportsRtl="false"
         tools:replace="android:supportsRtl"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.DetailsActivity"></activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/MAPS_API_KEY"/>
+
+        <activity android:name=".activities.DetailsActivity"/>
         <activity android:name=".activities.PointsActivity" />
         <activity android:name=".activities.OrdersActivity" />
         <activity android:name=".activities.ProfileActivity" />
