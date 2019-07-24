@@ -62,7 +62,16 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
     @BindView(R.id.details_event_fab)
     public FloatingActionButton fab;
 
+    @BindView(R.id.details_event_interest)
+    public TextView interested;
 
+    @BindDrawable(R.drawable.ic_star)
+    public Drawable starIcon;
+
+    @BindDrawable(R.drawable.ic_check_empty)
+    public Drawable checkIcon;
+
+    private boolean isInterested = false;
     private Unbinder unbinder;
 
     @Override
@@ -74,10 +83,17 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         setSupportActionBar(toolbar);
         setupActionBar();
         setupCollapsingToolbar();
-        resizeAddressDrawable();
+        setupInterestedText();
+        setupAddressText();
         setupExpandableDescription();
         setupEventLocationMap();
 
+    }
+
+    @OnClick(R.id.details_event_interest)
+    public void markInterested() {
+
+       controlIconState();
     }
 
     @OnClick(R.id.details_event_description)
@@ -117,14 +133,35 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedText);
     }
 
-    private void resizeAddressDrawable() {
-        locationIcon.setBounds(
-                0,
-                0,
-                convertToPixels(24),
-                convertToPixels(24));
-        address.setCompoundDrawables(locationIcon, null, null, null);
+    private void setupInterestedText(){
+        controlIconState();
+    }
 
+    private void controlIconState(){
+        if (isInterested) {
+            interested.setBackground(getResources().getDrawable(R.drawable.shape_round_side_on));
+            int rightPx = convertToPixels(18);
+            int bottomPx = convertToPixels(18);
+            checkIcon = resizeDrawable(checkIcon, rightPx, bottomPx);
+            interested.setCompoundDrawables(null, null, checkIcon, null);
+            isInterested = false;
+        } else {
+            interested.setBackground(getResources().getDrawable(R.drawable.shape_round_side_off));
+            int rightPx = convertToPixels(18);
+            int bottomPx = convertToPixels(18);
+            starIcon = resizeDrawable(starIcon, rightPx, bottomPx);
+            interested.setCompoundDrawables(null, null, starIcon, null);
+            isInterested = true;
+        }
+    }
+
+    private Drawable resizeDrawable(Drawable drawable, int right, int bottom) {
+        drawable.setBounds(
+                0,
+                0,
+                right,
+                bottom);
+        return drawable;
     }
 
     private int convertToPixels(int dp) {
@@ -145,6 +182,14 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
                 " still in their infancy. Various versions have evolved over the years, sometimes" +
                 " by accident, sometimes on purpose (injected humour and the like).";
         description.setText(descriptionText);
+    }
+
+    private void setupAddressText() {
+        int rightPx = convertToPixels(24);
+        int bottomPx = convertToPixels(24);
+
+        locationIcon = resizeDrawable(locationIcon, rightPx, bottomPx);
+        address.setCompoundDrawables(locationIcon, null, null, null);
     }
 
     private void setupEventLocationMap() {
