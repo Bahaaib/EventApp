@@ -175,7 +175,7 @@
         app:backgroundTint="@color/colorPrimary"
         app:layout_anchor="@id/details_event_scroll_child"
         app:layout_anchorGravity="bottom|right|end"
-        app:tint="@null" />
+        app:tint="@color/colorWhite" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -231,6 +231,10 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
                 Toast.makeText(getApplicationContext(), "Booked!", Toast.LENGTH_LONG).show();
                 return true;
 
+            case R.id.action_share:
+                shareEvent();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -2,8 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/action_order"
-        android:title="Book NOW"
-        app:showAsAction="never" />
+
+
+    <item android:id="@+id/action_notification1"
+        android:icon="@drawable/ic_more"
+        app:showAsAction="always"
+        android:title="action_notification">
+        <menu>
+            <item
+                android:id="@+id/action_order"
+                android:title="Book Tickets"
+                android:icon="@drawable/ic_cart" />
+
+            <item
+                android:id="@+id/action_share"
+                android:title="Share"
+                android:icon="@drawable/ic_share" />
+
+        </menu>
+    </item>
 </menu>
