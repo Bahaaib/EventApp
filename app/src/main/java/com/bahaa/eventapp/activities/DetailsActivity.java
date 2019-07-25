@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
@@ -19,10 +18,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bahaa.eventapp.MockedData;
 import com.bahaa.eventapp.R;
+import com.bahaa.eventapp.dialogs.BookingDialog;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -72,6 +75,9 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
     @BindDrawable(R.drawable.ic_check_empty)
     public Drawable checkIcon;
 
+    @BindView(R.id.details_event_booking_button)
+    public AppCompatButton bookingButton;
+
     private boolean isInterested = false;
     private Unbinder unbinder;
 
@@ -89,18 +95,17 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         setupExpandableDescription();
         setupEventLocationMap();
 
-        Log.i("statuss", String.valueOf(description.getMeasuredHeight()));
 
     }
 
     @OnClick(R.id.details_event_interest)
-    public void markInterested() {
+    public void toggleInterestedState() {
 
         controlIconState();
     }
 
     @OnClick(R.id.details_event_description)
-    public void toggleExpandableDescription() {
+    public void toggleDescriptionState() {
 
         description.toggle();
 
@@ -122,6 +127,20 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         shareIntent.putExtra(Intent.EXTRA_TEXT, "Hey, \nI'm interested in Software Engineering Event. \nCheck it out on \n" + "https://play.google.com/store/apps/details?id=" + getPackageName());
         shareIntent.setType("text/plain");
         startActivity(Intent.createChooser(shareIntent, "Share with"));
+    }
+
+    @OnClick(R.id.details_event_booking_button)
+    public void launchBookingDialog(){
+
+        BookingDialog bookingDialog = new BookingDialog();
+        final String tag = "booking_dialog";
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(tag);
+        if (fragment != null) {
+            fragmentTransaction.remove(fragment);
+        }
+        fragmentTransaction.add(bookingDialog, tag).commit();
     }
 
 
@@ -173,11 +192,6 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
     private int convertToPixels(int dp) {
         return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
-
-    }
-
-    private int convertToDP(int px) {
-        return (int) (px / Resources.getSystem().getDisplayMetrics().density);
 
     }
 
