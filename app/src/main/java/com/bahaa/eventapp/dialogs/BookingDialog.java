@@ -16,6 +16,7 @@ import androidx.fragment.app.DialogFragment;
 import com.bahaa.eventapp.R;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class BookingDialog extends DialogFragment {
@@ -43,6 +44,17 @@ public class BookingDialog extends DialogFragment {
         return v;
     }
 
+    @OnClick(R.id.booking_ok_button)
+    public void confirmBooking() {
+    }
+
+    @OnClick(R.id.booking_cancel_button)
+    public void dismissDialog() {
+        if (getDialog() != null) {
+            getDialog().dismiss();
+        }
+    }
+
     private void setupDialogRoundedCorners() {
         if (getDialog() != null && getDialog().getWindow() != null) {
             getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -52,10 +64,6 @@ public class BookingDialog extends DialogFragment {
         }
     }
 
-//    @Override
-//    public int getTheme() {
-//        return R.style.BookingDialogTheme;
-//    }
 
     @Override
     public void onDestroyView() {
