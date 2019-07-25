@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
@@ -88,12 +89,14 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         setupExpandableDescription();
         setupEventLocationMap();
 
+        Log.i("statuss", String.valueOf(description.getMeasuredHeight()));
+
     }
 
     @OnClick(R.id.details_event_interest)
     public void markInterested() {
 
-       controlIconState();
+        controlIconState();
     }
 
     @OnClick(R.id.details_event_description)
@@ -101,12 +104,16 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
         description.toggle();
 
+
         if (!description.isExpanded()) {
             adjustMapPosition(470);
         } else {
             adjustMapPosition(280);
         }
+
+
     }
+
 
     @OnClick(R.id.details_event_fab)
     public void shareEvent() {
@@ -133,11 +140,11 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedText);
     }
 
-    private void setupInterestedText(){
+    private void setupInterestedText() {
         controlIconState();
     }
 
-    private void controlIconState(){
+    private void controlIconState() {
         if (isInterested) {
             interested.setBackground(getResources().getDrawable(R.drawable.shape_round_side_on));
             int rightPx = convertToPixels(18);
@@ -169,6 +176,11 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
     }
 
+    private int convertToDP(int px) {
+        return (int) (px / Resources.getSystem().getDisplayMetrics().density);
+
+    }
+
     private void setupExpandableDescription() {
 
         description.setInterpolator(new OvershootInterpolator());
@@ -181,6 +193,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
                 " default model text, and a search for 'lorem ipsum' will uncover many web sites" +
                 " still in their infancy. Various versions have evolved over the years, sometimes" +
                 " by accident, sometimes on purpose (injected humour and the like).";
+
         description.setText(descriptionText);
     }
 
@@ -204,9 +217,9 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
     private void adjustMapPosition(int top) {
         ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mapContainer.getLayoutParams();
 
-        int topMarginDP = convertToPixels(top);
+        int topPx = convertToPixels(top);
 
-        params.setMargins(0, topMarginDP, 0, 80);
+        params.setMargins(0, topPx, 0, 80);
         mapContainer.setLayoutParams(params);
         animateMap();
 
