@@ -169,14 +169,14 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
             int rightPx = convertToPixels(18);
             int bottomPx = convertToPixels(18);
             checkIcon = resizeDrawable(checkIcon, rightPx, bottomPx);
-            interested.setCompoundDrawables(null, null, checkIcon, null);
+            interested.setCompoundDrawables(checkIcon, null, null, null);
             isInterested = false;
         } else {
             interested.setBackground(getResources().getDrawable(R.drawable.shape_round_side_off));
             int rightPx = convertToPixels(18);
             int bottomPx = convertToPixels(18);
             starIcon = resizeDrawable(starIcon, rightPx, bottomPx);
-            interested.setCompoundDrawables(null, null, starIcon, null);
+            interested.setCompoundDrawables(starIcon, null, null, null);
             isInterested = true;
         }
     }
