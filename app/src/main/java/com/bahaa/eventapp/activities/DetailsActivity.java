@@ -130,7 +130,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
     }
 
     @OnClick(R.id.details_event_booking_button)
-    public void launchBookingDialog(){
+    public void launchBookingDialog() {
 
         BookingDialog bookingDialog = new BookingDialog();
         final String tag = "booking_dialog";

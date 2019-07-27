@@ -6,7 +6,7 @@
     android:background="@drawable/rounded_rec"
     android:backgroundTint="@color/colorWhite"
     android:focusableInTouchMode="true"
-    android:id="@+id/front_layout">
+    android:id="@+id/back_layout">
 
 
     <RelativeLayout
