@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +22,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bahaa.eventapp.R;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
 import java.util.Objects;
@@ -33,17 +31,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class BookingDialog extends DialogFragment {
+import static com.bahaa.eventapp.dialogs.BookingDialog.isOld;
+import static com.bahaa.eventapp.dialogs.BookingDialog.isSingleDismiss;
 
-    @BindView(R.id.front_layout)
-    public RelativeLayout frontLayout;
+public class PreviewDialog extends DialogFragment {
 
-    @BindView(R.id.booking_name_layout)
-    public TextInputLayout nameLayout;
+    @BindView(R.id.back_layout)
+    public RelativeLayout backLayout;
 
-
-    static boolean isOld; //Detect old dialog to set different enter animation
-    static boolean isSingleDismiss; //Decide to dismiss single dialog or all at once
     private View v;
     private Unbinder unbinder;
 
@@ -60,11 +55,12 @@ public class BookingDialog extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.dialog_booking, container, false);
+        v = inflater.inflate(R.layout.dialog_preview, container, false);
 
         unbinder = ButterKnife.bind(this, v);
 
         setupDialogRoundedCorners();
+        setGlobalFlags();
         setAnimationScale();
         animateDialog();
 
@@ -72,35 +68,36 @@ public class BookingDialog extends DialogFragment {
         return v;
     }
 
-    @OnClick(R.id.booking_ok_button)
-    void confirmBooking() {
-        Log.i("Statuss", "Clicked Booking OK");
+    @OnClick(R.id.preview_ok_button)
+    void performBooking() {
+        if (getDialog() != null) {
+            dismissAllDialogs();
+        }
+    }
 
+    @OnClick(R.id.preview_cancel_button)
+    void editBooking() {
         isSingleDismiss = true;
         AnimatorSet anim = new AnimatorSet();
-        AnimatorSet rightOut = (AnimatorSet) AnimatorInflater.loadAnimator(getActivity(), R.animator.right_out);
-
-        rightOut.setTarget(frontLayout);
-
-        anim.play(rightOut);
+        AnimatorSet leftOut = (AnimatorSet) AnimatorInflater.loadAnimator(getActivity(), R.animator.left_out);
+        leftOut.setTarget(backLayout);
+        anim.play(leftOut);
 
         anim.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
 
             }
-
             @Override
             public void onAnimationEnd(Animator animator) {
-                PreviewDialog previewDialog = new PreviewDialog();
+                BookingDialog bookingDialog = new BookingDialog();
                 FragmentTransaction fragmentTransaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("preview_dialog");
+                Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("booking_dialog");
                 if (fragment != null) {
                     fragmentTransaction.remove(fragment);
                 }
-                fragmentTransaction.add(previewDialog, "preview_dialog").commit();
 
-
+                fragmentTransaction.add(bookingDialog, "booking_dialog").commit();
             }
 
             @Override
@@ -113,15 +110,10 @@ public class BookingDialog extends DialogFragment {
 
             }
         });
+
+
         anim.start();
 
-
-    }
-
-    @OnClick(R.id.booking_cancel_button)
-    void dismissDialog() {
-        isOld = false;
-        dismissAllDialogs();
 
     }
 
@@ -129,15 +121,28 @@ public class BookingDialog extends DialogFragment {
         if (getDialog() != null && getDialog().getWindow() != null) {
             getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-            //getDialog().getWindow().getAttributes().windowAnimations = R.style.MyAnimation_Window;
 
         }
+    }
+
+    private void setGlobalFlags() {
+        isOld = true;
+        isSingleDismiss = false;
     }
 
     private void setAnimationScale() {
         int distance = 4000;
         float scale = getResources().getDisplayMetrics().density * distance;
+
         v.setCameraDistance(scale);
+    }
+
+    private void animateDialog() {
+        AnimatorSet anim = new AnimatorSet();
+        AnimatorSet rightIn = (AnimatorSet) AnimatorInflater.loadAnimator(getActivity(), R.animator.right_in);
+        rightIn.setTarget(backLayout);
+        anim.play(rightIn);
+        anim.start();
     }
 
     private void dismissAllDialogs() {
@@ -146,22 +151,12 @@ public class BookingDialog extends DialogFragment {
 
         for (Fragment fragment : fragments) {
             if (fragment instanceof DialogFragment) {
-                Log.i("Statuss", "Popped " + fragment.getTag());
                 DialogFragment dialogFragment = (DialogFragment) fragment;
                 dialogFragment.dismissAllowingStateLoss();
             }
         }
     }
 
-    private void animateDialog() {
-        if (isOld) {
-            AnimatorSet anim = new AnimatorSet();
-            AnimatorSet leftIn = (AnimatorSet) AnimatorInflater.loadAnimator(getActivity(), R.animator.left_in);
-            leftIn.setTarget(frontLayout);
-            anim.play(leftIn);
-            anim.start();
-        }
-    }
 
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
@@ -170,7 +165,6 @@ public class BookingDialog extends DialogFragment {
             super.onDismiss(dialog);
         } else {
             dismissAllDialogs();
-            isOld = false;
         }
     }
 
@@ -180,6 +174,4 @@ public class BookingDialog extends DialogFragment {
 
         unbinder.unbind();
     }
-
-
 }

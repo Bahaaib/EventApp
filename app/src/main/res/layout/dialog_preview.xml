@@ -24,7 +24,7 @@
             android:layout_centerVertical="true"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
-            android:text="Ticket Details"
+            android:text="Ticket Preview"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp" />
     </RelativeLayout>
@@ -115,7 +115,7 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/booking_cancel_button"
+            android:id="@+id/preview_cancel_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -136,7 +136,7 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/booking_ok_button"
+            android:id="@+id/preview_ok_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
