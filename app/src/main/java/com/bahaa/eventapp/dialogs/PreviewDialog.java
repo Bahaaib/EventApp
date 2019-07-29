@@ -131,7 +131,7 @@ public class PreviewDialog extends DialogFragment {
     }
 
     private void setAnimationScale() {
-        int distance = 4000;
+        int distance = 8000;
         float scale = getResources().getDisplayMetrics().density * distance;
 
         v.setCameraDistance(scale);

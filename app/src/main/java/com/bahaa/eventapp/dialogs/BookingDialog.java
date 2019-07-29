@@ -74,7 +74,6 @@ public class BookingDialog extends DialogFragment {
 
     @OnClick(R.id.booking_ok_button)
     void confirmBooking() {
-        Log.i("Statuss", "Clicked Booking OK");
 
         isSingleDismiss = true;
         AnimatorSet anim = new AnimatorSet();
@@ -134,7 +133,7 @@ public class BookingDialog extends DialogFragment {
     }
 
     private void setAnimationScale() {
-        int distance = 4000;
+        int distance = 8000;
         float scale = getResources().getDisplayMetrics().density * distance;
         v.setCameraDistance(scale);
     }
