@@ -129,7 +129,6 @@ public class BookingDialog extends DialogFragment {
         if (getDialog() != null && getDialog().getWindow() != null) {
             getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-            //getDialog().getWindow().getAttributes().windowAnimations = R.style.MyAnimation_Window;
 
         }
     }
@@ -160,6 +159,11 @@ public class BookingDialog extends DialogFragment {
             leftIn.setTarget(frontLayout);
             anim.play(leftIn);
             anim.start();
+        } else {
+            if (getDialog() != null && getDialog().getWindow() != null) {
+                getDialog().getWindow().getAttributes().windowAnimations = R.style.MyAnimation_Window;
+            }
+
         }
     }
 
