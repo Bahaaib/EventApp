@@ -1,103 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/back_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/rounded_rec"
+    android:background="@android:color/transparent"
     android:backgroundTint="@color/colorWhite"
-    android:focusableInTouchMode="true"
-    android:id="@+id/back_layout">
+    android:focusableInTouchMode="true">
 
-
-    <RelativeLayout
+    <com.vipulasri.ticketview.TicketView
+        android:id="@+id/preview_ticket"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/upper_round_rec"
-        android:backgroundTint="@color/colorWhite"
-        android:elevation="6dp">
+        android:layout_height="370dp"
+        app:ticketDividerPadding="0dp"
+        app:ticketDividerType="dash"
+        app:ticketOrientation="horizontal"
+        app:ticketScallopPositionPercent="65"
+        app:ticketScallopRadius="10dp"
+        app:ticketShowBorder="false"
+        app:ticketShowDivider="true" />
 
-        <TextView
-            android:id="@+id/booking_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:fontFamily="sans-serif-medium"
-            android:gravity="center"
-            android:text="Ticket Preview"
-            android:textColor="@color/colorPrimary"
-            android:textSize="18sp" />
-    </RelativeLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/booking_name_layout"
-        style="@style/TextInputLayout"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="20dp"
-        app:errorEnabled="true">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/booking_name_textfield"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="left"
-            android:hint="Name on Ticket"
-            android:inputType="textPersonName"
-            android:textSize="14sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/booking_mobile_layout"
-        style="@style/TextInputLayout"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="160dp"
-        android:layout_marginEnd="20dp"
-        app:errorEnabled="true">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/booking_mobile_textfield"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="left"
-            android:hint="Mobile Number"
-            android:inputType="phone"
-            android:textSize="14sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <RadioGroup
-        android:id="@+id/booking_radio_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="250dp"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/booking_radio_discount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/colorPrimary"
-            android:checked="true"
-            android:text="Apply Discount" />
-
-
-        <RadioButton
-            android:id="@+id/booking_radio_points"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:buttonTint="@color/colorPrimary"
-            android:checked="false"
-            android:text="Earn Points" />
-    </RadioGroup>
 
     <View
         android:id="@+id/horizontal_line"
@@ -106,13 +28,15 @@
         android:layout_below="@+id/booking_radio_group"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:background="@android:color/darker_gray" />
+        android:background="@android:color/darker_gray"
+        android:visibility="invisible" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/horizontal_line"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="invisible">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/preview_cancel_button"
