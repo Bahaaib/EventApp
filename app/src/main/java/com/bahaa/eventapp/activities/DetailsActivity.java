@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -287,7 +286,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         int id = item.getItemId();
         switch (id) {
             case R.id.action_order:
-                Toast.makeText(getApplicationContext(), "Booked!", Toast.LENGTH_LONG).show();
+                launchBookingDialog();
                 return true;
 
             case R.id.action_share:
