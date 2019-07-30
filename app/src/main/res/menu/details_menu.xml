@@ -11,7 +11,7 @@
         <menu>
             <item
                 android:id="@+id/action_order"
-                android:title="Book Tickets"
+                android:title="Book A Ticket"
                 android:icon="@drawable/ic_cart" />
 
             <item
