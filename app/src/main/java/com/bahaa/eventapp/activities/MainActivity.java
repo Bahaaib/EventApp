@@ -1,13 +1,5 @@
 package com.bahaa.eventapp.activities;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +10,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.viewpager.widget.ViewPager;
 
 import com.bahaa.eventapp.R;
 import com.bahaa.eventapp.adapters.PagerAdapter;
@@ -85,11 +85,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.main_toolbar_points_icon)
-    public void showPointsLayout(){
-        if (pointsLayout.getVisibility() == View.VISIBLE){
+    public void showPointsLayout() {
+        if (pointsLayout.getVisibility() == View.VISIBLE) {
             pointsLayout.setVisibility(View.INVISIBLE);
             triangle.setVisibility(View.INVISIBLE);
-        }else {
+        } else {
             pointsLayout.setVisibility(View.VISIBLE);
             triangle.setVisibility(View.VISIBLE);
         }
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        navigationView.getMenu().getItem(0).setChecked(false);
+        navigationView.getMenu().getItem(0).setChecked(true);
 
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
@@ -155,16 +155,20 @@ public class MainActivity extends AppCompatActivity {
                     navigateToActivity(ProfileActivity.class);
                     return true;
 
+                case R.id.action_notification:
+                    displayToast("Notifications Activity");
+                    return true;
+
                 case R.id.action_orders:
                     navigateToActivity(OrdersActivity.class);
                     return true;
 
-                case R.id.action_interested:
-                    navigateToActivity(DetailsActivity.class);
-                    return true;
-
                 case R.id.action_points:
                     navigateToActivity(PointsActivity.class);
+                    return true;
+
+                case R.id.action_settings:
+                    displayToast("Settings Activity");
                     return true;
 
                 default:
@@ -249,6 +253,7 @@ public class MainActivity extends AppCompatActivity {
         if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             this.drawerLayout.closeDrawer(GravityCompat.START);
             uncheckAllDrawerItems();
+            navigationView.getMenu().getItem(0).setChecked(true);
             super.onResume();
         } else {
             super.onResume();

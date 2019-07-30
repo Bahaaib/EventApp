@@ -138,17 +138,29 @@ public class ProfileActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        navigationView.getMenu().getItem(0).setChecked(true);
+        navigationView.getMenu().getItem(1).setChecked(true);
 
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             switch (id) {
+                case R.id.action_home:
+                    navigateToActivity(MainActivity.class);
+                    return true;
+
+                case R.id.action_notification:
+                    displayToast("Notifications Activity");
+                    return true;
+
                 case R.id.action_orders:
                     navigateToActivity(OrdersActivity.class);
                     return true;
 
-                case R.id.action_interested:
-                    displayToast("Clicked Interested");
+                case R.id.action_points:
+                    navigateToActivity(PointsActivity.class);
+                    return true;
+
+                case R.id.action_settings:
+                    displayToast("Settings Activity");
                     return true;
 
                 default:
@@ -211,6 +223,15 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
+    private void uncheckAllDrawerItems() {
+        int size = navigationView.getMenu().size();
+
+        for (int i = 0; i < size; i++) {
+            navigationView.getMenu().getItem(i).setChecked(false);
+        }
+    }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -254,6 +275,8 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onResume() {
         if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             this.drawerLayout.closeDrawer(GravityCompat.START);
+            uncheckAllDrawerItems();
+            navigationView.getMenu().getItem(1).setChecked(true);
             super.onResume();
         } else {
             super.onResume();
