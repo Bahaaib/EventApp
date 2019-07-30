@@ -1,6 +1,7 @@
 package com.bahaa.eventapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bahaa.eventapp.R;
+import com.bahaa.eventapp.activities.DetailsActivity;
 import com.bahaa.eventapp.models.EventModel;
 import com.squareup.picasso.Picasso;
 
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class CurrentEventsAdapter extends RecyclerView.Adapter {
@@ -64,12 +67,16 @@ public class CurrentEventsAdapter extends RecyclerView.Adapter {
 
         @BindView(R.id.current_events_img)
         public ImageView image;
+
         @BindView(R.id.current_events_date)
         public TextView date;
+
         @BindView(R.id.current_events_title)
         public TextView title;
+
         @BindView(R.id.current_events_capacity)
         public TextView capacity;
+
         @BindView(R.id.current_events_avialable)
         public TextView ticketsAvailable;
 
@@ -93,12 +100,19 @@ public class CurrentEventsAdapter extends RecyclerView.Adapter {
             if (adapterModel.get(position).getTicketsAvailable() == 0) {
                 ticketsAvailable.setText("SOLD OUT");
                 ticketsAvailable.setTextColor(Color.RED);
-                ticketsAvailable.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
+                ticketsAvailable.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
             } else {
                 ticketsAvailable.setText(String.valueOf(adapterModel.get(position).getTicketsAvailable()));
             }
 
 
+        }
+
+
+        @OnClick(R.id.current_events_card)
+        public void openEvent() {
+            Intent intent = new Intent(context, DetailsActivity.class);
+            context.startActivity(intent);
         }
 
 
