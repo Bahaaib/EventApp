@@ -80,7 +80,7 @@ public class OrdersActivity extends AppCompatActivity {
         ordersAdapter = new OrdersAdapter(this, ordersList);
         ordersRV.setAdapter(ordersAdapter);
         int cardWidth = convertToPixels(300);
-        CardSliderLayoutManager layoutManager = new CardSliderLayoutManager(30, cardWidth, 12f);
+        CardSliderLayoutManager layoutManager = new CardSliderLayoutManager(30, cardWidth, 20f);
         ordersRV.setLayoutManager(layoutManager);
         new CardSnapHelper().attachToRecyclerView(ordersRV);
 

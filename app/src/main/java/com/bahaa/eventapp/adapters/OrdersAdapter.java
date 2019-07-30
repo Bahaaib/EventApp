@@ -61,19 +61,25 @@ public class OrdersAdapter extends RecyclerView.Adapter {
     // actions to show & interact with them
     public class OrdersViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.order_img)
+        @BindView(R.id.ticket_event_img)
         public ImageView orderImage;
 
-        @BindView(R.id.order_events_date)
+        @BindView(R.id.ticket_cancel)
+        public TextView ticketCancel;
+
+        @BindView(R.id.ticket_payment_note)
+        public TextView paymentNote;
+
+        @BindView(R.id.ticket_date)
         public TextView orderDate;
 
-        @BindView(R.id.order_events_title)
+        @BindView(R.id.ticket_event_title)
         public TextView orderTitle;
 
-        @BindView(R.id.order_confirm)
+        @BindView(R.id.ticket_status_confirmed)
         public TextView orderConfirm;
 
-        @BindView(R.id.order_pending)
+        @BindView(R.id.ticket_status_pending)
         public TextView orderPending;
 
 
@@ -96,6 +102,8 @@ public class OrdersAdapter extends RecyclerView.Adapter {
             if (position % 2 != 0) {
                 orderConfirm.setVisibility(View.INVISIBLE);
                 orderPending.setVisibility(View.VISIBLE);
+                ticketCancel.setVisibility(View.VISIBLE);
+                paymentNote.setVisibility(View.VISIBLE);
             }
 
         }

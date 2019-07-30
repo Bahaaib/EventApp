@@ -12,5 +12,6 @@
     <color name="colorLikeButton">#FF0000</color>
     <color name="colorGreen">#228B22</color>
     <color name="colorGold">#FFD700	</color>
+    <color name="colorYellowLight">#c7b800</color>
 
 </resources>

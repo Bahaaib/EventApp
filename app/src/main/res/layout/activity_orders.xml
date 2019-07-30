@@ -50,8 +50,9 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/order_rv"
+            android:background="@android:color/transparent"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="430dp"
             android:layout_marginTop="100dp"
             android:clipChildren="false"
             android:overScrollMode="never"
