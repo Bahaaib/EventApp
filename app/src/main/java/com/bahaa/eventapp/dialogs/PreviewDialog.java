@@ -68,14 +68,14 @@ public class PreviewDialog extends DialogFragment {
         return v;
     }
 
-    @OnClick(R.id.preview_ok_button)
+    @OnClick(R.id.preview_confirm)
     void performBooking() {
         if (getDialog() != null) {
             dismissAllDialogs();
         }
     }
 
-    @OnClick(R.id.preview_cancel_button)
+    @OnClick(R.id.preview_edit)
     void editBooking() {
         isSingleDismiss = true;
         AnimatorSet anim = new AnimatorSet();
@@ -88,6 +88,7 @@ public class PreviewDialog extends DialogFragment {
             public void onAnimationStart(Animator animator) {
 
             }
+
             @Override
             public void onAnimationEnd(Animator animator) {
                 BookingDialog bookingDialog = new BookingDialog();

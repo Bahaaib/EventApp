@@ -15,58 +15,220 @@
         app:ticketDividerPadding="0dp"
         app:ticketDividerType="dash"
         app:ticketOrientation="horizontal"
-        app:ticketScallopPositionPercent="65"
+        app:ticketScallopPositionPercent="60"
         app:ticketScallopRadius="10dp"
         app:ticketShowBorder="false"
         app:ticketShowDivider="true" />
 
-
-    <View
-        android:id="@+id/horizontal_line"
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/booking_radio_group"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:background="@android:color/darker_gray"
-        android:visibility="invisible" />
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/horizontal_line"
-        android:orientation="horizontal"
-        android:visibility="invisible">
+        android:layout_height="370dp">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/preview_cancel_button"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/preview_confirm"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackground"
-            android:text="Cancel"
-            android:textColor="@color/colorBlack" />
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:drawableStart="@drawable/ic_check_empty"
+            android:drawableTint="@color/colorPrimary"
+            android:gravity="center"
+            android:text="Confirm"
+            android:textColor="@color/colorPrimary" />
+
+        <ImageView
+            android:id="@+id/preview_edit"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:tint="@color/colorPrimary"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_arrow_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:text="TICKET ID:"
+            android:textColor="@color/colorInactive"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/preview_ticket_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="110dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="a76W123kB"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="170dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:text="(This ticket is NOT confirmed until paid)"
+            android:textColor="@color/colorInactive"
+            android:textSize="14sp" />
+
+
+        <TextView
+            android:id="@+id/preview_event_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="240dp"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLength="50"
+            android:text="Software Engineering Event "
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/preview_holder_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="270dp"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:maxLength="30"
+            android:text="Bahaa Ibrahim Mohamed"
+            android:textColor="@color/colorInactive"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/preview_holder_mobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="270dp"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:text="01009540399"
+            android:textColor="@color/colorInactive"
+            android:textSize="16sp" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
 
-            <View
-                android:id="@+id/vertical_line"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@android:color/darker_gray" />
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="3dp"
+                    android:text="Date"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/preview_ticket_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:text="Fri, Apr 19" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:background="@android:color/darker_gray" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="3dp"
+                    android:text="From"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/preview_ticket_time_from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:text="5 PM" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:background="@android:color/darker_gray" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="3dp"
+                    android:text="To"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/preview_ticket_time_to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:text="7 PM" />
+            </RelativeLayout>
+
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/preview_ok_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackground"
-            android:text="Proceed"
-            android:textColor="@color/colorBlack" />
+    </RelativeLayout>
 
-    </LinearLayout>
+
 </RelativeLayout>
