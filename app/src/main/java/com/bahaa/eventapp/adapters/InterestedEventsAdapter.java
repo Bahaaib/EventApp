@@ -1,6 +1,7 @@
 package com.bahaa.eventapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bahaa.eventapp.activities.DetailsActivity;
 import com.bahaa.eventapp.activities.MainActivity;
 import com.bahaa.eventapp.R;
 import com.bahaa.eventapp.models.EventModel;
@@ -25,6 +27,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class InterestedEventsAdapter extends RecyclerView.Adapter {
@@ -162,6 +165,12 @@ public class InterestedEventsAdapter extends RecyclerView.Adapter {
             }
 
 
+        }
+
+        @OnClick(R.id.interested_events_card)
+        public void openEvent() {
+            Intent intent = new Intent(context, DetailsActivity.class);
+            context.startActivity(intent);
         }
 
     }
