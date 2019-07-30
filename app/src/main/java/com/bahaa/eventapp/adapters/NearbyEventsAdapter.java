@@ -1,6 +1,7 @@
 package com.bahaa.eventapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bahaa.eventapp.R;
+import com.bahaa.eventapp.activities.DetailsActivity;
 import com.bahaa.eventapp.models.EventModel;
 import com.squareup.picasso.Picasso;
 
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class NearbyEventsAdapter extends RecyclerView.Adapter {
@@ -65,10 +68,13 @@ public class NearbyEventsAdapter extends RecyclerView.Adapter {
 
         @BindView(R.id.nearby_events_image)
         public ImageView nearbyImage;
+
         @BindView(R.id.nearby_events_date)
         public TextView nearbyDate;
+
         @BindView(R.id.nearby_events_title)
         public TextView nearbyTitle;
+
         @BindView(R.id.nearby_events_dist)
         public TextView nearbyDistance;
 
@@ -95,8 +101,12 @@ public class NearbyEventsAdapter extends RecyclerView.Adapter {
             }
             nearbyTitle.setText(adapterModel.get(position).getTitle());
 
+        }
 
-
+        @OnClick(R.id.nearby_events_card)
+        public void openEvent() {
+            Intent intent = new Intent(context, DetailsActivity.class);
+            context.startActivity(intent);
         }
 
     }
