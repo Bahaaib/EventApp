@@ -1,7 +1,9 @@
 package com.bahaa.eventapp.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -16,11 +18,13 @@ import com.bahaa.eventapp.R;
 import com.bahaa.eventapp.models.UserModel;
 import com.bahaa.eventapp.utils.NavigationHeaderViewHolder;
 import com.google.android.material.navigation.NavigationView;
+import com.ramotion.fluidslider.FluidSlider;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import kotlin.Unit;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -33,10 +37,18 @@ public class SettingsActivity extends AppCompatActivity {
     @BindView(R.id.settings_toolbar)
     public Toolbar toolbar;
 
+    @BindView(R.id.settings_distance_slider)
+    public FluidSlider slider;
+
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private View header;
     private NavigationHeaderViewHolder holder;
+    private float sliderPosition;
+    private SharedPreferences.Editor editor;
+    private final String PREFS_KEY = "general_prefs";
+    private final String POSITION_KEY = "slider_position";
     private Unbinder unbinder;
+
 
 
     @Override
@@ -48,6 +60,18 @@ public class SettingsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setupNavigationDrawer();
         setupNavigationDrawerHeader();
+
+        Log.i("Statuss", "I'm in onCreate");
+
+
+        slider.setPositionListener(pos -> {
+           // Log.i("statuss", String.valueOf(pos));
+            sliderPosition = pos;
+            return Unit.INSTANCE;
+        });
+
+
+
     }
 
     private void setupNavigationDrawer() {
@@ -129,6 +153,12 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    private void updateSharedPrefs(){
+        editor = getSharedPreferences(PREFS_KEY, MODE_PRIVATE).edit();
+        editor.putFloat(POSITION_KEY, sliderPosition);
+        editor.apply();
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -137,6 +167,12 @@ public class SettingsActivity extends AppCompatActivity {
             return true;
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        updateSharedPrefs();
     }
 
     @Override

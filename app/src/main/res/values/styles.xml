@@ -38,5 +38,9 @@
         <item name="android:windowExitAnimation">@anim/anim_out</item>
     </style>
 
+    <style name="SwitchTheme" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/colorPrimaryLight</item>
+    </style>
+
 
 </resources>

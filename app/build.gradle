@@ -59,6 +59,10 @@ dependencies {
     //TicketView
     implementation 'com.vipulasri:ticketview:1.0.7'
 
+    //Fluid Slider
+    implementation 'com.ramotion.fluidslider:fluid-slider:0.3.1'
+
+
 
     //testing
     testImplementation 'junit:junit:4.12'
