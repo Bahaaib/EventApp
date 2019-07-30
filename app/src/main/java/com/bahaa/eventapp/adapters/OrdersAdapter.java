@@ -1,6 +1,7 @@
 package com.bahaa.eventapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bahaa.eventapp.R;
+import com.bahaa.eventapp.activities.DetailsActivity;
 import com.bahaa.eventapp.models.EventModel;
 import com.squareup.picasso.Picasso;
 
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class OrdersAdapter extends RecyclerView.Adapter {
@@ -106,6 +109,12 @@ public class OrdersAdapter extends RecyclerView.Adapter {
                 paymentNote.setVisibility(View.VISIBLE);
             }
 
+        }
+
+        @OnClick(R.id.ticket_card)
+        public void openEvent() {
+            Intent intent = new Intent(context, DetailsActivity.class);
+            context.startActivity(intent);
         }
 
     }

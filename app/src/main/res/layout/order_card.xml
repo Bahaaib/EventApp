@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ticket_card"
     android:layout_width="300dp"
     android:layout_height="430dp"
     android:background="@android:color/transparent">
@@ -26,15 +27,15 @@
             android:id="@+id/ticket_event_img"
             android:layout_width="290dp"
             android:layout_height="240dp"
+            android:layout_centerHorizontal="true"
             android:scaleType="fitXY"
-            android:src="@drawable/ev1"
-            android:layout_centerHorizontal="true"/>
+            android:src="@drawable/ev1" />
 
         <View
             android:layout_width="290dp"
             android:layout_height="240dp"
-            android:alpha="0.6"
             android:layout_centerHorizontal="true"
+            android:alpha="0.6"
             android:background="@color/colorInactive" />
 
         <TextView
@@ -75,7 +76,6 @@
             android:textStyle="bold" />
 
         <TextView
-            android:visibility="invisible"
             android:id="@+id/ticket_payment_note"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,7 +85,8 @@
             android:gravity="center"
             android:text="(This ticket is NOT confirmed until paid)"
             android:textColor="@color/colorWhite"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:visibility="invisible" />
 
 
         <TextView
@@ -93,12 +94,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:paddingEnd="15dp"
             android:layout_marginTop="270dp"
             android:ellipsize="end"
             android:gravity="start"
             android:lines="1"
             android:maxLength="50"
+            android:paddingEnd="15dp"
             android:text="Software Engineering Event "
             android:textColor="@color/colorPrimary"
             android:textSize="16sp"
@@ -193,9 +194,9 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_alignParentBottom="true"
-            android:orientation="horizontal"
             android:layout_marginBottom="5dp"
-            android:baselineAligned="false">
+            android:baselineAligned="false"
+            android:orientation="horizontal">
 
             <RelativeLayout
                 android:layout_width="0dp"
