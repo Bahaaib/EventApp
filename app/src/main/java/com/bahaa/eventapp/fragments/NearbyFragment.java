@@ -1,6 +1,8 @@
 package com.bahaa.eventapp.fragments;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -35,14 +37,18 @@ public class NearbyFragment extends Fragment {
     @BindView(R.id.nearby_events_rv)
     public RecyclerView nearbyEventsRV;
 
-    private Unbinder unbinder;
+
     private ArrayList<EventModel> nearbyEventsList;
     private NearbyEventsAdapter nearbyEventsAdapter;
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
     private GridLayoutManager gridLayoutManager;
-    private int distanceLimiter = 1000000;
+    private int distanceLimiter;
     private double mLatitude;
     private double mLongitude;
+    private final String PREFS_KEY = "general_prefs";
+    private final String DISTANCE_KEY = "slider_position";
+    private SharedPreferences preferences;
+    private Unbinder unbinder;
 
     public NearbyFragment() {
         // Required empty public constructor
@@ -56,7 +62,7 @@ public class NearbyFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_nearby, container, false);
 
         unbinder = ButterKnife.bind(this, v);
-
+        retrieveSharedPrefs();
         setupNearbyEventsRV();
         getDeviceLocation();
 
@@ -79,6 +85,19 @@ public class NearbyFragment extends Fragment {
         nearbyEventsAdapter.notifyDataSetChanged();
 
         return v;
+    }
+
+    private void retrieveSharedPrefs() {
+        if (getActivity() != null) {
+            preferences = getActivity().getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE);
+            calculatePreferenceDistance();
+        }
+
+    }
+
+    private void calculatePreferenceDistance() {
+        float ratio = preferences.getFloat(DISTANCE_KEY, 0.5f);
+        distanceLimiter = (int) (ratio * 100);
     }
 
     private void getDeviceLocation() {

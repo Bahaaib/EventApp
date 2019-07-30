@@ -11,7 +11,7 @@ public class MockedData {
 
     public static int[] ticketsAvailable = {8, 6, 0};
 
-    public static double[] latitude = {30.003722, 30.044740, 26.563984};
+    public static double[] latitude = {30.003722, 26.761552, 26.563984};
 
-    public static double[] longitude = {31.168816, 31.235614, 31.695623};
+    public static double[] longitude = {31.168816, 31.497040, 31.695623};
 }

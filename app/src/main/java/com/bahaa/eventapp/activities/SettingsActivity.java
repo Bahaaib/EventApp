@@ -1,9 +1,9 @@
 package com.bahaa.eventapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -45,8 +45,9 @@ public class SettingsActivity extends AppCompatActivity {
     private NavigationHeaderViewHolder holder;
     private float sliderPosition;
     private SharedPreferences.Editor editor;
+    private SharedPreferences preferences;
     private final String PREFS_KEY = "general_prefs";
-    private final String POSITION_KEY = "slider_position";
+    private final String DISTANCE_KEY = "slider_position";
     private Unbinder unbinder;
 
 
@@ -58,17 +59,11 @@ public class SettingsActivity extends AppCompatActivity {
 
         unbinder = ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+
+        retrieveSharedPrefs();
+        setSliderListener();
         setupNavigationDrawer();
         setupNavigationDrawerHeader();
-
-        Log.i("Statuss", "I'm in onCreate");
-
-
-        slider.setPositionListener(pos -> {
-           // Log.i("statuss", String.valueOf(pos));
-            sliderPosition = pos;
-            return Unit.INSTANCE;
-        });
 
 
 
@@ -153,10 +148,28 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    private void setSliderListener(){
+        slider.setPositionListener(pos -> {
+            sliderPosition = pos;
+            return Unit.INSTANCE;
+        });
+    }
+
     private void updateSharedPrefs(){
         editor = getSharedPreferences(PREFS_KEY, MODE_PRIVATE).edit();
-        editor.putFloat(POSITION_KEY, sliderPosition);
+        editor.putFloat(DISTANCE_KEY, sliderPosition);
         editor.apply();
+    }
+
+    private void retrieveSharedPrefs(){
+        preferences = getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE);
+        sliderPosition = preferences.getFloat(DISTANCE_KEY, 0.5f);
+
+        setSliderPosition(sliderPosition);
+    }
+
+    private void setSliderPosition(float pos){
+        slider.setPosition(pos);
     }
 
 
