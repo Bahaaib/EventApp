@@ -67,23 +67,30 @@ public class PointsActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        navigationView.getMenu().getItem(3).setChecked(true);
+        navigationView.getMenu().getItem(4).setChecked(true);
 
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             switch (id) {
+                case R.id.action_home:
+                    navigateToActivity(MainActivity.class);
+                    return true;
+
                 case R.id.action_profile:
                     navigateToActivity(ProfileActivity.class);
                     return true;
 
-                case R.id.action_explore:
-                    displayToast("Clicked Explore");
+                case R.id.action_notification:
+                    displayToast("Notifications Activity");
                     return true;
 
-                case R.id.action_interested:
-                    displayToast("Clicked Interested");
+                case R.id.action_orders:
+                    navigateToActivity(OrdersActivity.class);
                     return true;
 
+                case R.id.action_settings:
+                    displayToast("Settings Activity");
+                    return true;
                 default:
                     return true;
             }
@@ -151,6 +158,15 @@ public class PointsActivity extends AppCompatActivity {
         return random.nextInt((max - min) + 1) + min;
     }
 
+    private void uncheckAllDrawerItems() {
+        int size = navigationView.getMenu().size();
+
+        for (int i = 0; i < size; i++) {
+            navigationView.getMenu().getItem(i).setChecked(false);
+        }
+    }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -173,6 +189,8 @@ public class PointsActivity extends AppCompatActivity {
     protected void onResume() {
         if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             this.drawerLayout.closeDrawer(GravityCompat.START);
+            uncheckAllDrawerItems();
+            navigationView.getMenu().getItem(4).setChecked(true);
             super.onResume();
         } else {
             super.onResume();
