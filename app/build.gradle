@@ -50,9 +50,6 @@ dependencies {
     //CardSlider
     implementation 'com.ramotion.cardslider:card-slider:0.3.1'
 
-    //Zigzag Layout
-    implementation 'com.github.beigirad:ZigzagView:1.0.7'
-
     //TickerView
     implementation 'com.robinhood.ticker:ticker:2.0.1'
 
