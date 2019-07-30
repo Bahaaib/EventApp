@@ -1,6 +1,7 @@
 package com.bahaa.eventapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bahaa.eventapp.R;
+import com.bahaa.eventapp.activities.DetailsActivity;
 import com.bahaa.eventapp.models.EventModel;
 import com.squareup.picasso.Picasso;
 
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class FutureEventsAdapter extends RecyclerView.Adapter {
@@ -64,8 +67,10 @@ public class FutureEventsAdapter extends RecyclerView.Adapter {
 
         @BindView(R.id.future_events_image)
         public ImageView futureImage;
+
         @BindView(R.id.future_events_date)
         public TextView futureDate;
+
         @BindView(R.id.future_events_title)
         public TextView futureTitle;
 
@@ -85,6 +90,12 @@ public class FutureEventsAdapter extends RecyclerView.Adapter {
 
             futureDate.setText(adapterModel.get(position).getDate());
             futureTitle.setText(adapterModel.get(position).getTitle());
+        }
+
+        @OnClick(R.id.future_events_card)
+        public void openEvent() {
+            Intent intent = new Intent(context, DetailsActivity.class);
+            context.startActivity(intent);
         }
 
     }
