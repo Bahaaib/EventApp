@@ -24,6 +24,19 @@
         android:layout_width="match_parent"
         android:layout_height="370dp">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:id="@+id/preview_event_img"
+            android:src="@drawable/ev1"
+            android:scaleType="fitXY"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="210dp"
+            android:alpha="0.6"
+            android:background="@color/colorInactive" />
+
         <TextView
             android:id="@+id/preview_confirm"
             android:layout_width="wrap_content"
@@ -33,10 +46,10 @@
             android:layout_marginEnd="10dp"
             android:backgroundTint="@color/colorPrimary"
             android:drawableStart="@drawable/ic_check_empty"
-            android:drawableTint="@color/colorPrimary"
+            android:drawableTint="@color/colorWhite"
             android:gravity="center"
-            android:text="Confirm"
-            android:textColor="@color/colorPrimary" />
+            android:text="Save"
+            android:textColor="@color/colorWhite" />
 
         <ImageView
             android:id="@+id/preview_edit"
@@ -44,7 +57,7 @@
             android:layout_height="30dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:tint="@color/colorPrimary"
+            android:tint="@color/colorWhite"
             android:scaleType="centerInside"
             android:src="@drawable/ic_arrow_back" />
 
@@ -56,7 +69,7 @@
             android:fontFamily="sans-serif-light"
             android:gravity="center"
             android:text="TICKET ID:"
-            android:textColor="@color/colorInactive"
+            android:textColor="@color/colorWhite"
             android:textSize="18sp" />
 
         <TextView
@@ -67,7 +80,7 @@
             android:layout_marginTop="110dp"
             android:fontFamily="sans-serif-condensed"
             android:text="a76W123kB"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorWhite"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -79,7 +92,7 @@
             android:fontFamily="sans-serif-light"
             android:gravity="center"
             android:text="(This ticket is NOT confirmed until paid)"
-            android:textColor="@color/colorInactive"
+            android:textColor="@color/colorWhite"
             android:textSize="14sp" />
 
 
