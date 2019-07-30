@@ -1,66 +1,37 @@
 package com.bahaa.eventapp.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.viewpager.widget.ViewPager;
 
 import com.bahaa.eventapp.R;
-import com.bahaa.eventapp.adapters.PagerAdapter;
 import com.bahaa.eventapp.models.UserModel;
 import com.bahaa.eventapp.utils.NavigationHeaderViewHolder;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class MainActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity {
 
-    @BindView(R.id.main_coordinator_layout)
-    public CoordinatorLayout mainCooLayout;
-
-    @BindView(R.id.main_toolbar)
-    public Toolbar toolbar;
-
-    @BindView(R.id.btm_nav)
-    public BottomNavigationView bottomNavigationView;
-
-    @BindView(R.id.pager)
-    public ViewPager viewPager;
-
-    @BindView(R.id.drawer_layout)
+    @BindView(R.id.settings_drawer)
     public DrawerLayout drawerLayout;
 
-    @BindView(R.id.nv)
+    @BindView(R.id.settings_nv)
     public NavigationView navigationView;
 
-    @BindView(R.id.main_toolbar_triangle)
-    public ImageView triangle;
-
-    @BindView(R.id.main_points_layout)
-    public RelativeLayout pointsLayout;
-
-    @BindView(R.id.main_toolbar_points_icon)
-    public ImageView pointsIcon;
-
+    @BindView(R.id.settings_toolbar)
+    public Toolbar toolbar;
 
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private View header;
@@ -71,69 +42,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_settings);
 
         unbinder = ButterKnife.bind(this);
-
         setSupportActionBar(toolbar);
-
-        setupViewPager();
-        setupBottomNavigationView();
         setupNavigationDrawer();
         setupNavigationDrawerHeader();
-
-    }
-
-    @OnClick(R.id.main_toolbar_points_icon)
-    public void showPointsLayout() {
-        if (pointsLayout.getVisibility() == View.VISIBLE) {
-            pointsLayout.setVisibility(View.INVISIBLE);
-            triangle.setVisibility(View.INVISIBLE);
-        } else {
-            pointsLayout.setVisibility(View.VISIBLE);
-            triangle.setVisibility(View.VISIBLE);
-        }
-    }
-
-    private void setupViewPager() {
-        final PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), 3);
-        viewPager.setAdapter(pagerAdapter);
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-                bottomNavigationView.getMenu().getItem(position).setChecked(true);
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-    }
-
-    private void setupBottomNavigationView() {
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.action_nearby:
-                    viewPager.setCurrentItem(0);
-                    break;
-                case R.id.action_explore:
-                    viewPager.setCurrentItem(1);
-                    break;
-                case R.id.action_interested:
-                    viewPager.setCurrentItem(2);
-                    break;
-            }
-            return true;
-        });
     }
 
     private void setupNavigationDrawer() {
@@ -145,12 +59,15 @@ public class MainActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
-        navigationView.getMenu().getItem(0).setChecked(true);
+        navigationView.getMenu().getItem(5).setChecked(true);
 
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             switch (id) {
+                case R.id.action_home:
+                    navigateToActivity(MainActivity.class);
+                    return true;
+
                 case R.id.action_profile:
                     navigateToActivity(ProfileActivity.class);
                     return true;
@@ -165,10 +82,6 @@ public class MainActivity extends AppCompatActivity {
 
                 case R.id.action_points:
                     navigateToActivity(PointsActivity.class);
-                    return true;
-
-                case R.id.action_settings:
-                    navigateToActivity(SettingsActivity.class);
                     return true;
 
                 default:
@@ -203,12 +116,8 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
     }
 
-    public CoordinatorLayout getMainCoordinatorLayout() {
-        return mainCooLayout;
-    }
-
     private void navigateToActivity(Class<? extends AppCompatActivity> TargetActivity) {
-        Intent intent = new Intent(MainActivity.this, TargetActivity);
+        Intent intent = new Intent(SettingsActivity.this, TargetActivity);
         startActivity(intent);
     }
 
@@ -220,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -230,18 +140,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (getCurrentFocus() != null) {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-        }
-        return super.dispatchTouchEvent(ev);
-    }
-
-    @Override
     public void onBackPressed() {
         if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            navigationView.getMenu().getItem(0).setChecked(false);
             this.drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
@@ -253,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             this.drawerLayout.closeDrawer(GravityCompat.START);
             uncheckAllDrawerItems();
-            navigationView.getMenu().getItem(0).setChecked(true);
+            navigationView.getMenu().getItem(5).setChecked(true);
             super.onResume();
         } else {
             super.onResume();
@@ -263,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         unbinder.unbind();
     }
 }

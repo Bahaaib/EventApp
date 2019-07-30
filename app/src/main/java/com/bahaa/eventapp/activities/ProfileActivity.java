@@ -160,7 +160,7 @@ public class ProfileActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.action_settings:
-                    displayToast("Settings Activity");
+                    navigateToActivity(SettingsActivity.class);
                     return true;
 
                 default:
