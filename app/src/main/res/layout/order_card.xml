@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         app:ticketDividerPadding="0dp"
         app:ticketDividerType="dash"
-        app:ticketElevation="10dp"
+        app:ticketElevation="12dp"
         app:ticketOrientation="horizontal"
         app:ticketScallopPositionPercent="60"
         app:ticketScallopRadius="10dp"
