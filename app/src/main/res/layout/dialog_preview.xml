@@ -104,8 +104,10 @@
             android:layout_marginTop="240dp"
             android:ellipsize="end"
             android:gravity="start"
+            android:lines="1"
+            android:paddingEnd="8dp"
             android:maxLength="50"
-            android:text="Software Engineering Event "
+            android:text="Software Engineering Event"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp"
             android:textStyle="bold" />
