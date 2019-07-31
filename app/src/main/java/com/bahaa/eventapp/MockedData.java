@@ -15,8 +15,14 @@ public class MockedData {
 
     public static double[] longitude = {31.168816, 31.497040, 31.695623};
 
-    static class NotificationData {
+    public static class NotificationData {
 
-        public String[] id = {"a76W123kB", null, "x1xZoO58Q"};
+        public static String[] id = {"a76W123kB", "", "v1iZoO58Q"};
+
+        public static String[] destination = {"", "Wesaya", ""};
+
+        public static int[] points = {0, 12, 0};
+
+
     }
 }

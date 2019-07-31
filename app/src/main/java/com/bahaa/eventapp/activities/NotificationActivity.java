@@ -11,9 +11,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bahaa.eventapp.MockedData;
 import com.bahaa.eventapp.R;
+import com.bahaa.eventapp.adapters.NotificationAdapter;
 import com.bahaa.eventapp.models.NotificationModel;
 import com.bahaa.eventapp.models.UserModel;
 import com.bahaa.eventapp.utils.NavigationHeaderViewHolder;
@@ -44,6 +48,8 @@ public class NotificationActivity extends AppCompatActivity {
     private View header;
     private NavigationHeaderViewHolder holder;
     private ArrayList<NotificationModel> notificationsList;
+    private NotificationAdapter adapter;
+    private LinearLayoutManager linearLayoutManager;
 
     private Unbinder unbinder;
 
@@ -56,6 +62,29 @@ public class NotificationActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setupNavigationDrawer();
         setupNavigationDrawerHeader();
+        setupNotificationsRV();
+
+        //fill mocked data
+        for(int i=0; i < 3; i++){
+            NotificationModel model = new NotificationModel();
+            model.setId(MockedData.NotificationData.id[i]);
+            model.setPointsDestination(MockedData.NotificationData.destination[i]);
+            model.setPoints(MockedData.NotificationData.points[i]);
+
+            notificationsList.add(model);
+        }
+
+        adapter.notifyDataSetChanged();
+    }
+
+    private void setupNotificationsRV(){
+        notificationsList = new ArrayList<>();
+        adapter = new NotificationAdapter(this, notificationsList);
+        notificationRV.setAdapter(adapter);
+        linearLayoutManager = new LinearLayoutManager(this);
+        notificationRV.setLayoutManager(linearLayoutManager);
+        notificationRV.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
     }
 
     private void setupNavigationDrawer() {
@@ -67,7 +96,7 @@ public class NotificationActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        navigationView.getMenu().getItem(3).setChecked(true);
+        navigationView.getMenu().getItem(2).setChecked(true);
 
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
@@ -161,7 +190,7 @@ public class NotificationActivity extends AppCompatActivity {
         if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             this.drawerLayout.closeDrawer(GravityCompat.START);
             uncheckAllDrawerItems();
-            navigationView.getMenu().getItem(3).setChecked(true);
+            navigationView.getMenu().getItem(2).setChecked(true);
             super.onResume();
         } else {
             super.onResume();
