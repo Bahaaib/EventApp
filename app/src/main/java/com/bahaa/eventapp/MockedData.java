@@ -16,6 +16,7 @@ public class MockedData {
     public static double[] longitude = {31.168816, 31.497040, 31.695623};
 
     static class NotificationData {
+
         public String[] id = {"a76W123kB", null, "x1xZoO58Q"};
     }
 }

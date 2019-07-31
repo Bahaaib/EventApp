@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.action_notification:
-                    displayToast("Notifications Activity");
+                    navigateToActivity(NotificationActivity.class);
                     return true;
 
                 case R.id.action_orders:
