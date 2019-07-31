@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/notification_card"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginBottom="6dp"
+    card_view:cardCornerRadius="5dp"
+    card_view:cardElevation="6dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/notification_icon"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_check_circle" />
+
+        <TextView
+            android:id="@+id/notification_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-light"
+            android:paddingEnd="10dp"
+            android:text="Your Ticket #a76W123kB has been confirmed"
+            android:textColor="@color/colorInactive"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/notification_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="80dp"
+            android:fontFamily="sans-serif-light"
+            android:paddingEnd="10dp"
+            android:text="25/07/2019"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+
