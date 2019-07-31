@@ -63,7 +63,6 @@ dependencies {
     implementation 'com.ramotion.fluidslider:fluid-slider:0.3.1'
 
 
-
     //testing
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
