@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -21,6 +20,7 @@ import com.bahaa.eventapp.activities.DetailsActivity;
 import com.bahaa.eventapp.activities.MainActivity;
 import com.bahaa.eventapp.models.EventModel;
 import com.google.android.material.snackbar.Snackbar;
+import com.ramotion.foldingcell.FoldingCell;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -114,8 +114,8 @@ public class InterestedEventsAdapter extends RecyclerView.Adapter {
     // actions to show & interact with them
     public class InterestedEventsViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.interested_events_title_layout)
-        public RelativeLayout relativeLayout;
+        @BindView(R.id.interested_events_layout)
+        public FoldingCell layout;
 
         @BindView(R.id.interested_events_img)
         public ImageView intstdImage;
@@ -131,6 +131,15 @@ public class InterestedEventsAdapter extends RecyclerView.Adapter {
 
         @BindView(R.id.title_tickets_available)
         public TextView intstdAvailable;
+
+        @BindView(R.id.interested_events_content_title)
+        public TextView contentTitle;
+
+        @BindView(R.id.content_event_description)
+        public TextView contentDescription;
+
+        @BindView(R.id.content_date)
+        public TextView contentDate;
 
 
         public InterestedEventsViewHolder(View itemView) {
@@ -148,22 +157,7 @@ public class InterestedEventsAdapter extends RecyclerView.Adapter {
 
 
             //Title
-            intstdTitle.setText(adapterModel.get(position).getTitle());
-            ViewTreeObserver treeObserver = intstdTitle.getViewTreeObserver();
-            treeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    ViewTreeObserver observer = intstdTitle.getViewTreeObserver();
-                    observer.removeOnGlobalLayoutListener(this);
-                    int titleLen = intstdTitle.length();
-                    if (titleLen > 50) {
-                        String titleText = intstdTitle.getText().toString();
-                        titleText = titleText.replace(titleText.substring(50, titleLen), "");
-                        titleText = titleText + "...";
-                        intstdTitle.setText(titleText);
-                    }
-                }
-            });
+            setAdjustedTitle(intstdTitle, position, 50);
 
 
             //Date
@@ -189,11 +183,64 @@ public class InterestedEventsAdapter extends RecyclerView.Adapter {
 
             }
 
+            //Content Title
+            setAdjustedTitle(contentTitle, position, 95);
+
+            //Content Description
+            setDescription();
+
+            //Content Date
+            setContentDate(position);
+
 
         }
 
+        private void setAdjustedTitle(TextView tv, int cardPos, int maxLength) {
+            tv.setText(adapterModel.get(cardPos).getTitle());
+            ViewTreeObserver treeObserver = tv.getViewTreeObserver();
+            treeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    ViewTreeObserver observer = tv.getViewTreeObserver();
+                    observer.removeOnGlobalLayoutListener(this);
+                    int titleLen = tv.length();
+                    if (titleLen > maxLength) {
+                        String text = intstdTitle.getText().toString();
+                        text = text.replace(text.substring(maxLength, titleLen), "");
+                        text = text + "...";
+                        tv.setText(text);
+                    }
+                }
+            });
+
+        }
+
+        private void setDescription() {
+            String descriptionText = "It is a long established fact that a reader will be distracted by " +
+                    "the readable content of a page when looking at its layout. The point of using Lorem" +
+                    " Ipsum is that it has a more-or-less normal distribution of letters, as opposed to" +
+                    " using 'Content here, content here', making it look like readable English. Many " +
+                    "desktop publishing packages and web page editors now use Lorem Ipsum as their" +
+                    " default model text, and a search for 'lorem ipsum' will uncover many web sites" +
+                    " still in their infancy. Various versions have evolved over the years, sometimes" +
+                    " by accident, sometimes on purpose (injected humour and the like).";
+
+            descriptionText = descriptionText.replace(descriptionText.substring(200, descriptionText.length()), "");
+            descriptionText = descriptionText + "...(Read more)";
+            contentDescription.setText(descriptionText);
+        }
+
+        private void setContentDate(int cardPosition) {
+            contentDate.setText(adapterModel.get(cardPosition).getDate());
+        }
+
         @OnClick(R.id.interested_events_layout)
-        public void openEvent() {
+        public void animateCell() {
+            layout.toggle(false);
+        }
+
+        @OnClick(R.id.content_event_description)
+        public void openEventDetails(){
             Intent intent = new Intent(context, DetailsActivity.class);
             context.startActivity(intent);
         }
