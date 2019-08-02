@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.InterestedFragment"
-    android:background="@color/colorGrayLight">
+    android:background="@color/colorGrayLight"
+    tools:context=".fragments.InterestedFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,20 +16,21 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-light"
             android:text="Your most favorite Events"
             android:textColor="@color/colorInactive"
             android:textSize="16sp"
-            android:fontFamily="sans-serif-light"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="60dp"
             android:id="@+id/interested_event_rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="6dp"
             android:orientation="vertical" />
     </RelativeLayout>
-
 
 
 </androidx.core.widget.NestedScrollView>

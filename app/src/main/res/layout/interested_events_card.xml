@@ -1,102 +1,265 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.ramotion.foldingcell.FoldingCell xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/interested_events_card"
+    android:id="@+id/interested_events_layout"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
-    android:elevation="6dp"
-    app:cardCornerRadius="0dp">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:id="@+id/interested_events_relativeLayout"
+        android:id="@+id/interested_events_content_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/interested_events_img"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:contentDescription="Interested Event"
-            android:scaleType="centerCrop"
-            android:transitionName="transition" />
+            android:layout_height="150dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ev1" />
 
-        <View
-            android:id="@+id/interested_events_blackLayer"
+        <TextView
+            android:id="@+id/interested_events_content_title"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:alpha="0.6"
-            android:background="@color/colorBlack" />
-
-
-        <TextView
-            android:id="@+id/interested_events_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="130dp"
-            android:ellipsize="end"
-            android:fontFamily="sans-serif-light"
-            android:maxLines="1"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:text="Software Engineering Specialization"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/colorWhite"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/interested_events_date"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="170dp"
             android:ellipsize="end"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:maxLines="1"
-            android:paddingStart="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:maxLength="95"
+            android:maxLines="2"
             android:paddingEnd="8dp"
-            android:text="Fri, Apr 19 @11:00 A.M."
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/colorWhite"
+            android:text="Software Engineering Event"
+            android:textColor="@color/colorBlack"
             android:textSize="18sp" />
 
+        <View
+            android:id="@+id/content_title_divider"
+            android:layout_width="300dp"
+            android:layout_height="1dp"
+            android:layout_below="@+id/interested_events_content_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorGrayLight" />
 
         <TextView
-            android:id="@+id/interested_events_capacity"
+            android:id="@+id/content_event_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="100dp"
-            android:layout_marginBottom="15dp"
-            android:contentDescription="Capacity"
-            android:drawableStart="@drawable/ic_person"
-            android:drawableTint="@color/colorPrimaryLight"
-            android:gravity="center"
-            android:text="10"
-            android:textColor="@color/colorWhite"
-            android:textSize="16sp" />
+            android:layout_below="@+id/content_title_divider"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-light"
+            android:text="long description text"
+            android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/interested_events_availability"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="170dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="15dp"
-            android:contentDescription="Available Tickets"
-            android:drawableStart="@drawable/ic_ticket"
-            android:drawablePadding="5dp"
-            android:drawableTint="@color/colorPrimaryLight"
-            android:gravity="center"
-            android:text="8"
-            android:textColor="@color/colorWhite"
-            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/content_date_layout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/content_event_description"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="3dp"
+                    android:text="Date"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/content_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:text="Fri, Apr 19" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:background="@android:color/darker_gray" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="3dp"
+                    android:text="From"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/content_time_from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:text="5 PM" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:background="@android:color/darker_gray" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="3dp"
+                    android:text="To"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/content_time_to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:text="7 PM" />
+            </RelativeLayout>
+
+        </LinearLayout>
 
     </RelativeLayout>
 
-</androidx.cardview.widget.CardView>
+    <RelativeLayout
+        android:id="@+id/interested_events_title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorWhite"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="90dp"
+            android:layout_height="120dp"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:id="@+id/title_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="Fri\n Apr 19"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/title_event_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="110dp"
+            android:layout_marginTop="15dp"
+            android:maxLines="2"
+            android:text="Software Engineering Event"
+            android:textSize="18sp" />
+
+        <View
+            android:id="@+id/title_title_divider"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/title_event_title"
+            android:layout_marginStart="110dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/colorPrimary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_title_divider"
+            android:layout_marginStart="110dp"
+            android:layout_marginTop="5dp"
+            android:text="Organized by: "
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/title_event_organizer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_title_divider"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-light"
+            android:maxLength="50"
+            android:maxLines="2"
+            android:text="The Event Team"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/title_tickets_available"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="20dp"
+            android:drawableStart="@drawable/ic_ticket"
+            android:drawablePadding="3dp"
+            android:gravity="center"
+            android:text="8"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/title_capacity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="80dp"
+            android:drawableStart="@drawable/ic_person"
+            android:drawablePadding="3dp"
+            android:drawableTint="@color/colorPrimary"
+            android:gravity="center"
+            android:text="10"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+</com.ramotion.foldingcell.FoldingCell>

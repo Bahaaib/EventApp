@@ -8,17 +8,17 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bahaa.eventapp.R;
 import com.bahaa.eventapp.activities.DetailsActivity;
 import com.bahaa.eventapp.activities.MainActivity;
-import com.bahaa.eventapp.R;
 import com.bahaa.eventapp.models.EventModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
@@ -50,8 +50,8 @@ public class InterestedEventsAdapter extends RecyclerView.Adapter {
     }
 
     /*Swipe to Delete feature methods
-    *
-    */
+     *
+     */
     public Context getContext() {
         return context;
     }
@@ -114,22 +114,22 @@ public class InterestedEventsAdapter extends RecyclerView.Adapter {
     // actions to show & interact with them
     public class InterestedEventsViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.interested_events_relativeLayout)
+        @BindView(R.id.interested_events_title_layout)
         public RelativeLayout relativeLayout;
 
         @BindView(R.id.interested_events_img)
         public ImageView intstdImage;
 
-        @BindView(R.id.interested_events_title)
+        @BindView(R.id.title_event_title)
         public TextView intstdTitle;
 
-        @BindView(R.id.interested_events_date)
+        @BindView(R.id.title_date)
         public TextView intstdDate;
 
-        @BindView(R.id.interested_events_capacity)
+        @BindView(R.id.title_capacity)
         public TextView intstdCapacity;
 
-        @BindView(R.id.interested_events_availability)
+        @BindView(R.id.title_tickets_available)
         public TextView intstdAvailable;
 
 
@@ -146,19 +146,44 @@ public class InterestedEventsAdapter extends RecyclerView.Adapter {
                     .fit()
                     .into(intstdImage);
 
+
+            //Title
             intstdTitle.setText(adapterModel.get(position).getTitle());
-            intstdDate.setText(adapterModel.get(position).getDate());
+            ViewTreeObserver treeObserver = intstdTitle.getViewTreeObserver();
+            treeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    ViewTreeObserver observer = intstdTitle.getViewTreeObserver();
+                    observer.removeOnGlobalLayoutListener(this);
+                    int titleLen = intstdTitle.length();
+                    if (titleLen > 50) {
+                        String titleText = intstdTitle.getText().toString();
+                        titleText = titleText.replace(titleText.substring(50, titleLen), "");
+                        titleText = titleText + "...";
+                        intstdTitle.setText(titleText);
+                    }
+                }
+            });
+
+
+            //Date
+            String date = adapterModel.get(position).getDate();
+            date = date.replace(date.substring(3, 4), "\n");
+            intstdDate.setText(date);
+
+            //Capacity & Available
             intstdCapacity.setText(String.valueOf(adapterModel.get(position).getCapacity()));
             if (adapterModel.get(position).getTicketsAvailable() == 0) {
                 intstdAvailable.setText("SOLD OUT");
+                intstdAvailable.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
                 intstdAvailable.setTextColor(Color.RED);
                 intstdAvailable.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
                 ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) intstdAvailable.getLayoutParams();
-                int rightMarginDP = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12, context.getResources().getDisplayMetrics());
+                int rightMarginDP = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, context.getResources().getDisplayMetrics());
                 params.setMarginEnd(rightMarginDP);
                 intstdAvailable.setLayoutParams(params);
                 intstdAvailable.setBackgroundColor(Color.WHITE);
-                intstdAvailable.setPadding(5, 0, 5, 0);
+                intstdAvailable.setPadding(5, 0, 5, 8);
             } else {
                 intstdAvailable.setText(String.valueOf(adapterModel.get(position).getTicketsAvailable()));
 
@@ -167,7 +192,7 @@ public class InterestedEventsAdapter extends RecyclerView.Adapter {
 
         }
 
-        @OnClick(R.id.interested_events_card)
+        @OnClick(R.id.interested_events_layout)
         public void openEvent() {
             Intent intent = new Intent(context, DetailsActivity.class);
             context.startActivity(intent);
