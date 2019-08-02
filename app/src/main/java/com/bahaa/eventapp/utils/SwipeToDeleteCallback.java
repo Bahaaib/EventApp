@@ -54,7 +54,7 @@ public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
 
         //Swiping to the left
         if (dX < 0) {
-            int iconRight = itemView.getRight() - iconMargin + icon.getIntrinsicWidth() + 80;
+            int iconRight = itemView.getRight() - iconMargin + icon.getIntrinsicWidth() - 40;
             int iconLeft = iconRight - icon.getIntrinsicWidth();
 
 
