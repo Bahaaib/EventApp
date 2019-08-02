@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -63,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private ActionBarDrawerToggle actionBarDrawerToggle;
-    private View header;
-    private NavigationHeaderViewHolder holder;
     private Unbinder unbinder;
 
 
@@ -183,8 +182,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupNavigationDrawerHeader() {
-        header = navigationView.getHeaderView(0);
-        holder = new NavigationHeaderViewHolder(header);
+        View header = navigationView.getHeaderView(0);
+        NavigationHeaderViewHolder holder = new NavigationHeaderViewHolder(header);
 
         //Mocked User data
         UserModel user = new UserModel();
@@ -225,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if (actionBarDrawerToggle.onOptionsItemSelected(item))
             return true;
@@ -237,6 +236,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (getCurrentFocus() != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            assert imm != null;
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
         return super.dispatchTouchEvent(ev);
