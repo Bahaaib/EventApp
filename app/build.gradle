@@ -62,6 +62,9 @@ dependencies {
     //Fluid Slider
     implementation 'com.ramotion.fluidslider:fluid-slider:0.3.1'
 
+    //Folding Cell
+    implementation 'com.ramotion.foldingcell:folding-cell:1.2.3'
+
 
     //testing
     testImplementation 'junit:junit:4.12'
