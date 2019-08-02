@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager() {
         final PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), 3);
         viewPager.setAdapter(pagerAdapter);
+        viewPager.setCurrentItem(1);
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -120,6 +121,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupBottomNavigationView() {
+
+        bottomNavigationView.setSelectedItemId(R.id.action_explore);
+
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.action_nearby:
