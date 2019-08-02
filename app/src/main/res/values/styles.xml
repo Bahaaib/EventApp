@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:icon">@android:color/transparent</item>
     </style>
 
     <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -41,6 +42,7 @@
     <style name="SwitchTheme" parent="Theme.AppCompat.Light">
         <item name="colorControlActivated">@color/colorPrimaryLight</item>
     </style>
+
 
 
 </resources>

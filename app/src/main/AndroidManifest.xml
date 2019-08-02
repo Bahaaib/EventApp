@@ -16,13 +16,27 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
         tools:replace="android:supportsRtl">
-        <activity android:name=".activities.SearchActivity"></activity>
-        <activity android:name=".activities.NotificationActivity" />
-        <activity android:name=".activities.SettingsActivity" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/MAPS_API_KEY" />
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value=".activities.SearchActivity" />
+
+        <activity
+            android:name=".activities.SearchActivity"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <activity android:name=".activities.NotificationActivity" />
+        <activity android:name=".activities.SettingsActivity" />
+
 
         <activity android:name=".activities.DetailsActivity" />
         <activity android:name=".activities.PointsActivity" />
@@ -30,6 +44,7 @@
         <activity android:name=".activities.ProfileActivity" />
         <activity
             android:name=".activities.MainActivity"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,6 +53,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value="activities.SearchActivity" />
         </activity>
     </application>
 

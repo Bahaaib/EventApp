@@ -1,6 +1,9 @@
 package com.bahaa.eventapp.fragments;
 
 
+import android.app.SearchManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bahaa.eventapp.MockedData;
 import com.bahaa.eventapp.R;
+import com.bahaa.eventapp.activities.SearchActivity;
 import com.bahaa.eventapp.adapters.CurrentEventsAdapter;
 import com.bahaa.eventapp.adapters.FutureEventsAdapter;
 import com.bahaa.eventapp.models.EventModel;
@@ -28,15 +32,18 @@ public class ExploreFragment extends Fragment {
 
     @BindView(R.id.search_view)
     public SearchView searchView;
+
     @BindView(R.id.current_events_rv)
     public RecyclerView currentEventsRV;
+
     @BindView(R.id.future_events_rv)
     public RecyclerView futureEventsRV;
 
-    private Unbinder unbinder;
+
     private ArrayList<EventModel> currentEventsList;
     private CurrentEventsAdapter currentEventsAdapter;
     private LinearLayoutManager linearLayoutManager;
+    private Unbinder unbinder;
 
     private ArrayList<EventModel> futureEventsList;
     private FutureEventsAdapter futureEventsAdapter;
@@ -54,8 +61,20 @@ public class ExploreFragment extends Fragment {
 
         unbinder = ButterKnife.bind(this, v);
 
-
+        setupSearchView();
         setupCurrentEventsRV();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
 
         //fill mocked data
         for (int i = 0; i < 3; i++) {
@@ -85,6 +104,14 @@ public class ExploreFragment extends Fragment {
 
 
         return v;
+    }
+
+    private void setupSearchView() {
+        if (getActivity() != null) {
+            SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(new ComponentName(getActivity(), SearchActivity.class)));
+
+        }
     }
 
     private void setupCurrentEventsRV() {
