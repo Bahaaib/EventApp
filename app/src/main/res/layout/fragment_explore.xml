@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:focusableInTouchMode="true">
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_view"
+        <RelativeLayout
+            android:id="@+id/search_view_layout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="15dp"
@@ -22,10 +22,19 @@
             android:layout_marginRight="15dp"
             android:alpha="0.4"
             android:background="@drawable/rounded_rec"
-            android:focusable="false"
-            android:gravity="center"
-            app:iconifiedByDefault="false"
-            app:queryHint="Search for events" />
+            android:focusable="false">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:drawableStart="@drawable/ic_search"
+                android:gravity="center"
+                android:drawablePadding="10dp"
+                android:textSize="16dp"
+                android:drawableTint="@color/colorInactive"
+                android:text="Search for events..."/>
+        </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"

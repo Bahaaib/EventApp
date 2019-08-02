@@ -1,15 +1,13 @@
 package com.bahaa.eventapp.fragments;
 
 
-import android.app.SearchManager;
-import android.content.ComponentName;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,8 +28,8 @@ import butterknife.Unbinder;
 
 public class ExploreFragment extends Fragment {
 
-    @BindView(R.id.search_view)
-    public SearchView searchView;
+    @BindView(R.id.search_view_layout)
+    public RelativeLayout searchLayout;
 
     @BindView(R.id.current_events_rv)
     public RecyclerView currentEventsRV;
@@ -61,19 +59,8 @@ public class ExploreFragment extends Fragment {
 
         unbinder = ButterKnife.bind(this, v);
 
-        setupSearchView();
+        setupSearchLayout();
         setupCurrentEventsRV();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
 
 
         //fill mocked data
@@ -106,12 +93,11 @@ public class ExploreFragment extends Fragment {
         return v;
     }
 
-    private void setupSearchView() {
-        if (getActivity() != null) {
-            SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(new ComponentName(getActivity(), SearchActivity.class)));
-
-        }
+    private void setupSearchLayout() {
+        searchLayout.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), SearchActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void setupCurrentEventsRV() {

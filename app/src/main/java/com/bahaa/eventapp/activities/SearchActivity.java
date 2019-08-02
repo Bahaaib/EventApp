@@ -8,11 +8,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.bahaa.eventapp.R;
+
+import org.jetbrains.annotations.NotNull;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,9 +34,18 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         unbinder = ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setupActionBar();
+    }
 
+    private void setupActionBar() {
+        setSupportActionBar(toolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+
+        if (actionBar != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        }
     }
 
 
@@ -43,13 +55,15 @@ public class SearchActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.search_menu, menu);
 
-        // Get the SearchView and set the searchable configuration
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        // Assumes current activity is the searchable activity
+        assert searchManager != null;
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setQueryHint("Search for events");
         searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setFocusable(true);
+        searchView.requestFocusFromTouch();
+        searchView.setIconified(false);
         searchView.setIconifiedByDefault(false);
 
 
@@ -57,7 +71,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
+    public boolean onOptionsItemSelected(@NotNull MenuItem menuItem) {
         if (menuItem.getItemId() == android.R.id.home) {
             Intent homeIntent = new Intent(this, MainActivity.class);
             homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
