@@ -1,20 +1,25 @@
 package com.bahaa.eventapp.activities;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.DialogFragment;
@@ -70,11 +75,6 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     private ActionBarDrawerToggle actionBarDrawerToggle;
-    private View header;
-    private NavigationHeaderViewHolder holder;
-    private final String USERNAME_TAG = "username_dialog";
-    private final String PASS_TAG = "password_dialog";
-    private final String MOBILE_TAG = "mobile_dialog";
     private UsernameDialog usernameDialog;
     private PasswordDialog passwordDialog;
     private MobileDialog mobileDialog;
@@ -99,26 +99,48 @@ public class ProfileActivity extends AppCompatActivity {
 
     @OnClick(R.id.profile_img_icon)
     public void editProfileImg() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        startActivityForResult(intent, GALLERY_INTENT);
+        if (!isPermissionGranted(ProfileActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        } else {
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            startActivityForResult(intent, GALLERY_INTENT);
+        }
+
     }
 
     @OnLongClick(R.id.profile_user_name)
     public void editUsername() {
+        final String USERNAME_TAG = "username_dialog";
+
         showDialogFragment(usernameDialog, USERNAME_TAG);
     }
 
     @OnLongClick(R.id.profile_user_password)
     public void changePassword() {
+        final String PASS_TAG = "password_dialog";
+
         showDialogFragment(passwordDialog, PASS_TAG);
     }
 
     @OnLongClick(R.id.profile_user_mobile)
     public void editMobileNumber() {
+        final String MOBILE_TAG = "mobile_dialog";
+
         showDialogFragment(mobileDialog, MOBILE_TAG);
     }
 
+
+    private boolean isPermissionGranted(Activity activity, String permission) {
+
+        int result = ContextCompat.checkSelfPermission(activity, permission);
+        return result == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestPermission(String permission) {
+        ActivityCompat.requestPermissions(ProfileActivity.this
+                , new String[]{permission}, 1);
+    }
 
     private void showDialogFragment(DialogFragment dialogFragment, String tag) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -171,8 +193,8 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void setupNavigationDrawerHeader() {
-        header = navigationView.getHeaderView(0);
-        holder = new NavigationHeaderViewHolder(header);
+        View header = navigationView.getHeaderView(0);
+        NavigationHeaderViewHolder holder = new NavigationHeaderViewHolder(header);
 
         //Mocked User data
         UserModel user = new UserModel();
@@ -231,9 +253,17 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
+            displayToast("Permission Denied!");
+        }
+    }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if (actionBarDrawerToggle.onOptionsItemSelected(item))
             return true;
@@ -252,7 +282,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             if (uri != null) {
                 String path = uri.getLastPathSegment();
-                Log.i("Statuss", path);
+                assert path != null;
                 progressDialog.setMessage("Updating Profile Picture..");
                 progressDialog.show();
 

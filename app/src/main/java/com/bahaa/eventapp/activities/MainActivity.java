@@ -231,6 +231,8 @@ public class MainActivity extends AppCompatActivity {
         if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
 
             displayToast("Permission Denied!");
+        }else {
+            //Get Device Location
         }
 
 
