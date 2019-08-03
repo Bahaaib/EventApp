@@ -69,7 +69,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="20dp"
-                    android:layout_marginBottom="40dp"
+                    android:layout_marginBottom="35dp"
                     android:text="Organized by: "
                     android:textColor="@color/colorWhite"
                     android:textSize="14sp" />
@@ -80,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="110dp"
-                    android:layout_marginBottom="40dp"
+                    android:layout_marginBottom="35dp"
                     android:fontFamily="sans-serif-light"
                     android:gravity="start"
                     android:text="The Event Team"
@@ -136,11 +136,33 @@
                 android:background="@color/colorGrayLight" />
 
             <TextView
+                android:id="@+id/details_event_ticket_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="85dp"
+                android:drawableStart="@drawable/ic_points"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/colorPrimary"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:text="100 EGP / Ticket"
+                android:textColor="@color/colorInactive"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="300dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="120dp"
+                android:background="@color/colorGrayLight" />
+
+            <TextView
                 android:id="@+id/details_event_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="130dp"
                 android:layout_marginEnd="10dp"
                 android:drawableStart="@drawable/ic_location"
                 android:drawablePadding="10dp"
@@ -156,7 +178,7 @@
                 android:layout_width="300dp"
                 android:layout_height="1dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="150dp"
+                android:layout_marginTop="200dp"
                 android:background="@color/colorGrayLight" />
 
             <at.blogc.android.views.ExpandableTextView
@@ -164,7 +186,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="160dp"
+                android:layout_marginTop="210dp"
                 android:drawableStart="@drawable/ic_info"
                 android:drawablePadding="10dp"
                 android:ellipsize="end"
@@ -182,7 +204,7 @@
                 android:id="@+id/details_event_map_container"
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
-                android:layout_marginTop="280dp"
+                android:layout_marginTop="330dp"
                 android:layout_marginBottom="30dp">
 
                 <fragment

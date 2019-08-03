@@ -110,9 +110,9 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
 
         if (!description.isExpanded()) {
-            adjustMapPosition(470);
+            adjustMapPosition(520);
         } else {
-            adjustMapPosition(280);
+            adjustMapPosition(330);
         }
 
 
