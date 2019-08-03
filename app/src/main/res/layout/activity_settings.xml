@@ -96,7 +96,7 @@
                 app:bar_color="@color/colorPrimary"
                 app:duration="250"
                 app:size="small"
-                app:start_text="0"
+                app:start_text="1"
                 tools:targetApi="LOLLIPOP" />
         </RelativeLayout>
 
