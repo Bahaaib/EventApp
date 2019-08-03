@@ -2,6 +2,7 @@ package com.bahaa.eventapp.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -221,6 +222,18 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < size; i++) {
             navigationView.getMenu().getItem(i).setChecked(false);
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
+
+            displayToast("Permission Denied!");
+        }
+
+
     }
 
     @Override

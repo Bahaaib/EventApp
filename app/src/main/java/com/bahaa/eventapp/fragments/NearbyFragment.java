@@ -1,8 +1,11 @@
 package com.bahaa.eventapp.fragments;
 
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -11,10 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.bahaa.eventapp.MockedData;
 import com.bahaa.eventapp.R;
@@ -44,14 +49,11 @@ public class NearbyFragment extends Fragment {
 
     private ArrayList<EventModel> nearbyEventsList;
     private NearbyEventsAdapter nearbyEventsAdapter;
-    private StaggeredGridLayoutManager staggeredGridLayoutManager;
-    private GridLayoutManager gridLayoutManager;
     private int distanceLimiter;
     private double mLatitude;
     private double mLongitude;
-    private final String PREFS_KEY = "general_prefs";
-    private final String DISTANCE_KEY = "slider_position";
     private SharedPreferences preferences;
+
     private Unbinder unbinder;
 
     public NearbyFragment() {
@@ -60,15 +62,15 @@ public class NearbyFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_nearby, container, false);
 
         unbinder = ButterKnife.bind(this, v);
+        checkLocationPermission();
         retrieveSharedPrefs();
         setupNearbyEventsRV();
-        getDeviceLocation();
 
         for (int j = 0; j < 3; j++) {
             EventModel model = new EventModel();
@@ -92,7 +94,27 @@ public class NearbyFragment extends Fragment {
         return v;
     }
 
+    private void checkLocationPermission() {
+        assert getActivity() != null;
+
+        if (!isLocationPermissionGranted(getActivity())) {
+            ActivityCompat.requestPermissions(getActivity()
+                    , new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        } else {
+            getDeviceLocation();
+        }
+    }
+
+    private boolean isLocationPermissionGranted(Activity activity) {
+        assert getActivity() != null;
+
+        int result = ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION);
+        return result == PackageManager.PERMISSION_GRANTED;
+    }
+
     private void retrieveSharedPrefs() {
+        final String PREFS_KEY = "general_prefs";
+
         if (getActivity() != null) {
             preferences = getActivity().getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE);
             calculatePreferenceDistance();
@@ -101,12 +123,19 @@ public class NearbyFragment extends Fragment {
     }
 
     private void calculatePreferenceDistance() {
+        final String DISTANCE_KEY = "slider_position";
+
         float ratio = preferences.getFloat(DISTANCE_KEY, 0.5f);
         distanceLimiter = (int) (ratio * 100);
     }
 
     private void getDeviceLocation() {
+        assert getActivity() != null;
+
         LocationManager mLocationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
+
+        assert mLocationManager != null;
+
         List<String> providers = mLocationManager.getProviders(true);
         Location bestLocation = null;
         try {
@@ -119,6 +148,8 @@ public class NearbyFragment extends Fragment {
                     bestLocation = loc;
                 }
             }
+            assert bestLocation != null;
+
 
             mLatitude = bestLocation.getLatitude();
             mLongitude = bestLocation.getLongitude();
@@ -130,12 +161,12 @@ public class NearbyFragment extends Fragment {
     }
 
     private void setupNearbyEventsRV() {
+
         nearbyEventsList = new ArrayList<>();
         nearbyEventsAdapter = new NearbyEventsAdapter(getActivity(), nearbyEventsList);
         nearbyEventsRV.setAdapter(nearbyEventsAdapter);
-        staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        gridLayoutManager = new GridLayoutManager(getActivity(), 2, RecyclerView.VERTICAL, false);
-        nearbyEventsRV.setLayoutManager(staggeredGridLayoutManager);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2, RecyclerView.VERTICAL, false);
+        nearbyEventsRV.setLayoutManager(gridLayoutManager);
     }
 
     private double meterDistanceBetweenLocations(
