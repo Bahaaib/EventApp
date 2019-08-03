@@ -2,9 +2,11 @@ package com.bahaa.eventapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -89,8 +91,31 @@ public class FutureEventsAdapter extends RecyclerView.Adapter {
                     .into(futureImage);
 
             futureDate.setText(adapterModel.get(position).getDate());
-            futureTitle.setText(adapterModel.get(position).getTitle());
+
+            setAdjustedTitle(futureTitle, position, 90);
         }
+
+        private void setAdjustedTitle(TextView tv, int cardPos, int maxLength) {
+            Log.i("Statuss", "I'm inside method");
+            tv.setText(adapterModel.get(cardPos).getTitle());
+            ViewTreeObserver treeObserver = tv.getViewTreeObserver();
+            treeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    ViewTreeObserver observer = tv.getViewTreeObserver();
+                    observer.removeOnGlobalLayoutListener(this);
+                    int titleLen = tv.length();
+                    if (titleLen > maxLength) {
+                        String text = tv.getText().toString();
+                        text = text.replace(text.substring(maxLength, titleLen), "");
+                        text = text + "...";
+                        tv.setText(text);
+                    }
+                }
+            });
+
+        }
+
 
         @OnClick(R.id.future_events_card)
         public void openEvent() {
