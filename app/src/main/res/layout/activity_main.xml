@@ -54,20 +54,21 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginEnd="35dp"
+                            android:layout_marginEnd="37dp"
                             android:text="20"
+                            android:gravity="center"
                             android:textColor="@color/colorWhite"
                             android:textSize="18sp"
-                            android:textStyle="bold" />
+                             />
 
                         <ImageView
                             android:id="@+id/main_toolbar_points_icon"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="65dp"
-                            android:background="@drawable/ic_gem" />
+                            android:layout_marginRight="67dp"
+                            android:background="@drawable/ic_jewel" />
 
                         <ImageView
                             android:id="@+id/main_toolbar_triangle"
