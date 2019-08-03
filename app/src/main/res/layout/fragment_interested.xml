@@ -12,6 +12,7 @@
         android:focusableInTouchMode="true">
 
         <TextView
+            android:id="@+id/interested_events_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -30,7 +31,35 @@
             android:layout_marginTop="60dp"
             android:layout_marginEnd="6dp"
             android:orientation="vertical" />
-    </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/interested_no_events"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="200dp"
+            android:visibility="invisible">
+
+            <ImageView
+                android:id="@+id/interested_no_events_icon"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:alpha="0.4"
+                android:src="@drawable/ic_shelf_empty" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/interested_no_events_icon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:text="The Shelf is empty\n Pick some events to show here"
+                android:textSize="18sp" />
+
+
+        </RelativeLayout>
+    </RelativeLayout>
 
 </androidx.core.widget.NestedScrollView>

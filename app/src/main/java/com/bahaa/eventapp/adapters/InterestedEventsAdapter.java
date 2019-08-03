@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bahaa.eventapp.R;
 import com.bahaa.eventapp.activities.DetailsActivity;
 import com.bahaa.eventapp.activities.MainActivity;
+import com.bahaa.eventapp.fragments.InterestedFragment;
 import com.bahaa.eventapp.models.EventModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.ramotion.foldingcell.FoldingCell;
@@ -37,14 +38,16 @@ public class InterestedEventsAdapter extends RecyclerView.Adapter {
     private Unbinder unbinder;
     private EventModel recentlyDeletedItem;
     private int recentlyDeletedItemPosition;
+    private InterestedFragment fragment;
 
     {
         adapterModel = new ArrayList<>();
     }
 
-    public InterestedEventsAdapter(Context context, ArrayList<EventModel> adapterModel) {
+    public InterestedEventsAdapter(Context context, ArrayList<EventModel> adapterModel, InterestedFragment fragment) {
         this.context = context;
         this.adapterModel = adapterModel;
+        this.fragment = fragment;
 
 
     }
@@ -62,6 +65,10 @@ public class InterestedEventsAdapter extends RecyclerView.Adapter {
         adapterModel.remove(position);
         notifyItemRemoved(position);
         showSnackBar();
+
+        if (adapterModel.isEmpty()){
+            fragment.changeListState();
+        }
     }
 
     private void showSnackBar() {
