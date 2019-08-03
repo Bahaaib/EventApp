@@ -205,7 +205,7 @@ public class InterestedEventsAdapter extends RecyclerView.Adapter {
                     observer.removeOnGlobalLayoutListener(this);
                     int titleLen = tv.length();
                     if (titleLen > maxLength) {
-                        String text = intstdTitle.getText().toString();
+                        String text = tv.getText().toString();
                         text = text.replace(text.substring(maxLength, titleLen), "");
                         text = text + "...";
                         tv.setText(text);

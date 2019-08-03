@@ -3,9 +3,11 @@ package com.bahaa.eventapp.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bahaa.eventapp.R;
 import com.bahaa.eventapp.activities.DetailsActivity;
 import com.bahaa.eventapp.models.EventModel;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -92,10 +95,12 @@ public class CurrentEventsAdapter extends RecyclerView.Adapter {
             Picasso.get()
                     .load(adapterModel.get(position).getImage())
                     .fit()
+                    .networkPolicy(NetworkPolicy.OFFLINE)
                     .into(image);
 
+            setAdjustedTitle(title, position, 80);
+
             date.setText(adapterModel.get(position).getDate());
-            title.setText(adapterModel.get(position).getTitle());
             capacity.setText(String.valueOf(adapterModel.get(position).getCapacity()));
             if (adapterModel.get(position).getTicketsAvailable() == 0) {
                 ticketsAvailable.setText("SOLD OUT");
@@ -105,6 +110,27 @@ public class CurrentEventsAdapter extends RecyclerView.Adapter {
                 ticketsAvailable.setText(String.valueOf(adapterModel.get(position).getTicketsAvailable()));
             }
 
+
+        }
+
+        private void setAdjustedTitle(TextView tv, int cardPos, int maxLength) {
+            Log.i("Statuss", "I'm inside method");
+            tv.setText(adapterModel.get(cardPos).getTitle());
+            ViewTreeObserver treeObserver = tv.getViewTreeObserver();
+            treeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    ViewTreeObserver observer = tv.getViewTreeObserver();
+                    observer.removeOnGlobalLayoutListener(this);
+                    int titleLen = tv.length();
+                    if (titleLen > maxLength) {
+                        String text = tv.getText().toString();
+                        text = text.replace(text.substring(maxLength, titleLen), "");
+                        text = text + "...";
+                        tv.setText(text);
+                    }
+                }
+            });
 
         }
 

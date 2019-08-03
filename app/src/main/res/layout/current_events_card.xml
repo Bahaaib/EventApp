@@ -1,75 +1,99 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/current_events_card"
     android:layout_width="350dp"
     android:layout_height="180dp"
     android:layout_marginEnd="8dp"
-    card_view:cardCornerRadius="5dp"
-    card_view:cardElevation="6dp">
+    card_view:cardBackgroundColor="@android:color/transparent"
+    card_view:cardElevation="0dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <com.bahaa.eventapp.custom_views.RoundedView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:bottomRightCornerRadius="15dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_gravity="bottom"
+            android:background="@color/colorWhite">
+
+
+            <TextView
+                android:id="@+id/current_events_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="155dp"
+                android:layout_marginTop="15dp"
+                android:drawableStart="@drawable/ic_timer"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:text="Fri, 04 Apr" />
+
+
+            <TextView
+                android:id="@+id/current_events_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="155dp"
+                android:textStyle="bold"
+                android:paddingEnd="8dp"
+                android:text="Codemotion Amsterdam Lorem ipsum dolor sit amet, consectetur adipisicing elit" />
+
+            <TextView
+                android:id="@+id/current_events_capacity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="155dp"
+                android:layout_marginBottom="10dp"
+                android:contentDescription="Capacity"
+                android:drawableStart="@drawable/ic_person"
+                android:drawableTint="@color/colorPrimary"
+                android:gravity="center"
+                android:text="10"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/current_events_avialable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="170dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:contentDescription="Available Tickets"
+                android:drawableStart="@drawable/ic_ticket"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:text="8"
+                android:textSize="16sp" />
+
+
+        </RelativeLayout>
+
+    </com.bahaa.eventapp.custom_views.RoundedView>
+
+
+    <com.bahaa.eventapp.custom_views.RoundedView
+        android:layout_width="wrap_content"
+        android:layout_height="160dp"
+        android:layout_marginBottom="20dp"
+        android:elevation="10dp"
+        app:topLeftCornerRadius="15dp">
+
 
         <ImageView
             android:id="@+id/current_events_img"
-            android:layout_width="150dp"
-            android:layout_height="match_parent" />
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/ev1" />
+    </com.bahaa.eventapp.custom_views.RoundedView>
 
-        <TextView
-            android:id="@+id/current_events_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="170dp"
-            android:layout_marginTop="20dp"
-            android:drawableStart="@drawable/ic_timer"
-            android:drawablePadding="5dp"
-            android:gravity="center"
-            android:text="Fri, 04 Apr"
-            android:textStyle="bold" />
-
-
-        <TextView
-            android:id="@+id/current_events_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="170dp"
-            android:maxLength="110"
-            android:paddingEnd="8dp"
-            android:text="Codemotion Amsterdam Lorem ipsum dolor sit amet, consectetur adipisicing elit" />
-
-        <TextView
-            android:id="@+id/current_events_capacity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="170dp"
-            android:layout_marginBottom="10dp"
-            android:contentDescription="Capacity"
-            android:drawableStart="@drawable/ic_person"
-            android:drawableTint="@color/colorPrimary"
-            android:gravity="center"
-            android:text="10"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/current_events_avialable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="170dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            android:contentDescription="Available Tickets"
-            android:drawableStart="@drawable/ic_ticket"
-            android:drawablePadding="5dp"
-            android:gravity="center"
-            android:text="8"
-            android:textSize="16sp" />
-
-
-    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

@@ -5,7 +5,7 @@ public class MockedData {
 
     public static String[] dates = {"Fri, Apr 19", "Thu, Jun 07", "Mon, Sep 30"};
 
-    public static String[] titles = {"This is an event short title", "This is an event very very very long and ugly title, This is an event very very very long and ugly title, But that's OK", "This is an event medium but beautiful title"};
+    public static String[] titles = {"Codemotion Amsterdam coding event", "European Code Week: 5th Anniversary (Including Bootcamps, Code jams, Coffee Breaks) With best coders in the industry", "DevOps Bootcamp: How to deploy your project smarter and cleaner"};
 
     public static int[] capacity = {10, 20, 30};
 
