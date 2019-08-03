@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -36,6 +37,9 @@ public class NearbyFragment extends Fragment {
 
     @BindView(R.id.nearby_events_rv)
     public RecyclerView nearbyEventsRV;
+
+    @BindView(R.id.nearby_no_events)
+    public RelativeLayout noEventsLayout;
 
 
     private ArrayList<EventModel> nearbyEventsList;
@@ -83,6 +87,7 @@ public class NearbyFragment extends Fragment {
 
         }
         nearbyEventsAdapter.notifyDataSetChanged();
+        changeListState();
 
         return v;
     }
@@ -159,6 +164,14 @@ public class NearbyFragment extends Fragment {
         df.setRoundingMode(RoundingMode.DOWN);
         return df.format(number);
 
+    }
+
+    private void changeListState() {
+        if (nearbyEventsList.isEmpty()) {
+            noEventsLayout.setVisibility(View.VISIBLE);
+        } else {
+            noEventsLayout.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

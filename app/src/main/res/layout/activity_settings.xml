@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="120dp"
-                android:text="Distance to near events (in KM)"
+                android:text="Distance to nearby events (in KM)"
                 android:textSize="16sp" />
 
             <com.ramotion.fluidslider.FluidSlider
@@ -96,7 +96,7 @@
                 app:bar_color="@color/colorPrimary"
                 app:duration="250"
                 app:size="small"
-                app:start_text="1"
+                app:start_text="0"
                 tools:targetApi="LOLLIPOP" />
         </RelativeLayout>
 

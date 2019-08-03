@@ -13,6 +13,36 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="6dp" />
 
+    <RelativeLayout
+        android:id="@+id/nearby_no_events"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible">
+
+        <ImageView
+            android:id="@+id/nearby_no_events_icon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_scopes"
+            android:tint="@color/colorInactive" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nearby_no_events_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:text="Couldn't find nearby events now\n Try again soon "
+            android:textSize="18sp" />
+
+
+    </RelativeLayout>
+
+
 </RelativeLayout>
 
 
