@@ -46,10 +46,10 @@
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/colorPrimary"
             android:drawableStart="@drawable/ic_close"
-            android:drawableTint="@color/colorWhite"
+            android:drawableTint="@color/colorLikeButton"
             android:gravity="center"
             android:text="Cancel"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorLikeButton"
             android:visibility="invisible" />
 
         <TextView
