@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bahaa.eventapp.R;
@@ -20,17 +21,12 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 public class OrdersAdapter extends RecyclerView.Adapter {
 
     private Context context;
     private ArrayList<EventModel> adapterModel;
-    private Unbinder unbinder;
 
-    {
-        adapterModel = new ArrayList<>();
-    }
 
     public OrdersAdapter(Context context, ArrayList<EventModel> adapterModel) {
         this.context = context;
@@ -41,8 +37,9 @@ public class OrdersAdapter extends RecyclerView.Adapter {
 
 
     //Here We tell the RecyclerView what to show at each element of it..it'd be a cardView!
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.order_card, parent, false);
         return new OrdersAdapter.OrdersViewHolder(view);
@@ -50,7 +47,7 @@ public class OrdersAdapter extends RecyclerView.Adapter {
 
     //Here We tell the RecyclerView what to show at each CardView..
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ((OrdersAdapter.OrdersViewHolder) holder).BindView(position);
 
     }
@@ -86,9 +83,9 @@ public class OrdersAdapter extends RecyclerView.Adapter {
         public TextView orderPending;
 
 
-        public OrdersViewHolder(View itemView) {
+        OrdersViewHolder(View itemView) {
             super(itemView);
-            unbinder = ButterKnife.bind(this, itemView);
+            ButterKnife.bind(this, itemView);
         }
 
 
@@ -114,6 +111,8 @@ public class OrdersAdapter extends RecyclerView.Adapter {
         @OnClick(R.id.ticket_card)
         public void openEvent() {
             Intent intent = new Intent(context, DetailsActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             context.startActivity(intent);
         }
 

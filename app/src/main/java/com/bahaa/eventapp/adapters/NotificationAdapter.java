@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bahaa.eventapp.R;
@@ -17,17 +18,12 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 public class NotificationAdapter extends RecyclerView.Adapter {
 
     private Context context;
     private ArrayList<NotificationModel> adapterModel;
-    private Unbinder unbinder;
 
-    {
-        adapterModel = new ArrayList<>();
-    }
 
     public NotificationAdapter(Context context, ArrayList<NotificationModel> adapterModel) {
         this.context = context;
@@ -38,8 +34,9 @@ public class NotificationAdapter extends RecyclerView.Adapter {
 
 
     //Here We tell the RecyclerView what to show at each element of it..it'd be a cardView!
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.notification_card, parent, false);
         return new NotificationAdapter.NotificationViewHolder(view);
@@ -47,7 +44,7 @@ public class NotificationAdapter extends RecyclerView.Adapter {
 
     //Here We tell the RecyclerView what to show at each CardView..
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ((NotificationAdapter.NotificationViewHolder) holder).BindView(position);
 
     }
@@ -67,9 +64,9 @@ public class NotificationAdapter extends RecyclerView.Adapter {
         @BindView(R.id.notification_body)
         public TextView bodyTV;
 
-        public NotificationViewHolder(View itemView) {
+        NotificationViewHolder(View itemView) {
             super(itemView);
-            unbinder = ButterKnife.bind(this, itemView);
+            ButterKnife.bind(this, itemView);
         }
 
 
