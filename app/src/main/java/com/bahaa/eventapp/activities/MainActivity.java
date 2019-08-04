@@ -213,6 +213,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void navigateToActivity(Class<? extends AppCompatActivity> TargetActivity) {
         Intent intent = new Intent(MainActivity.this, TargetActivity);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
 
@@ -223,6 +225,7 @@ public class MainActivity extends AppCompatActivity {
             navigationView.getMenu().getItem(i).setChecked(false);
         }
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

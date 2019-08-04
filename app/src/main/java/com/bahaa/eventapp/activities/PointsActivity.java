@@ -125,6 +125,8 @@ public class PointsActivity extends AppCompatActivity {
 
     private void navigateToActivity(Class<? extends AppCompatActivity> TargetActivity) {
         Intent intent = new Intent(PointsActivity.this, TargetActivity);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
 
