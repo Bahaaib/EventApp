@@ -35,10 +35,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:text="Fri, Apr 19"
-                android:textColor="@color/colorWhite"
-                android:textStyle="bold" />
+                android:textColor="@color/colorWhite" />
 
             <TextView
                 android:id="@+id/nearby_events_title"
@@ -47,7 +46,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
                 android:gravity="center"
-                android:maxLength="110"
+                android:textStyle="bold"
                 android:padding="3dp"
                 android:text="Codemotion Amsterdam Lorem ipsum dolor sit amet, consectetur adipisicing elit"
                 android:textColor="@color/colorWhite" />
@@ -60,13 +59,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:background="@color/colorInactive"
+            android:layout_marginTop="8dp"
+            android:elevation="10dp"
+            android:background="@drawable/shape_label"
             android:drawableStart="@drawable/ic_location"
             android:drawablePadding="3dp"
             android:gravity="center"
             android:paddingStart="3dp"
-            android:paddingEnd="3dp"
+            android:paddingEnd="5dp"
             android:textColor="@color/colorWhite" />
 
 

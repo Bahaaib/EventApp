@@ -9,6 +9,7 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bahaa.eventapp.R;
@@ -21,17 +22,12 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 public class FutureEventsAdapter extends RecyclerView.Adapter {
 
     private Context context;
     private ArrayList<EventModel> adapterModel;
-    private Unbinder unbinder;
 
-    {
-        adapterModel = new ArrayList<>();
-    }
 
     public FutureEventsAdapter(Context context, ArrayList<EventModel> adapterModel) {
         this.context = context;
@@ -42,8 +38,9 @@ public class FutureEventsAdapter extends RecyclerView.Adapter {
 
 
     //Here We tell the RecyclerView what to show at each element of it..it'd be a cardView!
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.future_events_card, parent, false);
         return new FutureEventsViewHolder(view);
@@ -51,7 +48,7 @@ public class FutureEventsAdapter extends RecyclerView.Adapter {
 
     //Here We tell the RecyclerView what to show at each CardView..
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ((FutureEventsViewHolder) holder).BindView(position);
 
     }
@@ -75,9 +72,9 @@ public class FutureEventsAdapter extends RecyclerView.Adapter {
         public TextView futureTitle;
 
 
-        public FutureEventsViewHolder(View itemView) {
+        FutureEventsViewHolder(View itemView) {
             super(itemView);
-            unbinder = ButterKnife.bind(this, itemView);
+            ButterKnife.bind(this, itemView);
         }
 
 
@@ -115,8 +112,10 @@ public class FutureEventsAdapter extends RecyclerView.Adapter {
 
 
         @OnClick(R.id.future_events_card)
-        public void openEvent() {
+        void openEvent() {
             Intent intent = new Intent(context, DetailsActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             context.startActivity(intent);
         }
 

@@ -6,10 +6,11 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bahaa.eventapp.R;
@@ -22,17 +23,12 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 public class NearbyEventsAdapter extends RecyclerView.Adapter {
 
     private Context context;
     private ArrayList<EventModel> adapterModel;
-    private Unbinder unbinder;
 
-    {
-        adapterModel = new ArrayList<>();
-    }
 
     public NearbyEventsAdapter(Context context, ArrayList<EventModel> adapterModel) {
         this.context = context;
@@ -43,8 +39,9 @@ public class NearbyEventsAdapter extends RecyclerView.Adapter {
 
 
     //Here We tell the RecyclerView what to show at each element of it..it'd be a cardView!
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.nearby_events_card, parent, false);
         return new NearbyEventsViewHolder(view);
@@ -52,7 +49,7 @@ public class NearbyEventsAdapter extends RecyclerView.Adapter {
 
     //Here We tell the RecyclerView what to show at each CardView..
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ((NearbyEventsViewHolder) holder).BindView(position);
 
     }
@@ -79,15 +76,15 @@ public class NearbyEventsAdapter extends RecyclerView.Adapter {
         public TextView nearbyDistance;
 
 
-        public NearbyEventsViewHolder(View itemView) {
+        NearbyEventsViewHolder(View itemView) {
             super(itemView);
-            unbinder = ButterKnife.bind(this, itemView);
+            ButterKnife.bind(this, itemView);
         }
 
 
         //Here where all the glory being made..!
         public void BindView(final int position) {
-            Picasso.get()
+           Picasso.get()
                     .load(adapterModel.get(position).getImage())
                     .fit()
                     .into(nearbyImage);
@@ -96,16 +93,39 @@ public class NearbyEventsAdapter extends RecyclerView.Adapter {
             nearbyDistance.setText(adapterModel.get(position).getDistance() + " KM");
 
             String title = adapterModel.get(position).getTitle();
-            if (title.length() > 60){
+            if (title.length() > 60) {
                 nearbyTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             }
-            nearbyTitle.setText(adapterModel.get(position).getTitle());
+
+            setAdjustedTitle(nearbyTitle, position, 100);
+        }
+
+        private void setAdjustedTitle(TextView tv, int cardPos, int maxLength) {
+            tv.setText(adapterModel.get(cardPos).getTitle());
+            ViewTreeObserver treeObserver = tv.getViewTreeObserver();
+            treeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    ViewTreeObserver observer = tv.getViewTreeObserver();
+                    observer.removeOnGlobalLayoutListener(this);
+                    int titleLen = tv.length();
+                    if (titleLen > maxLength) {
+                        String text = tv.getText().toString();
+                        text = text.replace(text.substring(maxLength, titleLen), "");
+                        text = text + "...";
+                        tv.setText(text);
+                    }
+                }
+            });
 
         }
 
+
         @OnClick(R.id.nearby_events_card)
-        public void openEvent() {
+        void openEvent() {
             Intent intent = new Intent(context, DetailsActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             context.startActivity(intent);
         }
 
