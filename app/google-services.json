@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "821647733426",
+    "firebase_url": "https://theevent.firebaseio.com",
+    "project_id": "theevent",
+    "storage_bucket": "theevent.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:821647733426:android:c4a936448c8c5db1",
+        "android_client_info": {
+          "package_name": "com.bahaa.eventapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "821647733426-sldni75mj580b1m7v59un7no88hbe4kh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD--CWVNdzA9wsnZFRVU8j8_p_Vvs5K508"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "821647733426-sldni75mj580b1m7v59un7no88hbe4kh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
