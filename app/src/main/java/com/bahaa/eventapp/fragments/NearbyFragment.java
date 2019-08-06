@@ -148,11 +148,12 @@ public class NearbyFragment extends Fragment {
                     bestLocation = loc;
                 }
             }
-            assert bestLocation != null;
 
+            if (bestLocation != null){
+                mLatitude = bestLocation.getLatitude();
+                mLongitude = bestLocation.getLongitude();
+            }
 
-            mLatitude = bestLocation.getLatitude();
-            mLongitude = bestLocation.getLongitude();
 
         } catch (SecurityException e) {
             e.printStackTrace();
