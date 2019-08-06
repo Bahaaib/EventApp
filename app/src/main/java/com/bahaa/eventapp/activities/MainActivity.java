@@ -3,7 +3,9 @@ package com.bahaa.eventapp.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,6 +27,7 @@ import com.bahaa.eventapp.R;
 import com.bahaa.eventapp.adapters.PagerAdapter;
 import com.bahaa.eventapp.models.UserModel;
 import com.bahaa.eventapp.utils.NavigationHeaderViewHolder;
+import com.crashlytics.android.Crashlytics;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
@@ -77,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
+        setupCrashytics();
         setupViewPager();
         setupBottomNavigationView();
         setupNavigationDrawer();
@@ -93,6 +97,11 @@ public class MainActivity extends AppCompatActivity {
             pointsLayout.setVisibility(View.VISIBLE);
             triangle.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void setupCrashytics() {
+        Crashlytics.log(Log.DEBUG, "Android API level: ", String.valueOf(Build.VERSION.SDK_INT));
+
     }
 
     private void setupViewPager() {
@@ -234,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
         if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
 
             displayToast("Permission Denied!");
-        }else {
+        } else {
             //Get Device Location
         }
 
